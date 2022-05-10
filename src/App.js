@@ -1,10 +1,11 @@
+import Routes from "./routes";
 
 
 function App() {
   return (
-    <div className="App">
-      <h1>Projeto</h1>
-    </div>
+    <>
+      <Routes/>
+    </>
   );
 }
 
