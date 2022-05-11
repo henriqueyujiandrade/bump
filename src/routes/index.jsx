@@ -5,7 +5,7 @@ import StartPage from "../Pages/StartPage";
 
 
 
-export default function Routes(){
+const Routes = () => {
 
     return (
         
@@ -17,3 +17,5 @@ export default function Routes(){
         
     )
 }
+
+export default Routes
