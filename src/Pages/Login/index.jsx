@@ -107,7 +107,7 @@ const Login = () => {
             </form>
             <Stack pt={4}>
               <Text align={'center'}>
-                Não tem conta ainda? <Link to="/home" color={'#8518F5'}>Login</Link>
+                Não tem conta ainda? <Link to="/register" color={'#8518F5'}>Cadastre-se</Link>
               </Text>
             </Stack>
           </Stack>
