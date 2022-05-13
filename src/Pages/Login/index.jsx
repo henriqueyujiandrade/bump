@@ -46,36 +46,32 @@ const Login = () => {
       minH={'100vh'}
       align={'center'}
       justify={'center'}
-      bg={useColorModeValue('gray.50', 'gray.800')}>
-      <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+      bg={"#02072F"}>
+        
+      <Stack mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Stack align={'center'}>
-          <Heading fontSize={'4xl'} textAlign={'center'}>
+          <Heading fontSize={'3xl'} textAlign={'center'} color='white'>
             Login
           </Heading>
         </Stack>
         <Box
           rounded={'lg'}
-          bg={useColorModeValue('white', 'gray.700')}
+          bg={useColorModeValue('white', 'gray.800')}
           boxShadow={'lg'}
           p={8}>
           <Stack spacing={8}>
 
             <form onSubmit={handleSubmit(onSubmit)} spacing={8}>
-              <FormControl  >
+              <FormControl py={3} >
                 <FormLabel>Email</FormLabel>
                 <Input type="email" id="email" {...register("email")} />
-                {errors.email && (
-                   <> 
-                   <span className="email">{errors.email.message}</span>
-                   <Stack align={'center'} >
-                    <Heading fontSize={'1x1'} textAlign={'center'}>
-                    {errors.email.message}
-                    </Heading>
-                    </Stack>
-                    </>
+                {errors.email &&  (
+                  <Text textAlign={'center'} py={1} color={"red"}>
+                  {errors.email.message}
+                  </Text>
                 )}
               </FormControl>
-              <FormControl {...register("password")}>
+              <FormControl py={3} >
                 <FormLabel>Senha</FormLabel>
                 <InputGroup>
                   <Input id="password" {...register("password")} type={showPassword ? 'text' : 'password'} />
@@ -90,14 +86,9 @@ const Login = () => {
                   </InputRightElement>
                 </InputGroup>
                 {errors.password && (
-                   <> 
-                   <span className="error">{errors.password.message}</span>
-                   <Stack align={'center'} spacing={6}>
-                    <Heading fontSize={'1x1'} textAlign={'center'}>
-                    {errors.password.message}
-                    </Heading>
-                    </Stack>
-                    </>
+                   <Text textAlign={'center'} py={1} color={"red"}>
+                   {errors.password.message}
+                   </Text>
                 )}
               </FormControl>
               <Stack spacing={10} pt={2}>
@@ -114,14 +105,17 @@ const Login = () => {
                 </Button>
               </Stack>
             </form>
-            <Stack pt={6}>
+            <Stack pt={4}>
               <Text align={'center'}>
-                Não tem conta ainda? <Link to="/" color={'#8518F5'}>Login</Link>
+                Não tem conta ainda? <Link to="/home" color={'#8518F5'}>Login</Link>
               </Text>
             </Stack>
           </Stack>
         </Box>
+
       </Stack>
+      
+      
     </Flex>
     </>
   );
