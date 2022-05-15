@@ -14,7 +14,7 @@ import {
     AiOutlineLaptop,
     AiOutlineTeam,
     AiOutlineClockCircle,
-    AiOutlineWechat,
+    //AiOutlineWechat,
     AiOutlineClose,
 } from "react-icons/ai";
 import {
