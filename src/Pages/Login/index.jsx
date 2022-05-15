@@ -11,10 +11,11 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  Link,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+
+import { useHistory, Link } from "react-router-dom";
 
 import * as yup from 'yup';
 import { useForm } from "react-hook-form";
@@ -41,7 +42,7 @@ const Login = () => {
 
   return (
     <>
-    <Header register/>
+    <Header login/>
     <Flex
       minH={'100vh'}
       align={'center'}
@@ -107,7 +108,7 @@ const Login = () => {
             </form>
             <Stack pt={4}>
               <Text align={'center'}>
-                Não tem conta ainda? <Link to="/register" color={'#8518F5'}>Cadastre-se</Link>
+                Não tem conta ainda? <Link to="/register" style={{color: '#8518F5'}}>Cadastre-se</Link>
               </Text>
             </Stack>
           </Stack>
@@ -122,5 +123,7 @@ const Login = () => {
 }
 
 export default Login
+
+
 
 
