@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { TasksContext } from "../../Providers/Tasks";
 import styled from "styled-components";
-import "./styles.css";
 import { Link } from "react-router-dom";
 // --- modal ---
 import { useState } from "react";
@@ -167,9 +166,55 @@ const Projects = () => {
         justify-content: space-between;
         margin: 10px;
     `;
-
+    const Body = styled.body`
+        font-family: "Inter", sans-serif;
+    `;
+    const Icone = styled.img`
+        width: 90%;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    `;
+    const TagTeam = styled.button`
+        background-color: #b84deb;
+        margin: 2px;
+        color: #fff;
+        border-radius: 15px;
+        width: fit-content;
+        padding: 10px;
+    `;
+    const Nav = styled.nav`
+        display: flex;
+        align-items: center;
+        margin: 20px;
+        font-size: 20px;
+        h6 {
+            font-size: 50px;
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+            margin-right: 20px;
+        }
+    `;
+    const ContainerPrincipal = styled.div`
+        width: 100%;
+    `;
+    const Label = styled.label`
+        color: rgb(135, 130, 130);
+        display: flex;
+        align-items: center;
+        width: 35px;
+        padding: 2px;
+    `;
+    const LabelExp = styled.label`
+        background-color: #84e439;
+        border-radius: 15px;
+        width: fit-content;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+    `;
     return (
-        <body>
+        <Body>
             <>
                 {openMAdd && (
                     <ModalMembroAdd
@@ -186,7 +231,7 @@ const Projects = () => {
                     <Logo>
                         Bum<Logo2>p</Logo2>
                     </Logo>
-                    <img
+                    <Icone
                         src="https://cdn-icons-png.flaticon.com/512/219/219986.png"
                         alt="ícone de usuario"
                     />
@@ -232,20 +277,20 @@ const Projects = () => {
                         Sair
                     </Sair>
                 </MenuLateral>
-                <div className="container-principal">
+                <ContainerPrincipal className="container-principal">
                     <Header>
-                        <nav className="nav-header">
+                        <Nav className="nav-header">
                             <AiOutlineLaptop size={100} />
                             <h6> Rotina</h6>
                             <RemoveTask>Excluir Coleção</RemoveTask>
-                        </nav>
-                        <nav className="nav-header">
+                        </Nav>
+                        <Nav className="nav-header">
                             <AddTask>Adicionar +</AddTask>
 
                             <Group onClick={checkMembers}>
                                 <AiOutlineTeam />2
                             </Group>
-                        </nav>
+                        </Nav>
                     </Header>
 
                     <NavFilter>
@@ -269,7 +314,7 @@ const Projects = () => {
                                 display={"flex"}
                                 justifyContent={"space-between"}
                             >
-                                <label>10/05/2022</label>
+                                <Label>10/05/2022</Label>
                                 <Button colorScheme="none" color={"black"}>
                                     <AiOutlineClose size={"25"} />
                                 </Button>
@@ -285,23 +330,23 @@ const Projects = () => {
                             <Spacer />
                             <ButtonGroup gap="2">
                                 <Date>
-                                    <label className="expiration-date">
+                                    <LabelExp className="expiration-date">
                                         <AiOutlineClockCircle />
                                         Mar 26
-                                    </label>
-                                    <button
+                                    </LabelExp>
+                                    <TagTeam
                                         className="tag-team"
                                         onClick={addMembros}
                                     >
                                         <AiOutlineTeam />
-                                    </button>
+                                    </TagTeam>
                                 </Date>
                             </ButtonGroup>
                         </Flex>
                     </Display>
-                </div>
+                </ContainerPrincipal>
             </Container>
-        </body>
+        </Body>
     );
 };
 export default Projects;
