@@ -224,7 +224,6 @@ const Projects = () => {
                             <AccordionPanel pb={4}>
                                 Tarefas domésticas
                             </AccordionPanel>
-                            <AccordionPanel pb={4}>Festa</AccordionPanel>
                             <AccordionPanel pb={4}>Rotina</AccordionPanel>
                         </AccordionItem>
                     </Accordion>
