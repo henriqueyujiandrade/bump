@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-    baseURL:'https://bump-capstone.herokuapp.com/'
+    baseURL:'https:/.herokuapp.com/'
 })
 
 export default api
