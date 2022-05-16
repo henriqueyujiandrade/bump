@@ -1,30 +1,45 @@
+import { useEffect } from "react";
 import { createContext, useState } from "react";
+import api from "../../Services/api";
 
 export const TasksContext = createContext();
 
 export const TasksProvider = ({ children }) => {
-    const [tasks, setTasks] = useState([
-        {
-            description: "Criar projeto de notificação",
-            creationDate: "10/05/2022",
-            expirationDate: "26/03",
-            id: 1,
-            group: [1, 2, 3],
-        },
-        {
-            description: "Estilizar página dashboard",
-            creationDate: "09/03/2022",
-            expirationDate: "29/03",
-            group: [1],
-            id: 2,
-        },
-    ]);
+    const [tasks, setTasks] = useState([]);
+    const [token, setToken] = useState(
+        JSON.parse(localStorage.getItem("@bump:token")) || ""
+    );
 
-    const addTask = (product) => {
-        setTasks([...tasks, product]);
+    // useEffect(()=>{
+    //     api.get('group',{
+    //         headers: {
+    //             Authorization: `Bearer ${token}`,
+    //         }
+    //     })
+    //     .then((response) =>{
+
+    //     })
+
+    // },[])
+
+    const addTask = (data) => {
+        api.post(`group`, data, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
     };
 
     const removeTask = (id) => {
+        const list = tasks.filter((product) => product.id !== id);
+        setTasks(list);
+    };
+
+    const addSubTask = (product) => {
+        setTasks([...tasks, product]);
+    };
+
+    const removeSubTask = (id) => {
         const list = tasks.filter((product) => product.id !== id);
         setTasks(list);
     };

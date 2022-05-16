@@ -52,10 +52,12 @@ import {
     ButtonGroup,
     Heading,
 } from "@chakra-ui/react";
+import { ModalAddTask } from "../../Modals/ModalAddTask";
 
 const Projects = () => {
     const [openM, setOpenM] = useState(false);
     const [openMAdd, setOpenMAdd] = useState(false);
+    const [openAddTask, setOpenAddTask] = useState(false);
 
     const addMembros = () => {
         setOpenMAdd(true);
@@ -64,6 +66,10 @@ const Projects = () => {
     const checkMembers = () => {
         setOpenM(true);
         setOpenMAdd(false);
+    };
+    const openAddTaskFunc = () => {
+        /* setOpenM(true); */
+        setOpenAddTask(true);
     };
 
     const { tasks, addTask, removeTask } = useContext(TasksContext);
@@ -74,6 +80,12 @@ const Projects = () => {
     return (
         <Body>
             <>
+                {openAddTask && (
+                    <ModalAddTask
+                        setOpenAddTask={setOpenAddTask} /* 
+                        setOpenMAdd={setOpenMAdd} */
+                    />
+                )}
                 {openMAdd && (
                     <ModalMembroAdd
                         setOpenM={setOpenM}
@@ -144,7 +156,9 @@ const Projects = () => {
                             <RemoveTask>Excluir Coleção</RemoveTask>
                         </Nav>
                         <Nav className="nav-header">
-                            <AddTask>Adicionar +</AddTask>
+                            <AddTask onClick={openAddTaskFunc}>
+                                Adicionar +
+                            </AddTask>
 
                             <Group onClick={checkMembers}>
                                 <AiOutlineTeam />2
