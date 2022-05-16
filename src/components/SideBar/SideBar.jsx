@@ -12,6 +12,8 @@ import { GroupContext } from "../../Providers/Group/index.js";
 import { useHistory } from "react-router-dom";
 
 const SideBar = ({ showSideBar, setShowSideBar }) => {
+    const { group } = useContext(GroupContext);
+    console.log(group);
     const [drop, setDrop] = useState("isClose");
     const history = useHistory();
     const handleHome = () => {
