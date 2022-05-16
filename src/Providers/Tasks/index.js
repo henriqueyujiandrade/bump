@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 import { useEffect } from "react";
 import { createContext, useState } from "react";
 import api from "../../Services/api";
@@ -32,21 +33,25 @@ export const TasksProvider = ({children}) => {
     }
  
 
+=======
+export const TasksContext = createContext();
+
+export const TasksProvider = ({ children }) => {
+    const [tasks, setTasks] = useState([]);
+>>>>>>> 8a26322111ce1c3ac9ef8fe610ee83df0b474585
 
     const addTask = (product) => {
-        setTasks([...tasks, product])       
-        
-    }
-    
-    const removeTask = (id) =>{    
-        const list = tasks.filter((product) => product.id !== id)
-        setTasks(list)
-              
-    }
-    
-    return(
-        <TasksContext.Provider value={{tasks, addTask, removeTask}}>
+        setTasks([...tasks, product]);
+    };
+
+    const removeTask = (id) => {
+        const list = tasks.filter((product) => product.id !== id);
+        setTasks(list);
+    };
+
+    return (
+        <TasksContext.Provider value={{ tasks, addTask, removeTask }}>
             {children}
         </TasksContext.Provider>
-    )
-}
+    );
+};
