@@ -1,11 +1,11 @@
+import SideBar from "../../components/SideBar/SideBar.jsx";
+
 const Projects = () => {
+  return (
+    <>
+      <SideBar />
+    </>
+  );
+};
 
-    return (
-        <>
-        <h2>Projects</h2>
-        
-        </>
-    )
-}
-
-export default Projects
+export default Projects;
