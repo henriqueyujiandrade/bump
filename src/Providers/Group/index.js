@@ -20,7 +20,7 @@ export const GroupProvider = ({children}) => {
                 }
             })
             .then((response) =>{
-               setGroup(response.data.filter((gp) => gp.membros.find((membro)=>membro.id == 2)))                
+               setGroup(response.data.filter((gp) => gp.membros.find((membro)=>membro.id == myInfo.id)))                
             })
         }
     },[token])
@@ -58,3 +58,5 @@ export const GroupProvider = ({children}) => {
         </GroupContext.Provider>
     );
 };
+
+
