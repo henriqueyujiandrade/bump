@@ -1,10 +1,9 @@
 import { ConteSearching, DivsaoSearching } from "../styled";
 
-export const Searching = ({ children }) => {
+export const Searching = ({ children, type }) => {
     return (
         <ConteSearching>
-            <input placeholder={children} />
-            <DivsaoSearching />
+            <input type={type} placeholder={children} />
         </ConteSearching>
     );
 };
