@@ -8,7 +8,7 @@ export const ChatContext = createContext()
 export const ChatProvider = ({children}) => {
     
     const[chat, setChat] = useState([])
-    const [token, setToken] = useState( JSON.parse(localStorage.getItem('@bump:token')) || '')
+    const [token, setToken] = useState( JSON.parse(localStorage.getItem("@bump:token")) || "")
     
     // useEffect(()=>{
     //     api.get('chat',{

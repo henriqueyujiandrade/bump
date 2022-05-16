@@ -8,7 +8,7 @@ export const TasksContext = createContext()
 
 export const TasksProvider = ({children}) => {
     const [tasks, setTasks] = useState([])    
-    const [token, setToken] = useState( JSON.parse(localStorage.getItem('@bump:token')) || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlMUBtYWlsLmNvbSIsImlhdCI6MTY1MjY2Mzg1OCwiZXhwIjoxNjUyNjY3NDU4LCJzdWIiOiIzIn0.iRU1ydMquhjcPBIiqjVaa5hJ0NZMCSosbOFd5xhmcUw')
+    const [token, setToken] = useState( JSON.parse(localStorage.getItem("@bump:token")) || "")
     
     // useEffect(()=>{
     //     api.get('group',{
