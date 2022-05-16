@@ -10,7 +10,7 @@ import { Flex, Button, Text, Image, Heading } from "@chakra-ui/react";
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-function SideBar({ showSideBar, setShowSideBar }) {
+const SideBar = ({ showSideBar, setShowSideBar }) => {
   const [drop, setDrop] = useState("isClose");
   const history = useHistory();
   const handleHome = () => {
@@ -147,6 +147,6 @@ function SideBar({ showSideBar, setShowSideBar }) {
       </Flex>
     </>
   );
-}
+};
 
 export default SideBar;
