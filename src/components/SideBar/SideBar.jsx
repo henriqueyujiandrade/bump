@@ -48,6 +48,7 @@ function SideBar({ showSideBar, setShowSideBar }) {
           <Flex
             justifyContent={["space-between", "space-between", "center"]}
             w={["163px", "189px", "205px"]}
+            marginBottom="16px"
           >
             <Heading>
               <Image
@@ -59,7 +60,7 @@ function SideBar({ showSideBar, setShowSideBar }) {
             </Heading>
             <Button
               maxW={"30px"}
-              p="10px 0px 10px 0px"
+              p="0px 0px 10px 0px"
               h={["15px", "25px", "25px"]}
               onClick={() => {
                 setShowSideBar("none");
@@ -67,11 +68,14 @@ function SideBar({ showSideBar, setShowSideBar }) {
               display={["flex", "flex", "none"]}
               justifyContent="center"
               alignItems={"center"}
+              backgroundColor="#6D17B0"
+              color="#ffffff"
+              _hover={{ background: "#6D17B0" }}
             >
               x
             </Button>
           </Flex>
-          <Flex>
+          <Flex marginBottom="16px">
             <Image
               src={UserIcon}
               alt={"User Image"}
