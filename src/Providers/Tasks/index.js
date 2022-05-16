@@ -1,5 +1,4 @@
 
-<<<<<<< HEAD
 import { useEffect } from "react";
 import { createContext, useState } from "react";
 import api from "../../Services/api";
@@ -8,23 +7,22 @@ import api from "../../Services/api";
 export const TasksContext = createContext()
 
 export const TasksProvider = ({children}) => {
-    const [tasks, setTasks] = useState([])
-    const [group, setGroup] = useState([])
-    const [token, setToken] = useState( JSON.parse(localStorage.getItem('@bump:token')) || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlMUBtYWlsLmNvbSIsImlhdCI6MTY1MjQ1ODcyNiwiZXhwIjoxNjUyNDYyMzI2LCJzdWIiOiIzIn0.5_B5SYMOqiD5ftaoNlS_ni9Hb5hKxM6nwEccmdYEu4c')
+    const [tasks, setTasks] = useState([])    
+    const [token, setToken] = useState( JSON.parse(localStorage.getItem('@bump:token')) || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlMUBtYWlsLmNvbSIsImlhdCI6MTY1MjY2Mzg1OCwiZXhwIjoxNjUyNjY3NDU4LCJzdWIiOiIzIn0.iRU1ydMquhjcPBIiqjVaa5hJ0NZMCSosbOFd5xhmcUw')
     
-    useEffect(()=>{
-        api.get('group',{
-            headers: {
-                Authorization: `Bearer ${token}`,
-            }
-        })
-        .then((response) =>{
-            console.log(response)
-        })
+    // useEffect(()=>{
+    //     api.get('group',{
+    //         headers: {
+    //             Authorization: `Bearer ${token}`,
+    //         }
+    //     })
+    //     .then((response) =>{
+           
+    //     })
 
-    },[])
+    // },[])
 
-    const addGroup = (data) =>{
+    const addTask = (data) =>{
         api.post(`group`,data, {
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -32,19 +30,17 @@ export const TasksProvider = ({children}) => {
         })
     }
  
+    const removeTask = (id) => {
+        const list = tasks.filter((product) => product.id !== id);
+        setTasks(list);
+    };
 
-=======
-export const TasksContext = createContext();
 
-export const TasksProvider = ({ children }) => {
-    const [tasks, setTasks] = useState([]);
->>>>>>> 8a26322111ce1c3ac9ef8fe610ee83df0b474585
-
-    const addTask = (product) => {
+    const addSubTask = (product) => {
         setTasks([...tasks, product]);
     };
 
-    const removeTask = (id) => {
+    const removeSubTask = (id) => {
         const list = tasks.filter((product) => product.id !== id);
         setTasks(list);
     };
