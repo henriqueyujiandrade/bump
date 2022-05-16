@@ -3,6 +3,10 @@ import styled from "styled-components";
 export const ConteSearching = styled.div`
     display: flex;
     flex-direction: column;
+    margin-bottom: 30px;
+    :nth-last-child(1) {
+        margin-bottom: 0;
+    }
     input {
         width: 374px;
         padding: 10px 20px;
