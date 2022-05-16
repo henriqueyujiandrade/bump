@@ -1,6 +1,28 @@
 import { useContext } from "react";
 import { TasksContext } from "../../Providers/Tasks";
-import styled from "styled-components";
+import {
+    Container,
+    Home,
+    MenuLateral,
+    Logo,
+    Logo2,
+    Sair,
+    Header,
+    AddTask,
+    RemoveTask,
+    Group,
+    NavFilter,
+    ButtonFilter,
+    Display,
+    Date,
+    Body,
+    Icone,
+    TagTeam,
+    Nav,
+    ContainerPrincipal,
+    Label,
+    LabelExp,
+} from "./style";
 import { Link } from "react-router-dom";
 // --- modal ---
 import { useState } from "react";
@@ -46,173 +68,9 @@ const Projects = () => {
 
     const { tasks, addTask, removeTask } = useContext(TasksContext);
 
-    const Container = styled.div`
-        width: 100%;
-        display: flex;
-        background-color: #02072f;
-    `;
-
-    const Home = styled.a`
-        color: #ffffff;
-        margin-top: 30px;
-        font-weight: 500;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        margin-bottom: 30px;
-        font-size: 25px;
-        width: 100%;
-        justify-content: center;
-    `;
-    const MenuLateral = styled.div`
-        background-color: #6d17b0;
-        width: 15%;
-        height: 100%;
-        min-height: 100vh;
-        padding: 10px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    `;
-    const Logo = styled.h4`
-        color: #a346ff;
-        display: flex;
-        flex-direction: row;
-        font-family: "Mitr", sans-serif;
-        text-shadow: 2px 1px 2px rgba(0, 0, 0, 0.679);
-        font-size: 50px;
-        margin-top: 30px;
-    `;
-    const Logo2 = styled.h4`
-        color: #fab219;
-    `;
-    const Sair = styled.a`
-        color: #feee35;
-        margin-top: 90px;
-        font-weight: 500;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        font-weight: 500;
-        font-size: 25px;
-        width: 40%;
-        justify-content: space-around;
-    `;
-
-    const Header = styled.header`
-        display: flex;
-        flex-direction: row;
-        color: #ffff;
-        margin-top: 60px;
-        width: 100%;
-        font-size: 50px;
-        justify-content: space-between;
-    `;
-    const AddTask = styled.button`
-        background-color: #feee35;
-        border-radius: 25.8319px;
-        padding: 7px;
-        color: #444444;
-        height: 56.67px;
-        font-weight: 600;
-    `;
-    const RemoveTask = styled.button`
-        background-color: #6d17b0;
-        border-radius: 25.8319px;
-        padding: 7px;
-        color: #ffff;
-        margin-left: 20px;
-        height: 56.67px;
-        font-weight: 500;
-    `;
-    const Group = styled.button`
-        background-color: #57aad9;
-        border-radius: 8px;
-        padding: 7px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        height: 56.67px;
-        margin-left: 30px;
-        font-weight: 700;
-    `;
-    const NavFilter = styled.nav`
-        display: flex;
-        width: 60%;
-        align-items: center;
-        justify-content: space-between;
-    `;
-    const ButtonFilter = styled.button`
-        background-color: #feee35;
-        font-weight: 700;
-        border-radius: 25px;
-        margin-top: 20px;
-        margin-left: 20px;
-        height: 50px;
-        min-width: 150px;
-        padding: 7px;
-    `;
-
-    const Display = styled.div`
-        display: flex;
-        flex-wrap: wrap;
-        width: 70%;
-    `;
-    const Date = styled.div`
-        margin-left: 5px;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        margin: 10px;
-    `;
-    const Body = styled.body`
-        font-family: "Inter", sans-serif;
-    `;
-    const Icone = styled.img`
-        width: 90%;
-        margin-top: 30px;
-        margin-bottom: 30px;
-    `;
-    const TagTeam = styled.button`
-        background-color: #b84deb;
-        margin: 2px;
-        color: #fff;
-        border-radius: 15px;
-        width: fit-content;
-        padding: 10px;
-    `;
-    const Nav = styled.nav`
-        display: flex;
-        align-items: center;
-        margin: 20px;
-        font-size: 20px;
-        h6 {
-            font-size: 50px;
-            display: flex;
-            align-items: center;
-            margin-left: 10px;
-            margin-right: 20px;
-        }
-    `;
-    const ContainerPrincipal = styled.div`
-        width: 100%;
-    `;
-    const Label = styled.label`
-        color: rgb(135, 130, 130);
-        display: flex;
-        align-items: center;
-        width: 35px;
-        padding: 2px;
-    `;
-    const LabelExp = styled.label`
-        background-color: #84e439;
-        border-radius: 15px;
-        width: fit-content;
-        padding: 10px;
-        display: flex;
-        align-items: center;
-    `;
+    function clickClose(target) {
+        removeTask(target);
+    }
     return (
         <Body>
             <>
@@ -274,7 +132,8 @@ const Projects = () => {
                     </Accordion>
                     <Sair>
                         <AiOutlineImport />
-                        Sair
+                        {/*Limpar localstorage para deslogar usuario*/}
+                        <Link to="/login">Sair</Link>
                     </Sair>
                 </MenuLateral>
                 <ContainerPrincipal className="container-principal">
@@ -300,49 +159,61 @@ const Projects = () => {
                     </NavFilter>
                     <Display>
                         {/* filtrar rotinas e jogar dentro dos cards */}
-                        <Flex
-                            background={"white"}
-                            margin={"35px"}
-                            display={"flex"}
-                            flexDir={"column"}
-                            width={"300px"}
-                            borderRadius={"15px"}
-                        >
-                            <Heading
-                                size="xs"
-                                padding={"10px"}
-                                display={"flex"}
-                                justifyContent={"space-between"}
-                            >
-                                <Label>10/05/2022</Label>
-                                <Button colorScheme="none" color={"black"}>
-                                    <AiOutlineClose size={"25"} />
-                                </Button>
-                            </Heading>
-                            <Box
-                                fontSize={"30"}
-                                fontWeight={"500"}
-                                padding={"0px 10px"}
-                            >
-                                Criar Projeto de notificação
-                            </Box>
-
-                            <Spacer />
-                            <ButtonGroup gap="2">
-                                <Date>
-                                    <LabelExp className="expiration-date">
-                                        <AiOutlineClockCircle />
-                                        Mar 26
-                                    </LabelExp>
-                                    <TagTeam
-                                        className="tag-team"
-                                        onClick={addMembros}
+                        {tasks.map((results) => {
+                            return (
+                                <Flex
+                                    background={"white"}
+                                    margin={"35px"}
+                                    display={"flex"}
+                                    flexDir={"column"}
+                                    width={"300px"}
+                                    borderRadius={"15px"}
+                                    id={results.id}
+                                >
+                                    <Heading
+                                        size="xs"
+                                        padding={"10px"}
+                                        display={"flex"}
+                                        justifyContent={"space-between"}
                                     >
-                                        <AiOutlineTeam />
-                                    </TagTeam>
-                                </Date>
-                            </ButtonGroup>
-                        </Flex>
+                                        <Label>{results.creationDate}</Label>
+                                        <Button
+                                            colorScheme="none"
+                                            color={"black"}
+                                            onClick={() =>
+                                                clickClose(results.id)
+                                            }
+                                        >
+                                            <AiOutlineClose size={"25"} />
+                                        </Button>
+                                    </Heading>
+                                    <Box
+                                        fontSize={"30"}
+                                        fontWeight={"500"}
+                                        padding={"0px 10px"}
+                                    >
+                                        {results.description}
+                                    </Box>
+
+                                    <Spacer />
+                                    <ButtonGroup gap="2">
+                                        <Date>
+                                            <LabelExp className="expiration-date">
+                                                <AiOutlineClockCircle />
+                                                {results.expirationDate}
+                                            </LabelExp>
+                                            <TagTeam
+                                                className="tag-team"
+                                                onClick={addMembros}
+                                            >
+                                                <AiOutlineTeam />
+                                                {results.group.length}
+                                            </TagTeam>
+                                        </Date>
+                                    </ButtonGroup>
+                                </Flex>
+                            );
+                        })}
                     </Display>
                 </ContainerPrincipal>
             </Container>
