@@ -53,13 +53,24 @@ import {
     Heading,
 } from "@chakra-ui/react";
 import { ModalAddTask } from "../../Modals/ModalAddTask";
+
+import { ModalEditTask } from "../../Modals/ModalEditTask";
+import { ModalAddSubTask } from "../../Modals/ModalAddSubTask";
+
 // -- sideBar --
 import SideBar from "../../components/SideBar/SideBar";
+
 
 const Projects = () => {
     const [openM, setOpenM] = useState(false);
     const [openMAdd, setOpenMAdd] = useState(false);
     const [openAddTask, setOpenAddTask] = useState(false);
+    const [openEditTask, setOpenEditTask] = useState(false);
+    const [openAddSubTask, setOpenAddSubTask] = useState(false);
+
+    const editTesk = () => {
+        setOpenEditTask(true);
+    };
 
     const none = "none";
     const flex = "flex";
@@ -78,6 +89,7 @@ const Projects = () => {
         setOpenAddTask(true);
     };
 
+
     const handleOpenSideBar = () => {
         if (openSideBar === none) {
             setOpenSideBar(flex);
@@ -91,14 +103,25 @@ const Projects = () => {
     function clickClose(target) {
         removeTask(target);
     }
+
     return (
         <Body>
             <>
-                {openAddTask && (
-                    <ModalAddTask
-                        setOpenAddTask={setOpenAddTask} /* 
-                        setOpenMAdd={setOpenMAdd} */
+                {openAddSubTask && (
+                    <ModalAddSubTask
+                        subTask
+                        setOpenEditTask={setOpenEditTask}
+                        setOpenAddSubTask={setOpenAddSubTask}
                     />
+                )}
+                {openEditTask && (
+                    <ModalEditTask
+                        setOpenAddSubTask={setOpenAddSubTask}
+                        setOpenEditTask={setOpenEditTask}
+                    />
+                )}
+                {openAddTask && (
+                    <ModalAddTask setOpenAddTask={setOpenAddTask} />
                 )}
                 {openMAdd && (
                     <ModalMembroAdd
@@ -178,6 +201,7 @@ const Projects = () => {
                                         fontSize={"30"}
                                         fontWeight={"500"}
                                         padding={"0px 10px"}
+
                                     >
                                         {results.description}
                                     </Box>
