@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom"
-import ButtonSubmit from "../../components/Button"
-import logo from "./../../assets/Logo.svg"
-import { HeaderStyled } from "./style"
+import Header  from './../../components/Header/';
+import CarouselComponent from './carousel';
+import { Container } from './style';
+import img3 from './../../assets/2022-03-29_17-43.png'
+import { CardDev } from '../../components/CardDev';
 
 
 const StartPage = () => {
@@ -9,23 +10,35 @@ const StartPage = () => {
     return (
         <>
 
-            <HeaderStyled>
+            <Header homeDeslogado/>
 
-                <div><img src={logo} alt="logo" /></div>
+            <Container>
 
-                <div className="links">
-                    <Link to='/login'>Login</Link>
-                    <Link to='/register'>Register</Link>
-                </div>
+                <section className="section-carousel">
 
-            </HeaderStyled>
+                    <p>Organize e interaja com seus colegas de trabalho, estudo ou para montar sua rotina</p>
+                    <div className="carousel">
+                        <CarouselComponent />
+                    </div>
 
-            <main>
+                </section>
 
-                <ButtonSubmit size="1.5rem">Entrar</ButtonSubmit>
-                <ButtonSubmit size="1.5rem">Adicionar +</ButtonSubmit>
+                <section className="section-devs">
 
-            </main>
+                    <h2 className="epd">Equipe de Desenvolvimento:</h2>
+
+                    <div className="devs">
+                        <CardDev name="Valmir" link="https://github.com/" img={img3}/>
+                        <CardDev name="Valmir" link="https://github.com/" img={img3}/>
+                        <CardDev name="Valmir" link="https://github.com/" img={img3}/>
+                        <CardDev name="Valmir" link="https://github.com/" img={img3}/>
+                        <CardDev name="Valmir" link="https://github.com/" img={img3}/>
+                        <CardDev name="Valmir" link="https://github.com/" img={img3}/>
+                    </div>
+
+                </section>
+
+            </Container>
         
         </>
     )
