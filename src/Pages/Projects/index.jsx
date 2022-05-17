@@ -31,11 +31,19 @@ import {
     Heading,
 } from "@chakra-ui/react";
 import { ModalAddTask } from "../../Modals/ModalAddTask";
+import { ModalEditTask } from "../../Modals/ModalEditTask";
+import { ModalAddSubTask } from "../../Modals/ModalAddSubTask";
 
 const Projects = () => {
     const [openM, setOpenM] = useState(false);
     const [openMAdd, setOpenMAdd] = useState(false);
     const [openAddTask, setOpenAddTask] = useState(false);
+    const [openEditTask, setOpenEditTask] = useState(false);
+    const [openAddSubTask, setOpenAddSubTask] = useState(false);
+
+    const editTesk = () => {
+        setOpenEditTask(true);
+    };
 
     const addMembros = () => {
         setOpenMAdd(true);
@@ -57,7 +65,6 @@ const Projects = () => {
         display: flex;
         background-color: #02072f;
     `;
-
     const Home = styled.a`
         color: #ffffff;
         margin-top: 30px;
@@ -104,7 +111,6 @@ const Projects = () => {
         width: 40%;
         justify-content: space-around;
     `;
-
     const Header = styled.header`
         display: flex;
         flex-direction: row;
@@ -159,7 +165,6 @@ const Projects = () => {
         min-width: 150px;
         padding: 7px;
     `;
-
     const Display = styled.div`
         display: flex;
         flex-wrap: wrap;
@@ -222,11 +227,21 @@ const Projects = () => {
     return (
         <Body>
             <>
-                {openAddTask && (
-                    <ModalAddTask
-                        setOpenAddTask={setOpenAddTask} /* 
-                        setOpenMAdd={setOpenMAdd} */
+                {openAddSubTask && (
+                    <ModalAddSubTask
+                        subTask
+                        setOpenEditTask={setOpenEditTask}
+                        setOpenAddSubTask={setOpenAddSubTask}
                     />
+                )}
+                {openEditTask && (
+                    <ModalEditTask
+                        setOpenAddSubTask={setOpenAddSubTask}
+                        setOpenEditTask={setOpenEditTask}
+                    />
+                )}
+                {openAddTask && (
+                    <ModalAddTask setOpenAddTask={setOpenAddTask} />
                 )}
                 {openMAdd && (
                     <ModalMembroAdd
@@ -323,17 +338,23 @@ const Projects = () => {
                             borderRadius={"15px"}
                         >
                             <Heading
+                                onClick={editTesk}
                                 size="xs"
                                 padding={"10px"}
                                 display={"flex"}
                                 justifyContent={"space-between"}
                             >
                                 <Label>10/05/2022</Label>
-                                <Button colorScheme="none" color={"black"}>
+                                <Button
+                                    position="static"
+                                    colorScheme="none"
+                                    color={"black"}
+                                >
                                     <AiOutlineClose size={"25"} />
                                 </Button>
                             </Heading>
                             <Box
+                                onClick={editTesk}
                                 fontSize={"30"}
                                 fontWeight={"500"}
                                 padding={"0px 10px"}
