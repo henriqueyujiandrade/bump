@@ -6,14 +6,13 @@ import ListUp from "./Icons/ListUp.svg";
 import ListDown from "./Icons/ListDown.svg";
 import ColectionIcon from "./Icons/VectorColectionIcon.svg";
 
-import { Flex, Button, Text, Image, Heading } from "@chakra-ui/react";
+import { Flex, Button, Image, Heading } from "@chakra-ui/react";
 import React, { useContext, useState } from "react";
 import { GroupContext } from "../../Providers/Group/index.js";
 import { useHistory } from "react-router-dom";
 
 const SideBar = ({ showSideBar, setShowSideBar }) => {
     const { group } = useContext(GroupContext);
-    console.log(group);
     const [drop, setDrop] = useState("isClose");
     const history = useHistory();
     const handleHome = () => {
@@ -31,10 +30,10 @@ const SideBar = ({ showSideBar, setShowSideBar }) => {
         localStorage.removeItem("Token");
         history.push("/");
     };
-    // const {}=useContext()
-    // const handleProject =(e)=>{
 
-    // }
+    const handleProject = (e) => {
+        history.push(`/dashboard/${e.target.id}`);
+    };
     return (
         <>
             <Flex
@@ -129,15 +128,39 @@ const SideBar = ({ showSideBar, setShowSideBar }) => {
                             maxHeight={"40vh"}
                             overflowY="auto"
                         >
-                            <Flex>
+                            <Flex flexDir={"column"} alignItems={"flex-start"}>
                                 <Button
+                                    onClick={(e) => {
+                                        handleProject(e);
+                                    }}
                                     backgroundColor="#6D17B0"
                                     color="#ffffff"
                                     _hover={{ background: "#6D17B0" }}
+                                    id={"daily"}
                                 >
-                                    <Image src={UserIcon} />
+                                    <Image src={UserIcon} marginRight={"3px"} />
                                     Daily
                                 </Button>
+                                {group?.map((item) => {
+                                    return (
+                                        <Button
+                                            onClick={(e) => {
+                                                handleProject(e);
+                                            }}
+                                            backgroundColor="#6D17B0"
+                                            color="#ffffff"
+                                            _hover={{ background: "#6D17B0" }}
+                                            key={item.groupId}
+                                            id={item.groupId}
+                                        >
+                                            <Image
+                                                src={UserIcon}
+                                                marginRight={"3px"}
+                                            />
+                                            {item.name}
+                                        </Button>
+                                    );
+                                })}
                             </Flex>
                         </Flex>
                     </Flex>
