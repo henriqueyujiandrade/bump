@@ -15,6 +15,8 @@ import {
 } from "@chakra-ui/react";
 
 
+
+
 import logo from "./Bump.svg"
 
 
@@ -38,7 +40,6 @@ export default function WithSubnavigation({ login, register, homeLogado, homeDes
             minH={"60px"}
             py={{ base: 3 }}
             px={{ base: 20 }}
-            borderBottom={1}
             borderStyle={"solid"}
             borderColor={colorT}
             align={"center"}
@@ -63,7 +64,6 @@ export default function WithSubnavigation({ login, register, homeLogado, homeDes
             minH={"60px"}
             py={{ base: 2 }}
             px={{ base: 20 }}
-            borderBottom={1}
             borderStyle={"solid"}
             borderColor={colorT}
             align={"center"}
@@ -182,5 +182,4 @@ export default function WithSubnavigation({ login, register, homeLogado, homeDes
     </>
   );
 }
-
 
