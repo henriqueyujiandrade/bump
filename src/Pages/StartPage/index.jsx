@@ -5,8 +5,8 @@ import { MemberContext } from "../../Providers/Member"
 
 
 const StartPage = () => {
-    const {addMember} = useContext(MemberContext)
-    const data = {name:'joao', id:'4'}
+    const {addMember, removeMember} = useContext(MemberContext)
+    const data = {email:'tes@mail.com'}
     return (
         <>
         <h2>Star PAGE</h2>
@@ -14,7 +14,7 @@ const StartPage = () => {
         <Link to='/register'>Register</Link>
         <Link to='/dashboard'>Dashboard</Link>
         <button onClick={()=> addMember(data)}>TesteDeApi</button>
-        <button>Removendo</button>
+        <button onClick={()=> removeMember(2)}>Removendo</button>
         </>
     )
 }

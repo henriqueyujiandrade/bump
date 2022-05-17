@@ -54,11 +54,17 @@ import {
     Heading,
 } from "@chakra-ui/react";
 import { ModalAddTask } from "../../Modals/ModalAddTask";
+// -- sideBar --
+import SideBar from "../../components/SideBar/SideBar";
 
 const Projects = () => {
     const [openM, setOpenM] = useState(false);
     const [openMAdd, setOpenMAdd] = useState(false);
     const [openAddTask, setOpenAddTask] = useState(false);
+
+    const none = "none";
+    const flex = "flex";
+    const [openSideBar, setOpenSideBar] = useState(none);
 
     const addMembros = () => {
         setOpenMAdd(true);
@@ -71,6 +77,14 @@ const Projects = () => {
     const openAddTaskFunc = () => {
         /* setOpenM(true); */
         setOpenAddTask(true);
+    };
+
+    const handleOpenSideBar = () => {
+        if (openSideBar === none) {
+            setOpenSideBar(flex);
+        } else {
+            setOpenSideBar(none);
+        }
     };
 
     const { tasks, addTask, removeTask } = useContext(TasksContext);
@@ -98,58 +112,17 @@ const Projects = () => {
                 )}
             </>
             <Container>
-                <MenuLateral>
-                    <Logo>
-                        Bum<Logo2>p</Logo2>
-                    </Logo>
-                    <Icone
-                        src="https://cdn-icons-png.flaticon.com/512/219/219986.png"
-                        alt="ícone de usuario"
-                    />
-                    <Home className="home">
-                        <AiFillHome />
-                        <Link to="/dashboard">Home</Link>
-                    </Home>
-
-                    <Accordion
-                        defaultIndex={[0]}
-                        allowMultiple
-                        fontSize="10px"
-                        textAlign={"center"}
-                        width={"100%"}
-                    >
-                        <AccordionItem
-                            width={"100%"}
-                            color={"#FFF"}
-                            fontSize={"20px"}
-                        >
-                            <h2>
-                                <AccordionButton>
-                                    <Box
-                                        flex="1"
-                                        textAlign="left"
-                                        width={"100%"}
-                                    >
-                                        Coleções
-                                    </Box>
-                                    <AiOutlineSnippets /> <AccordionIcon />
-                                </AccordionButton>
-                            </h2>
-                            <AccordionPanel pb={4}>Kenzie</AccordionPanel>
-                            <AccordionPanel pb={4}>Escola</AccordionPanel>
-                            <AccordionPanel pb={4}>
-                                Tarefas domésticas
-                            </AccordionPanel>
-                            <AccordionPanel pb={4}>Rotina</AccordionPanel>
-                        </AccordionItem>
-                    </Accordion>
-                    <Sair>
-                        <AiOutlineImport />
-                        {/*Limpar localstorage para deslogar usuario*/}
-                        <Link to="/login">Sair</Link>
-                    </Sair>
-                </MenuLateral>
+                <SideBar
+                    setShowSideBar={setOpenSideBar}
+                    showSideBar={openSideBar}
+                />
                 <ContainerPrincipal className="container-principal">
+                    <Button
+                        onClick={handleOpenSideBar}
+                        display={["flex", "flex", "none"]}
+                    >
+                        Menu
+                    </Button>
                     <Header>
                         <Nav className="nav-header">
                             <AiOutlineLaptop size={100} />
