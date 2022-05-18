@@ -19,7 +19,7 @@ export const LoginProvider = ({ children }) => {
                 window.localStorage.clear();
                 window.localStorage.setItem(
                     "@bump:token",
-                    response.data.accessToken
+                    JSON.stringify(response.data.accessToken)
                 );
                 window.localStorage.setItem(
                     "@bump:myInfo",

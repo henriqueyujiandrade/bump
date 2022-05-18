@@ -7,21 +7,22 @@ export const MemberContext = createContext();
 
 export const MemberProvider = ({ children }) => {
     const [member, setMember] = useState([]);
-    const [token, setToken] = useState(
+    const [tokenMember, setTokenMember] = useState(
         JSON.parse(localStorage.getItem("@bump:token")) || ""
     );
-    const [users, setUsers] = useState([]); /* 
-    console.log(member) */
+    const [users, setUsers] = useState([]); 
+     
+    const [gpId, setGpId] = useState('1')
 
     useEffect(() => {
-        if (token) {
+        if (tokenMember) {
             api.get("group", {
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${tokenMember}`,
                 },
             }).then((response) => {
                 const thisGp = response.data.filter(
-                    (gp) => gp.groupId == "8da51ca4-204f-4264-a9bb-9895a3"
+                    (gp) => gp.id == gpId
                 );
 
                 setMember(thisGp[0].membros);
@@ -29,15 +30,15 @@ export const MemberProvider = ({ children }) => {
 
             api.get("users", {
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${tokenMember}`,
                 },
             }).then((response) => {
                 setUsers(response.data);
             });
         }
-    }, [token]);
+    }, [tokenMember, gpId]);
 
-    const addMember = (data) => {
+    const addMember = (groupId,data) => {
         if (
             !users.find((user) => user.email == data.email) ||
             member.find((mb) => mb.email == data.email)
@@ -50,32 +51,32 @@ export const MemberProvider = ({ children }) => {
             const newMember = { ...data, status, name, id };
             const membros = [...member, newMember];
             api.patch(
-                `group/2`,
+                `group/${groupId}`,
                 { membros: membros },
                 {
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${tokenMember}`,
                     },
                 }
             ).then((response) => setMember(membros));
         }
     };
 
-    const removeMember = (id) => {
+    const removeMember = (groupId,id) => {
         const filteredMembers = member.filter((user) => user.id != id);
         api.patch(
-            `group/2`,
+            `group/${groupId}`,
             { membros: filteredMembers },
             {
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${tokenMember}`,
                 },
             }
         ).then((response) => setMember(filteredMembers));
     };
 
     return (
-        <MemberContext.Provider value={{ member, addMember, removeMember }}>
+        <MemberContext.Provider value={{ member, addMember, removeMember, setGpId, setTokenMember }}>
             {children}
         </MemberContext.Provider>
     );
