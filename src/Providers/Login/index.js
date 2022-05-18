@@ -16,9 +16,14 @@ export const LoginProvider = ({ children }) => {
                 console.log(response.data.accessToken);
                 window.localStorage.clear();
                 window.localStorage.setItem(
-                    "accessToken",
+                    "@bump:token",
                     response.data.accessToken
-                ); /* 
+                );
+                window.localStorage.setItem(
+                    "@bump:myInfo",
+                    JSON.stringify(response.data.user)
+                );
+                /*
                 history.push(`/dashboard/${response.data.user.id}`) */
                 history.push(`/dashboard/1`);
                 setAuthenticated(true);

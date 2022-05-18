@@ -26,7 +26,6 @@ import Header from "../../components/Header";
 import api from "../../Services/api";
 
 const Register = () => {
-
     const [showPassword, setShowPassword] = useState(false);
 
     const history = useHistory();
@@ -56,7 +55,8 @@ const Register = () => {
     });
 
     const onSubmit = (data) => {
-        console.log(data);
+        delete data.passwordConfirm;
+
         api.post("register", data)
             .then((response) => {
                 console.log("funfou");

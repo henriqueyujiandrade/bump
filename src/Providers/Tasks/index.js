@@ -72,14 +72,16 @@ export const TasksProvider = ({ children }) => {
     );
 
     useEffect(() => {
-        api.get("group", {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        }).then((response) => {
-            console.log(response);
-        });
-    }, []);
+        if (token) {
+            api.get("group", {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }).then((response) => {
+                console.log(response);
+            });
+        }
+    }, [token]);
 
     const addTask = (data) => {
         api.post(`group`, data, {

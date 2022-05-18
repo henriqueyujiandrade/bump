@@ -21,6 +21,7 @@ export default function WithSubnavigation({
     homeLogado,
     homeDeslogado,
 }) {
+    const history = useHistory();
     const color = useColorModeValue("#6D17B0");
     const hover = useColorModeValue("#A993D7");
     const button = useColorModeValue(" #FEEE35 ");
@@ -45,7 +46,13 @@ export default function WithSubnavigation({
                             justify={{ base: "center", md: "start" }}
                         >
                             <Text>
-                                <img src={logo} alt="logo" />
+                                <img
+                                    onClick={() => {
+                                        history.push("/");
+                                    }}
+                                    src={logo}
+                                    alt="logo"
+                                />
                             </Text>
                         </Flex>
                     </Flex>
@@ -68,7 +75,13 @@ export default function WithSubnavigation({
                             justify={{ base: "center", md: "start" }}
                         >
                             <Text>
-                                <img src={logo} alt="logo" />
+                                <img
+                                    onClick={() => {
+                                        history.push("/");
+                                    }}
+                                    src={logo}
+                                    alt="logo"
+                                />
                             </Text>
                         </Flex>
 
@@ -127,7 +140,13 @@ export default function WithSubnavigation({
                             justify={{ base: "start", md: "start" }}
                         >
                             <Text>
-                                <img src={logo} alt="logo" />
+                                <img
+                                    onClick={() => {
+                                        history.push("/");
+                                    }}
+                                    src={logo}
+                                    alt="logo"
+                                />
                             </Text>
                         </Flex>
 
