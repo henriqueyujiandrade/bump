@@ -28,13 +28,126 @@ const Chat = ({ openChat, setOpenChat }) => {
         userId: userId,
     });
     const handleSubmit = () => {
-        setObjMsg({ ...objMsg, description: msg });
         console.log(objMsg, "corpo do objeto mensagem");
         if (msg.length > 0) {
-            addChat({ ...chat, objMsg });
+            addChat({ ...objMsg, description: msg });
+            setMsg("");
         }
-        setMsg("");
+        setObjMsg({
+            name: userInfo.name,
+            groupId: groupId,
+            userId: userId,
+        });
     };
+
+    //Dados chumbados para teste:
+
+    // const [msg, setMsg] = useState("");
+    // const userId = 2;
+    // const groupId = "8da51ca4-204f-4264-a9bb-989851c5aadb";
+    // const [objMsg, setObjMsg] = useState({
+    //     name: "Joao",
+    //     groupId: groupId,
+    //     userId: userId,
+    // });
+    // const [chat, setChat] = useState([
+    //     {
+    //         name: "Joao",
+    //         description: "sei la to testando email 1",
+    //         groupId: "8da51ca4-204f-4264-a9bb-989851c5badb",
+    //         userId: 2,
+    //         id: 1,
+    //     },
+    //     {
+    //         name: "Yasmin",
+    //         description: "sei la to testando email 1",
+    //         groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
+    //         userId: 3,
+    //         id: 1,
+    //     },
+    //     {
+    //         name: "Joao",
+    //         description: "sei la to testando email 1",
+    //         groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
+    //         userId: 2,
+    //         id: 1,
+    //     },
+    //     {
+    //         name: "Henrique",
+    //         description: "sei la to testando email 1",
+    //         groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
+    //         userId: 4,
+    //         id: 1,
+    //     },
+    //     {
+    //         name: "Joao",
+    //         description: "sei la to testando email 1",
+    //         groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
+    //         userId: 2,
+    //         id: 1,
+    //     },
+    //     {
+    //         name: "Valmir",
+    //         description: "sei la to testando email 1",
+    //         groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
+    //         userId: 5,
+    //         id: 1,
+    //     },
+    //     {
+    //         name: "Joao",
+    //         description: "sei la to testando email 1",
+    //         groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
+    //         userId: 2,
+    //         id: 1,
+    //     },
+    //     {
+    //         name: "Maykon",
+    //         description: "sei la to testando email 1",
+    //         groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
+    //         userId: 6,
+    //         id: 1,
+    //     },
+    //     {
+    //         name: "Joao",
+    //         description: "sei la to testando email 1",
+    //         groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
+    //         userId: 2,
+    //         id: 1,
+    //     },
+    //     {
+    //         name: "Igor",
+    //         description: "sei la to testando email 1",
+    //         groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
+    //         userId: 7,
+    //         id: 1,
+    //     },
+    //     {
+    //         name: "Joao",
+    //         description: "sei la to testando email 1",
+    //         groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
+    //         userId: 2,
+    //         id: 1,
+    //     },
+    //     {
+    //         name: "Joao",
+    //         description: "sei la to testando email 1",
+    //         groupId: "8da51ca4-204f-4264-a9bb-989851c5badb",
+    //         userId: 2,
+    //         id: 1,
+    //     },
+    // ]);
+
+    // const groupMsg = chat.filter((item) => {
+    //     return item.groupId === groupId;
+    // });
+
+    // const handleSubmit = () => {
+    //     if (msg.length > 0) {
+    //         setChat([...chat, { ...objMsg, description: msg }]);
+    //         setMsg("");
+    //     }
+    // };
+
     return (
         <>
             <Flex
@@ -70,8 +183,9 @@ const Chat = ({ openChat, setOpenChat }) => {
                 </Flex>
 
                 <Box
-                    transform={"rotate(180deg)"}
-                    scroll
+                    display={"flex"}
+                    flexDir={"column-reverse"}
+                    id="box"
                     overflowY="auto"
                     w={["100vw", "100vw", "308.8px"]}
                     h={["82vh", "82vh", "432px"]}
@@ -86,13 +200,9 @@ const Chat = ({ openChat, setOpenChat }) => {
                             background: "rgba(195, 118, 255, 0.98)",
                             borderRadius: "24px",
                         },
-                        "&": {
-                            direction: "rtl",
-                        },
                     }}
                 >
                     <Flex
-                        transform={"rotate(180deg)"}
                         p={"12px"}
                         flexDir={"column"}
                         justifyContent={"flex-end"}
@@ -101,17 +211,12 @@ const Chat = ({ openChat, setOpenChat }) => {
                         {groupMsg?.map((item) => {
                             return (
                                 <Flex
-                                    css={{
-                                        "&": {
-                                            direction: "ltr",
-                                        },
-                                    }}
                                     flexDir={"column-reverse"}
                                     w={["67vw", "50vw", "160px"]}
                                     alignSelf={
                                         userId === item.userId
-                                            ? "flex-start"
-                                            : "flex-end"
+                                            ? "flex-end"
+                                            : "flex-start"
                                     }
                                     backgroundColor={
                                         userId === item.userId
@@ -157,6 +262,9 @@ const Chat = ({ openChat, setOpenChat }) => {
                         color={"#fff"}
                         backgroundColor={"#6D17B0"}
                         onClick={handleSubmit}
+                        _hover={{
+                            backgroundColor: "#6D17B0",
+                        }}
                     >
                         Enviar
                     </Button>
