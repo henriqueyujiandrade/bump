@@ -32,8 +32,6 @@ export const ModMembroAddList = styled.div`
         }
     }
 `;
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 /* 
 export const ConteCard = styled.div`
@@ -44,7 +42,4 @@ export const ConteCard = styled.div`
     }
 `;
  */
-=======
->>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
-=======
->>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
+

@@ -23,11 +23,6 @@ export const ConteClose = styled.div`
         background: #b84deb;
     }
 `;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
 
 export const ConteCloseTask = styled.div`
     position: absolute;
@@ -52,7 +47,3 @@ export const ConteCloseTask = styled.div`
         background: #b84deb;
     }
 `;
-<<<<<<< HEAD
->>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
-=======
->>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84

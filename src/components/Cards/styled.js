@@ -50,11 +50,6 @@ export const CardMembrosAcao = styled.div`
         }
     }
 `;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
 
 export const ConteCardNew = styled.div`
     display: flex;
@@ -103,7 +98,4 @@ export const DivAcao = styled.div`
         cursor: pointer;
     }
 `;
-<<<<<<< HEAD
->>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
-=======
->>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
+

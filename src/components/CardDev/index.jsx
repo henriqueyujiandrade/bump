@@ -18,4 +18,4 @@ export const CardDev = ({name, link, img}) => {
 
     );
 
-}
+};
