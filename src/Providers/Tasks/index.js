@@ -71,24 +71,29 @@ export const TasksProvider = ({ children }) => {
         JSON.parse(localStorage.getItem("@bump:token")) || ""
     );
 
+    const [groupId, setGroupId] = ('1')   
     useEffect(() => {
         if (token) {
-            api.get("group", {
+            api.get(`group/${groupId}?_embed=task`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             }).then((response) => {
-                console.log(response);
+                setTasks(response.data.task);
             });
         }
-    }, [token]);
+    }, [token, groupId]);
 
-    const addTask = (data) => {
-        api.post(`group`, data, {
+    const addTask = (id,data) => {
+        const groupId = id;
+        const status = "andamento";               
+        const finalData = {...data, groupId, status};
+        api.post(`task`, finalData, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
-        });
+        })
+        .then((response) => setTasks([...tasks, response.data]))
     };
 
     const removeTask = (id) => {
@@ -106,8 +111,9 @@ export const TasksProvider = ({ children }) => {
     };
 
     return (
-        <TasksContext.Provider value={{ tasks, addTask, removeTask }}>
+        <TasksContext.Provider value={{ tasks, addTask, removeTask, setGroupId, setToken }}>
             {children}
+            <button onClick={() => addTask(1,{description:"atividade07",expirationDate: "02-05-2021"})}>addTask</button>
         </TasksContext.Provider>
     );
 };
