@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ModMembroAddConte = styled.div`
+export const ModMembroConte = styled.div`
     @media (min-width: 750px) {
         position: absolute;
         display: flex;
@@ -11,7 +11,8 @@ export const ModMembroAddConte = styled.div`
         background-color: rgb(0, 0, 0, 0.5);
     }
 `;
-export const ModMembroAddList = styled.div`
+/* 
+export const ModMembroList = styled.div`
     @media (min-width: 750px) {
         background: #b84deb;
         border-radius: 25px;
@@ -32,16 +33,11 @@ export const ModMembroAddList = styled.div`
         }
     }
 `;
-<<<<<<< HEAD
 
-/* 
 export const ConteCard = styled.div`
     @media (min-width: 750px) {
         max-height: 300px;
         overflow-y: auto;
         margin-bottom: 15px;
     }
-`;
- */
-=======
->>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
+`; */

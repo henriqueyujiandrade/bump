@@ -15,6 +15,11 @@ import {
 } from "@chakra-ui/react";
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
 import logo from "./Bump.svg"
 
 
@@ -38,7 +43,10 @@ export default function WithSubnavigation({ login, register, homeLogado, homeDes
             minH={"60px"}
             py={{ base: 3 }}
             px={{ base: 20 }}
+<<<<<<< HEAD
             borderBottom={1}
+=======
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
             borderStyle={"solid"}
             borderColor={colorT}
             align={"center"}
@@ -63,7 +71,10 @@ export default function WithSubnavigation({ login, register, homeLogado, homeDes
             minH={"60px"}
             py={{ base: 2 }}
             px={{ base: 20 }}
+<<<<<<< HEAD
             borderBottom={1}
+=======
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
             borderStyle={"solid"}
             borderColor={colorT}
             align={"center"}
@@ -85,7 +96,11 @@ export default function WithSubnavigation({ login, register, homeLogado, homeDes
                 fontWeight={400}
                 color={" #FFFFFF"}
                 variant={"link"}
+<<<<<<< HEAD
                 href={"/register"}
+=======
+                href={"../../Pages/Register"}
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
                 _hover={{
                   bg: {hover},
                 }}
@@ -98,7 +113,11 @@ export default function WithSubnavigation({ login, register, homeLogado, homeDes
                 fontWeight={600}
                 color={"black"}
                 bg={button}
+<<<<<<< HEAD
                 href={"/login"}
+=======
+                href={"../../Pages/Login"}
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
                 _hover={{
                   bg: {buttonH},
                 }}
@@ -183,4 +202,7 @@ export default function WithSubnavigation({ login, register, homeLogado, homeDes
   );
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84

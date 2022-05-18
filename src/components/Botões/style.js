@@ -10,5 +10,10 @@ export const BtnMembros = styled.button`
     line-height: 43px;
 
     color: #4f4f4f;
+<<<<<<< HEAD
     padding: 12.36px;
+=======
+    padding: 5px 10px;
+    margin-bottom: 20px;
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
 `;

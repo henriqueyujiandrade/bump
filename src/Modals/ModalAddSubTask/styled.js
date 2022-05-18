@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ModMembroAddConte = styled.div`
+export const ModAddSubTaskConte = styled.div`
     @media (min-width: 750px) {
         position: absolute;
         display: flex;
@@ -9,9 +9,33 @@ export const ModMembroAddConte = styled.div`
         width: 100%;
         height: 100vh;
         background-color: rgb(0, 0, 0, 0.5);
+        h1 {
+            font-family: "Inter";
+            font-style: normal;
+            font-weight: 700;
+            font-size: 38.0917px;
+            line-height: 46px;
+
+            color: #ffffff;
+        }
     }
 `;
-export const ModMembroAddList = styled.div`
+
+export const TitleH1 = styled.h1`
+    @media (min-width: 750px) {
+        text-align: center;
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24.0917px;
+        line-height: 26px;
+
+        color: #ffffff;
+        margin-bottom: 25px;
+    }
+`;
+/* 
+export const ModMembroList = styled.div`
     @media (min-width: 750px) {
         background: #b84deb;
         border-radius: 25px;
@@ -32,16 +56,11 @@ export const ModMembroAddList = styled.div`
         }
     }
 `;
-<<<<<<< HEAD
 
-/* 
 export const ConteCard = styled.div`
     @media (min-width: 750px) {
         max-height: 300px;
         overflow-y: auto;
         margin-bottom: 15px;
     }
-`;
- */
-=======
->>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
+`; */

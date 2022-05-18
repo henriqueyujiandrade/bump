@@ -6,7 +6,7 @@ import SimpleSlider from '../../components/Caroseul';
 
 
 const StartPage = () => {
-
+    
     return (
         <>
 
@@ -40,7 +40,7 @@ const StartPage = () => {
             </Container>
         
         </>
-    )
-}
+    );
+};
 
-export default StartPage
+export default StartPage;

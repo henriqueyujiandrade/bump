@@ -3,6 +3,14 @@ import styled from "styled-components";
 export const ConteSearching = styled.div`
     display: flex;
     flex-direction: column;
+<<<<<<< HEAD
+=======
+    align-items: center;
+    margin-bottom: 30px;
+    :nth-last-child(1) {
+        margin-bottom: 0;
+    }
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
     input {
         width: 374px;
         padding: 10px 20px;
@@ -23,3 +31,30 @@ export const DivsaoSearching = styled.div`
     background-color: black;
     margin: 25px 0;
 `;
+<<<<<<< HEAD
+=======
+
+export const ConteSearchingSub = styled.div`
+    @media (min-width: 750px) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 30px;
+        :nth-last-child(1) {
+            margin-bottom: 0;
+        }
+        input {
+            width: 374px;
+            padding: 10px 20px;
+            border-radius: 15px;
+            font-family: "Inter";
+            font-style: normal;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 24px;
+
+            color: #acabab;
+        }
+    }
+`;
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
