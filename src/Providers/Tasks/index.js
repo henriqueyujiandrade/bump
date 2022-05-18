@@ -7,68 +7,7 @@ import api from "../../Services/api";
 export const TasksContext = createContext();
 
 export const TasksProvider = ({ children }) => {
-    const [tasks, setTasks] = useState([
-        {
-            description: "Atividade 01",
-            status: "andamento",
-            expirationDate: "16-05-2022",
-            creationDate: "01-01-2021",
-            owner: [1],
-            members: [1, 1, 1],
-            id: 13131313,
-            subTasks: [],
-        },
-        {
-            description: "Atividade 02",
-            status: "andamento",
-            expirationDate: "10-06-2022",
-            creationDate: "01-02-2021",
-            owner: [1],
-            members: [1, 1, 1],
-            id: 1213,
-            subTasks: [],
-        },
-        {
-            description: "Atividade 03",
-            status: "concluida",
-            expirationDate: "01-09-2022",
-            creationDate: "01-01-2021",
-            owner: [1],
-            members: [1, 1],
-            id: 1413,
-            subTasks: [],
-        },
-        {
-            description: "Atividade 04",
-            status: "andamento",
-            expirationDate: "12-05-2018",
-            creationDate: "01-01-2021",
-            owner: [1],
-            members: [1, 1, 1],
-            id: 112,
-            subTasks: [],
-        },
-        {
-            description: "Atividade 05",
-            status: "andamento",
-            expirationDate: "02-05-2021",
-            creationDate: "01-01-2022",
-            owner: [1],
-            members: [1, 1, 1],
-            id: 13,
-            subTasks: [],
-        },
-        {
-            description: "Atividade 06",
-            status: "concluida",
-            expirationDate: "22-03-2022",
-            creationDate: "01-01-2021",
-            owner: [1],
-            members: [1, 1, 1],
-            id: 222,
-            subTasks: [],
-        },
-    ]);
+    const [tasks, setTasks] = useState([]);
     const [token, setToken] = useState(
         JSON.parse(localStorage.getItem("@bump:token")) || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlMUBtYWlsLmNvbSIsImlhdCI6MTY1Mjg0MzA5NCwiZXhwIjoxNjUyODQ2Njk0LCJzdWIiOiIzIn0.24-EJjgDTz08vXVs_KoljSSijMBFkN6GHfM5dL3A6dU"
     );
@@ -78,7 +17,6 @@ export const TasksProvider = ({ children }) => {
     useEffect(()=>{
         if(token){
 
-<<<<<<< HEAD
         
         api.get('task',{
             headers: {
@@ -91,20 +29,9 @@ export const TasksProvider = ({ children }) => {
         }
 
     },[token])
-=======
-    useEffect(() => {
-        api.get("group", {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        }).then((response) => {
-            console.log(response);
-        });
-    }, []);
->>>>>>> 3034112e21ae67da14e8d22e1e63033203da22b0
 
     const addTask = (data) => {
-        const taskId = "8da51ca4-204f-4264-a9bb-989851c5aadbw";
+        const taskId = "";
         const status = "pending";
         const subTask = [];        
         const finalData = {...data, taskId, status, subTask};

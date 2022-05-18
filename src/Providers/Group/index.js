@@ -35,8 +35,8 @@ export const GroupProvider = ({ children }) => {
         const status = "admin";
         const admin = { ...myInfo, status };
         const membros = [admin];
-        const tasks = [];
-        const newData = { ...data, membros, tasks, groupId };
+        
+        const newData = { ...data, membros, groupId };
         api.post(`group`, newData, {
             headers: {
                 Authorization: `Bearer ${token}`,
