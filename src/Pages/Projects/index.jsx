@@ -2,11 +2,6 @@ import { useContext } from "react";
 import { TasksContext } from "../../Providers/Tasks";
 import {
     Container,
-    Home,
-    MenuLateral,
-    Logo,
-    Logo2,
-    Sair,
     Header,
     AddTask,
     RemoveTask,
@@ -16,7 +11,6 @@ import {
     Display,
     Date,
     Body,
-    Icone,
     TagTeam,
     Nav,
     ContainerPrincipal,
@@ -30,9 +24,6 @@ import { ModalMembro } from "../../Modals/ModalMembros";
 import { ModalMembroAdd } from "../../Modals/ModalMembrosAdd";
 //-- modal --
 import {
-    AiFillHome,
-    AiOutlineImport,
-    AiOutlineSnippets,
     AiOutlineLaptop,
     AiOutlineTeam,
     AiOutlineClockCircle,
@@ -40,11 +31,6 @@ import {
     AiOutlineClose,
 } from "react-icons/ai";
 import {
-    Accordion,
-    AccordionItem,
-    AccordionButton,
-    AccordionPanel,
-    AccordionIcon,
     Box,
     Flex,
     Spacer,
@@ -59,7 +45,6 @@ import { ModalAddSubTask } from "../../Modals/ModalAddSubTask";
 
 // -- sideBar --
 import SideBar from "../../components/SideBar/SideBar";
-
 
 const Projects = () => {
     const [openM, setOpenM] = useState(false);
@@ -88,7 +73,6 @@ const Projects = () => {
         /* setOpenM(true); */
         setOpenAddTask(true);
     };
-
 
     const handleOpenSideBar = () => {
         if (openSideBar === none) {
@@ -201,7 +185,6 @@ const Projects = () => {
                                         fontSize={"30"}
                                         fontWeight={"500"}
                                         padding={"0px 10px"}
-
                                     >
                                         {results.description}
                                     </Box>

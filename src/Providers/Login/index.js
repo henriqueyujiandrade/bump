@@ -5,31 +5,35 @@ import { useHistory } from "react-router-dom";
 export const LoginContext = createContext();
 
 export const LoginProvider = ({ children }) => {
+    const [authenticated, setAuthenticated] = useState();
 
-    const [authenticated, setAuthenticated] = useState()
+    const history = useHistory();
 
-    const history = useHistory()
-
-    const confirmLogin = (data) => {
-
-        api.post("login", data)
+    const confirmLogin = async (data) => {
+        await api
+            .post("login", data)
             .then((response) => {
-                console.log('funfou')
-                history.push("/dashboard/1")
-                setAuthenticated(true)
+                console.log(response.data.accessToken);
+                window.localStorage.clear();
+                window.localStorage.setItem(
+                    "accessToken",
+                    response.data.accessToken
+                ); /* 
+                history.push(`/dashboard/${response.data.user.id}`) */
+                history.push(`/dashboard/1`);
+                setAuthenticated(true);
+                return response.data;
             })
             .catch((err) => {
-                console.log("n funfou")
-            })
-
+                console.log("n funfou");
+            });
     };
 
-
     return (
-        <LoginContext.Provider value={{ confirmLogin, authenticated, setAuthenticated }}>
+        <LoginContext.Provider
+            value={{ confirmLogin, authenticated, setAuthenticated }}
+        >
             {children}
         </LoginContext.Provider>
     );
-
-
-}
+};

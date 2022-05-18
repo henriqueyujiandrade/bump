@@ -1,12 +1,14 @@
 import { BtnMembros } from "../style";
 
-export const BtnMembrosAdd = ({ children, click }) => {
+export const BtnMembrosAdd = ({ children, click, type }) => {
     return (
         <>
             {click ? (
-                <BtnMembros onClick={click}>{children}</BtnMembros>
+                <BtnMembros type={type} onClick={click}>
+                    {children}
+                </BtnMembros>
             ) : (
-                <BtnMembros>{children}</BtnMembros>
+                <BtnMembros type={type}>{children}</BtnMembros>
             )}
         </>
     );

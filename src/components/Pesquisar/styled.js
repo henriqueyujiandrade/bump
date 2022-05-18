@@ -18,7 +18,8 @@ export const ConteSearching = styled.div`
         font-size: 24px;
         line-height: 36px;
 
-        color: #acabab;
+        color: black;
+        outline: none;
     }
 `;
 

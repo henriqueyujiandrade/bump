@@ -1,15 +1,23 @@
 import { ConteSearching, ConteSearchingSub } from "../styled";
 
-export const Searching = ({ children, type, subTask }) => {
+export const Searching = ({ children, type, subTask, register, name }) => {
     return (
         <>
             {subTask ? (
                 <ConteSearchingSub>
-                    <input type={type} placeholder={children} />
+                    <input
+                        {...register(name)}
+                        type={type}
+                        placeholder={children}
+                    />
                 </ConteSearchingSub>
             ) : (
                 <ConteSearching>
-                    <input type={type} placeholder={children} />
+                    <input
+                        {...register(name)}
+                        type={type}
+                        placeholder={children}
+                    />
                 </ConteSearching>
             )}
         </>
