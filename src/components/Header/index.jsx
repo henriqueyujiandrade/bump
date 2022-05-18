@@ -76,9 +76,7 @@ export default function WithSubnavigation({
                         >
                             <Text>
                                 <img
-                                    onClick={() => {
-                                        history.push("/");
-                                    }}
+
                                     src={logo}
                                     alt="logo"
                                 />
@@ -97,10 +95,9 @@ export default function WithSubnavigation({
                                 fontWeight={400}
                                 color={" #FFFFFF"}
                                 variant={"link"}
-                                href={"../../Pages/Register"}
-                                _hover={{
-                                    bg: { hover },
-                                }}
+                                href={"/register"}
+                                _hover={{bg: hover}}
+        
                             >
                                 Cadastre-se
                             </Button>
@@ -110,9 +107,9 @@ export default function WithSubnavigation({
                                 fontWeight={600}
                                 color={"black"}
                                 bg={button}
-                                href={"../../Pages/Login"}
+                                href={"/login"}
                                 _hover={{
-                                    bg: { buttonH },
+                                    bg: buttonH
                                 }}
                             >
                                 Login
@@ -141,9 +138,6 @@ export default function WithSubnavigation({
                         >
                             <Text>
                                 <img
-                                    onClick={() => {
-                                        history.push("/");
-                                    }}
                                     src={logo}
                                     alt="logo"
                                 />
@@ -164,9 +158,9 @@ export default function WithSubnavigation({
                                 fontWeight={400}
                                 color={" #FFFFFF"}
                                 variant={"link"}
-                                href={"../../Pages/StartPage"}
+                                href={"/"}
                                 _hover={{
-                                    bg: { hover },
+                                    bg: hover
                                 }}
                             >
                                 Sair
