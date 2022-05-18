@@ -26,14 +26,11 @@ export const ModMembroList = styled.div`
             font-weight: 700;
             font-size: 26.6341px;
             line-height: 40px;
-
             color: #ffffff;
-
             margin-bottom: 24px;
         }
     }
 `;
-
 export const ConteCard = styled.div`
     @media (min-width: 750px) {
         max-height: 300px;

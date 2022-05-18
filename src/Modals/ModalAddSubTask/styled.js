@@ -15,7 +15,6 @@ export const ModAddSubTaskConte = styled.div`
             font-weight: 700;
             font-size: 38.0917px;
             line-height: 46px;
-
             color: #ffffff;
         }
     }
@@ -29,7 +28,6 @@ export const TitleH1 = styled.h1`
         font-weight: 700;
         font-size: 24.0917px;
         line-height: 26px;
-
         color: #ffffff;
         margin-bottom: 25px;
     }
@@ -49,14 +47,11 @@ export const ModMembroList = styled.div`
             font-weight: 700;
             font-size: 26.6341px;
             line-height: 40px;
-
             color: #ffffff;
-
             margin-bottom: 24px;
         }
     }
 `;
-
 export const ConteCard = styled.div`
     @media (min-width: 750px) {
         max-height: 300px;
