@@ -4,7 +4,7 @@ export const Container = styled.main`
 
     background-color: #02072F;
 
-    height: 100%;
+    min-height: 100vh;
 
     .section-carousel {
 
@@ -20,17 +20,29 @@ export const Container = styled.main`
 
         }
 
-        .carousel {
+        @media (min-width: 1920px) {
 
             display: flex;
-            flex-direction: column;
             align-items: center;
-            margin-top: 20px;
-        }
+            justify-content: space-around;
 
-        @media (min-width: 1024px) {
+            padding: 50px;
 
-            height: 100vh;
+            .text {
+
+                width: 500px;
+                
+
+                p {
+
+                    font-size: 2.5rem;
+                    text-align: start;
+
+                }
+
+            }
+
+            
 
         }
 

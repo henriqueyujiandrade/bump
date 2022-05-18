@@ -1,8 +1,8 @@
 import Header  from './../../components/Header/';
-import CarouselComponent from './carousel';
 import { Container } from './style';
 import img3 from './../../assets/2022-03-29_17-43.png'
 import { CardDev } from '../../components/CardDev';
+import SimpleSlider from '../../components/Caroseul';
 
 
 const StartPage = () => {
@@ -16,11 +16,10 @@ const StartPage = () => {
 
                 <section className="section-carousel">
 
-                    <p>Organize e interaja com seus colegas de trabalho, estudo ou para montar sua rotina</p>
-                    <div className="carousel">
-                        <CarouselComponent />
+                    <div className="text">
+                        <p>Organize e interaja com seus colegas de <strong>Trabalho</strong>, <strong>Estudo</strong> ou para montar sua <strong>Rotina</strong></p>
                     </div>
-
+                    <SimpleSlider />
                 </section>
 
                 <section className="section-devs">
