@@ -18,8 +18,6 @@ export const ModalMembroAdd = ({ setOpenMAdd, setOpenM }) => {
 
                 <DivsaoSearching />
 
-                <DivsaoSearching />
-
                 <CardMembros add={true} />
             </ModMembroAddList>
         </ModMembroAddConte>
