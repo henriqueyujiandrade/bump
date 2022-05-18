@@ -11,177 +11,34 @@ import { useState, useContext } from "react";
 import { ChatContext } from "../../Providers/Chat/index.js";
 import { useParams } from "react-router-dom";
 
-const Chat = () => {
-    // const params = useParams();
-    // const userInfo = JSON.parse(localStorage.getItem("@bump:myInfo"));
-    // const { chat, addChat, removeChat } = useContext(ChatContext);
+const Chat = ({ openChat, setOpenChat }) => {
+    const params = useParams();
+    const userInfo = JSON.parse(localStorage.getItem("@bump:myInfo"));
+    const { chat, addChat, removeChat } = useContext(ChatContext);
     const [msg, setMsg] = useState("");
 
-    const mensagensTeste = [
-        {
-            name: "Joao",
-            description: "sei la to testando email 1",
-            groupId: "8da51ca4-204f-4264-a9bb-989851c5badb",
-            userId: 2,
-            id: 1,
-        },
-        {
-            name: "Yasmin",
-            description: "sei la to testando email 1",
-            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-            userId: 3,
-            id: 2,
-        },
-        {
-            name: "Henrique",
-            description: "sei la to testando email 1",
-            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-            userId: 4,
-            id: 3,
-        },
-        {
-            name: "Joao",
-            description: "sei la to testando email 1",
-            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-            userId: 2,
-            id: 4,
-        },
-        {
-            name: "Joao",
-            description: "sei la to testando email 1",
-            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-            userId: 2,
-            id: 5,
-        },
-        {
-            name: "Joao",
-            description: "sei la to testando email 1",
-            groupId: "8da51ca4-204f-4264-a9bb-989751c5aadb",
-            userId: 2,
-            id: 6,
-        },
-        {
-            name: "Yasmin",
-            description: "sei la to testando email 1",
-            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-            userId: 3,
-            id: 7,
-        },
-        {
-            name: "Yasmin",
-            description: "sei la to testando email 1",
-            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-            userId: 3,
-            id: 2,
-        },
-        {
-            name: "Joao",
-            description: "sei la to testando email 1",
-            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-            userId: 2,
-            id: 5,
-        },
-        {
-            name: "Yasmin",
-            description: "sei la to testando email 1",
-            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-            userId: 3,
-            id: 2,
-        },
-        {
-            name: "Joao",
-            description: "sei la to testando email 1",
-            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-            userId: 2,
-            id: 5,
-        },
-        {
-            name: "Yasmin",
-            description: "sei la to testando email 1",
-            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-            userId: 3,
-            id: 2,
-        },
-        {
-            name: "Joao",
-            description: "sei la to testando email 1",
-            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-            userId: 2,
-            id: 5,
-        },
-        {
-            name: "Yasmin",
-            description: "sei la to testando email 1",
-            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-            userId: 3,
-            id: 2,
-        },
-        {
-            name: "Joao",
-            description: "sei la to testando email 1",
-            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-            userId: 2,
-            id: 5,
-        },
-        {
-            name: "Joao",
-            description: "sei la to testando email 1",
-            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-            userId: 2,
-            id: 5,
-        },
-        {
-            name: "Yasmin",
-            description: "sei la to testando email 1",
-            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-            userId: 3,
-            id: 2,
-        },
-        {
-            name: "Joao",
-            description: "sei la to testando email 1",
-            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-            userId: 2,
-            id: 5,
-        },
-        {
-            name: "Joao",
-            description: "sei la to testando email 1",
-            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-            userId: 2,
-            id: 5,
-        },
-        {
-            name: "Joao",
-            description: "sei la to testando email 1",
-            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-            userId: 2,
-            id: 5,
-        },
-        {
-            name: "Joao",
-            description: "sei la to testando email 1",
-            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-            userId: 2,
-            id: 5,
-        },
-    ];
-    const userId = 2;
-    const groupId = "8da51ca4-204f-4264-a9bb-989851c5aadb";
-    const groupMsg = mensagensTeste.filter((item) => {
+    const userId = userInfo.id;
+    const groupId = params.id;
+    const groupMsg = chat.filter((item) => {
         return item.groupId === groupId;
     });
     const [objMsg, setObjMsg] = useState({
+        name: userInfo.name,
         groupId: groupId,
         userId: userId,
     });
     const handleSubmit = () => {
         setObjMsg({ ...objMsg, description: msg });
         console.log(objMsg, "corpo do objeto mensagem");
+        if (msg.length > 0) {
+            addChat({ ...chat, objMsg });
+        }
+        setMsg("");
     };
     return (
         <>
             <Flex
+                display={openChat}
                 position={["absolute", "absolute", "static"]}
                 top={"0px"}
                 left={"0px"}
@@ -203,7 +60,13 @@ const Chat = () => {
                     backgroundColor={"#6D17B0"}
                 >
                     <Heading color={"#fff"}>Chat</Heading>
-                    <CloseButton color={"#fff"} size="lg" />
+                    <CloseButton
+                        onClick={() => {
+                            setOpenChat("none");
+                        }}
+                        color={"#fff"}
+                        size="lg"
+                    />
                 </Flex>
 
                 <Box
