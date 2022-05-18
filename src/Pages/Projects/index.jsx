@@ -47,7 +47,7 @@ import { ModalAddSubTask } from "../../Modals/ModalAddSubTask";
 import SideBar from "../../components/SideBar/SideBar";
 import getCurrentDate from "./getCurrentDate";
 import { CardNewTask } from "../../components/Cards/CardNewTask";
-
+import filterDate from "./filterDate";
 const Projects = () => {
     const [openM, setOpenM] = useState(false);
     const [openMAdd, setOpenMAdd] = useState(false);
@@ -91,7 +91,10 @@ const Projects = () => {
     }
 
     function filtrar(event) {
-        if (event === "Todas") return setShowTasks(tasks);
+        if (event === "Todas") {
+            console.log(tasks);
+            return setShowTasks(tasks);
+        }
         if (event === "Concluídas") {
             setShowTasks(tasks.filter((tasks) => tasks.status === "concluida"));
         }
@@ -122,6 +125,11 @@ const Projects = () => {
                 }
             }
             setShowTasks(filtradas);
+        }
+        if (event === "Data") {
+            const array = [...tasks];
+            filterDate(array);
+            setShowTasks(array);
         }
     }
     return (
