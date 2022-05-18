@@ -32,13 +32,3 @@ export const ModMembroAddList = styled.div`
         }
     }
 `;
-
-/* 
-export const ConteCard = styled.div`
-    @media (min-width: 750px) {
-        max-height: 300px;
-        overflow-y: auto;
-        margin-bottom: 15px;
-    }
-`;
- */

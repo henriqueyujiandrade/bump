@@ -50,3 +50,51 @@ export const CardMembrosAcao = styled.div`
         }
     }
 `;
+
+export const ConteCardNew = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 25px;
+    background-color: white;
+    margin: 0 50px 15px 50px;
+    box-sizing: border-box;
+    border-radius: 10px;
+`;
+
+export const DivInfo = styled.div`
+    display: flex;
+    align-items: center;
+    input {
+        width: 18px;
+        height: 18px;
+        border: 1px solid black;
+        margin: 0 20px 0 0;
+    }
+    h3 {
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18.5292px;
+        line-height: 20px;
+        color: #333333;
+    }
+`;
+
+export const DivAcao = styled.div`
+    display: flex;
+    align-items: center;
+    > img {
+        margin-right: 30px;
+        cursor: pointer;
+    }
+    > div {
+        display: flex;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 4px solid #b84deb;
+        padding: 5px;
+        cursor: pointer;
+    }
+`;
