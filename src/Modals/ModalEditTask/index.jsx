@@ -54,10 +54,8 @@ export const ModalEditTask = ({ setOpenEditTask, setOpenAddSubTask }) => {
         font-weight: 700;
         font-size: 18px;
         line-height: 22px;
-
         color: #ffffff;
     `;
-
     return (
         <ModTaskEditConte>
             <Modal

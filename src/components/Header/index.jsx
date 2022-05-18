@@ -27,8 +27,6 @@ export default function WithSubnavigation({
     const buttonH = useColorModeValue("#D6D793");
     const colorT = useColorModeValue("gray.200", "gray.900");
 
-    const history = useHistory();
-
     return (
         <>
             {login || register ? (
@@ -47,11 +45,7 @@ export default function WithSubnavigation({
                             justify={{ base: "center", md: "start" }}
                         >
                             <Text>
-                                <img
-                                    onClick={() => history.push("/")}
-                                    src={logo}
-                                    alt="logo"
-                                />
+                                <img src={logo} alt="logo" />
                             </Text>
                         </Flex>
                     </Flex>

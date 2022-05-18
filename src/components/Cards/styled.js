@@ -98,3 +98,4 @@ export const DivAcao = styled.div`
         cursor: pointer;
     }
 `;
+

@@ -17,5 +17,22 @@ export const ConteForm = styled.form`
         display: flex;
         flex-direction: column;
         align-items: center;
+        > h1 {
+            font-family: "Poppins";
+            font-style: normal;
+            font-weight: 700;
+            font-size: 26.6341px;
+            line-height: 40px;
+            color: #ffffff;
+            margin-bottom: 24px;
+        }
+    }
+`;
+
+export const ConteCard = styled.div`
+    @media (min-width: 750px) {
+        max-height: 300px;
+        overflow-y: auto;
+        margin-bottom: 15px;
     }
 `;

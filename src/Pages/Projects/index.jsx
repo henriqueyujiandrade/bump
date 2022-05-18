@@ -4,31 +4,31 @@ import {
     Container,
     Header,
     AddTask,
+    Body,
     RemoveTask,
     Group,
     NavFilter,
     ButtonFilter,
     Display,
     Date,
-    Body,
     TagTeam,
     Nav,
     ContainerPrincipal,
     Label,
     LabelExp,
 } from "./style";
-import { Link } from "react-router-dom";
 // --- modal ---
 import { useState } from "react";
 import { ModalMembro } from "../../Modals/ModalMembros";
 import { ModalMembroAdd } from "../../Modals/ModalMembrosAdd";
 //-- modal --
+
 import {
     AiOutlineLaptop,
     AiOutlineTeam,
     AiOutlineClockCircle,
     //AiOutlineWechat,
-    AiOutlineClose,
+    AiOutlineEdit,
 } from "react-icons/ai";
 import {
     Box,
@@ -45,7 +45,9 @@ import { ModalAddSubTask } from "../../Modals/ModalAddSubTask";
 
 // -- sideBar --
 import SideBar from "../../components/SideBar/SideBar";
-
+import getCurrentDate from "./getCurrentDate";
+import { CardNewTask } from "../../components/Cards/CardNewTask";
+import filterDate from "./filterDate";
 const Projects = () => {
     const [openM, setOpenM] = useState(false);
     const [openMAdd, setOpenMAdd] = useState(false);
@@ -53,7 +55,7 @@ const Projects = () => {
     const [openEditTask, setOpenEditTask] = useState(false);
     const [openAddSubTask, setOpenAddSubTask] = useState(false);
 
-    const editTesk = () => {
+    const editTesk = (target) => {
         setOpenEditTask(true);
     };
 
@@ -63,7 +65,6 @@ const Projects = () => {
 
     const addMembros = () => {
         setOpenMAdd(true);
-        setOpenM(false);
     };
     const checkMembers = () => {
         setOpenM(true);
@@ -81,13 +82,56 @@ const Projects = () => {
             setOpenSideBar(none);
         }
     };
-
-    const { tasks, addTask, removeTask } = useContext(TasksContext);
+    const { tasks, removeTask } = useContext(TasksContext);
+    const [showTasks, setShowTasks] = useState(tasks);
 
     function clickClose(target) {
         removeTask(target);
+        setShowTasks(tasks);
     }
 
+    function filtrar(event) {
+        if (event === "Todas") {
+            console.log(tasks);
+            return setShowTasks(tasks);
+        }
+        if (event === "Concluídas") {
+            setShowTasks(tasks.filter((tasks) => tasks.status === "concluida"));
+        }
+
+        if (event === "Atrasadas") {
+            setShowTasks([]);
+            const filtradas = [];
+            for (let i = 0; i < tasks.length; i++) {
+                const yrTask =
+                    tasks[i].expirationDate[6] +
+                    tasks[i].expirationDate[7] +
+                    tasks[i].expirationDate[8] +
+                    tasks[i].expirationDate[9];
+                const mTask =
+                    tasks[i].expirationDate[3] + tasks[i].expirationDate[4];
+                const dTask =
+                    tasks[i].expirationDate[0] + tasks[i].expirationDate[1];
+
+                if (
+                    parseInt(yrTask) < getCurrentDate().year ||
+                    (parseInt(yrTask) <= getCurrentDate().year &&
+                        parseInt(mTask) < getCurrentDate().month) ||
+                    (parseInt(yrTask) <= getCurrentDate().year &&
+                        parseInt(mTask) <= getCurrentDate().month &&
+                        parseInt(dTask) < getCurrentDate().date)
+                ) {
+                    filtradas.push(tasks[i]);
+                }
+            }
+            setShowTasks(filtradas);
+        }
+        if (event === "Data") {
+            const array = [...tasks];
+            filterDate(array);
+            setShowTasks(array);
+        }
+    }
     return (
         <Body>
             <>
@@ -147,13 +191,29 @@ const Projects = () => {
                     </Header>
 
                     <NavFilter>
-                        <ButtonFilter>Data</ButtonFilter>
-                        <ButtonFilter>Concluídas</ButtonFilter>
-                        <ButtonFilter>Atrasadas</ButtonFilter>
+                        <ButtonFilter
+                            onClick={(event) => filtrar(event.target.innerText)}
+                        >
+                            Data
+                        </ButtonFilter>
+                        <ButtonFilter
+                            onClick={(event) => filtrar(event.target.innerText)}
+                        >
+                            Concluídas
+                        </ButtonFilter>
+                        <ButtonFilter
+                            onClick={(event) => filtrar(event.target.innerText)}
+                        >
+                            Atrasadas
+                        </ButtonFilter>
+                        <ButtonFilter
+                            onClick={(event) => filtrar(event.target.innerText)}
+                        >
+                            Todas
+                        </ButtonFilter>
                     </NavFilter>
                     <Display>
-                        {/* filtrar rotinas e jogar dentro dos cards */}
-                        {tasks.map((results) => {
+                        {showTasks.map((results) => {
                             return (
                                 <Flex
                                     background={"white"}
@@ -171,15 +231,14 @@ const Projects = () => {
                                         justifyContent={"space-between"}
                                     >
                                         <Label>{results.creationDate}</Label>
-                                        <Button
-                                            colorScheme="none"
-                                            color={"black"}
+                                        <Label
+                                            href=""
                                             onClick={() =>
                                                 clickClose(results.id)
                                             }
                                         >
-                                            <AiOutlineClose size={"25"} />
-                                        </Button>
+                                            X
+                                        </Label>
                                     </Heading>
                                     <Box
                                         fontSize={"30"}
@@ -196,12 +255,18 @@ const Projects = () => {
                                                 <AiOutlineClockCircle />
                                                 {results.expirationDate}
                                             </LabelExp>
+                                            <AiOutlineEdit
+                                                size="40"
+                                                onClick={() =>
+                                                    editTesk(results.id)
+                                                }
+                                            />
                                             <TagTeam
                                                 className="tag-team"
                                                 onClick={addMembros}
                                             >
                                                 <AiOutlineTeam />
-                                                {results.group.length}
+                                                {results.members.length}
                                             </TagTeam>
                                         </Date>
                                     </ButtonGroup>
