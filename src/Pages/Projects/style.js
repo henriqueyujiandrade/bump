@@ -156,7 +156,6 @@ export const Label = styled.label`
     color: rgb(135, 130, 130);
     display: flex;
     align-items: center;
-    width: 35px;
     padding: 2px;
 `;
 export const LabelExp = styled.label`

@@ -2,28 +2,21 @@ import { useContext } from "react";
 import { TasksContext } from "../../Providers/Tasks";
 import {
     Container,
-    Home,
-    MenuLateral,
-    Logo,
-    Logo2,
-    Sair,
     Header,
     AddTask,
+    Body,
     RemoveTask,
     Group,
     NavFilter,
     ButtonFilter,
     Display,
     Date,
-    Body,
-    Icone,
     TagTeam,
     Nav,
     ContainerPrincipal,
     Label,
     LabelExp,
 } from "./style";
-import { Link } from "react-router-dom";
 // --- modal ---
 import { useState } from "react";
 import { ModalMembro } from "../../Modals/ModalMembros";
@@ -31,9 +24,6 @@ import { ModalMembroAdd } from "../../Modals/ModalMembrosAdd";
 //-- modal --
 
 import {
-    AiFillHome,
-    AiOutlineImport,
-    AiOutlineSnippets,
     AiOutlineLaptop,
     AiOutlineTeam,
     AiOutlineClockCircle,
@@ -41,11 +31,6 @@ import {
     AiOutlineClose,
 } from "react-icons/ai";
 import {
-    Accordion,
-    AccordionItem,
-    AccordionButton,
-    AccordionPanel,
-    AccordionIcon,
     Box,
     Flex,
     Spacer,
@@ -56,6 +41,7 @@ import {
 import { ModalAddTask } from "../../Modals/ModalAddTask";
 // -- sideBar --
 import SideBar from "../../components/SideBar/SideBar";
+import getCurrentDate from "./getCurrentDate";
 
 const Projects = () => {
     const [openM, setOpenM] = useState(false);
@@ -87,10 +73,50 @@ const Projects = () => {
         }
     };
 
-    const { tasks, addTask, removeTask } = useContext(TasksContext);
+    const { tasks, removeTask } = useContext(TasksContext);
+    const [showTasks, setShowTasks] = useState(tasks);
 
     function clickClose(target) {
         removeTask(target);
+    }
+
+    function filtrar(event) {
+        if (event.target.innerText === "Todas") return setShowTasks(tasks);
+
+        if (event.target.innerText === "Concluídas") {
+            setShowTasks(tasks.filter((tasks) => tasks.status === "concluida"));
+        }
+
+        if (event.target.innerText === "Atrasadas") {
+            setShowTasks([]);
+            const filtradas = [];
+            for (let i = 0; i < tasks.length; i++) {
+                const yrTask =
+                    tasks[i].expirationDate[6] +
+                    tasks[i].expirationDate[7] +
+                    tasks[i].expirationDate[8] +
+                    tasks[i].expirationDate[9];
+                const mTask =
+                    tasks[i].expirationDate[3] + tasks[i].expirationDate[4];
+                const dTask =
+                    tasks[i].expirationDate[0] + tasks[i].expirationDate[1];
+
+                if (
+                    parseInt(yrTask) < getCurrentDate().year ||
+                    (parseInt(yrTask) <= getCurrentDate().year &&
+                        parseInt(mTask) < getCurrentDate().month) ||
+                    (parseInt(yrTask) <= getCurrentDate().year &&
+                        parseInt(mTask) <= getCurrentDate().month &&
+                        parseInt(dTask) < getCurrentDate().date)
+                ) {
+                    filtradas.push(tasks[i]);
+                }
+            }
+            setShowTasks(filtradas);
+        }
+        if (event.target.innerText === "Data") {
+            setShowTasks(tasks);
+        }
     }
     return (
         <Body>
@@ -141,13 +167,22 @@ const Projects = () => {
                     </Header>
 
                     <NavFilter>
-                        <ButtonFilter>Data</ButtonFilter>
-                        <ButtonFilter>Concluídas</ButtonFilter>
-                        <ButtonFilter>Atrasadas</ButtonFilter>
+                        <ButtonFilter onClick={(event) => filtrar(event)}>
+                            Data
+                        </ButtonFilter>
+                        <ButtonFilter onClick={(event) => filtrar(event)}>
+                            Concluídas
+                        </ButtonFilter>
+                        <ButtonFilter onClick={(event) => filtrar(event)}>
+                            Atrasadas
+                        </ButtonFilter>
+                        <ButtonFilter onClick={(event) => filtrar(event)}>
+                            Todas
+                        </ButtonFilter>
                     </NavFilter>
                     <Display>
                         {/* filtrar rotinas e jogar dentro dos cards */}
-                        {tasks.map((results) => {
+                        {showTasks.map((results) => {
                             return (
                                 <Flex
                                     background={"white"}
@@ -195,7 +230,7 @@ const Projects = () => {
                                                 onClick={addMembros}
                                             >
                                                 <AiOutlineTeam />
-                                                {results.group.length}
+                                                {results.members.length}
                                             </TagTeam>
                                         </Date>
                                     </ButtonGroup>
