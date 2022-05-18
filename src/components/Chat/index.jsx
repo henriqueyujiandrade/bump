@@ -40,7 +40,7 @@ const Chat = ({ openChat, setOpenChat }) => {
         });
     };
 
-    //dados chumbados para teste:
+    //Dados chumbados para teste:
 
     // const [msg, setMsg] = useState("");
     // const userId = 2;
