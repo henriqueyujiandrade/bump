@@ -28,18 +28,7 @@ export const MenuLateral = styled.div`
     flex-direction: column;
     align-items: center;
 `;
-export const Logo = styled.h4`
-    color: #a346ff;
-    display: flex;
-    flex-direction: row;
-    font-family: "Mitr", sans-serif;
-    text-shadow: 2px 1px 2px rgba(0, 0, 0, 0.679);
-    font-size: 50px;
-    margin-top: 30px;
-`;
-export const Logo2 = styled.p`
-    color: #fab219;
-`;
+
 export const Sair = styled.a`
     color: #feee35;
     margin-top: 90px;
