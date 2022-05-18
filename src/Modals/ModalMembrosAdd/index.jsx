@@ -15,7 +15,9 @@ export const ModalMembroAdd = ({ setOpenMAdd, setOpenM }) => {
                 <Close close={close} />
                 <h1>Adicionar Membro</h1>
                 <Searching Label="Email">Digite um email</Searching>
+
                 <DivsaoSearching />
+
                 <CardMembros add={true} />
             </ModMembroAddList>
         </ModMembroAddConte>

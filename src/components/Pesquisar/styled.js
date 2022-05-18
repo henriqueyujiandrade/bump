@@ -17,7 +17,6 @@ export const ConteSearching = styled.div`
         font-weight: 500;
         font-size: 24px;
         line-height: 36px;
-
         color: #acabab;
     }
 `;
@@ -47,7 +46,6 @@ export const ConteSearchingSub = styled.div`
             font-weight: 500;
             font-size: 20px;
             line-height: 24px;
-
             color: #acabab;
         }
     }

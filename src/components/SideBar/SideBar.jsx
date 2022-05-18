@@ -40,7 +40,6 @@ const SideBar = ({ showSideBar, setShowSideBar }) => {
                 flexDir="column"
                 justifyContent="space-between"
                 w={["175px", "205px", "225px"]}
-                h="100vh"
                 backgroundColor="#6D17B0"
                 alignItems={"center "}
                 p={["8px", "12px", "16px"]}
