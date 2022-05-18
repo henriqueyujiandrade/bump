@@ -4,12 +4,18 @@ export const ConteSearching = styled.div`
     display: flex;
     flex-direction: column;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
     align-items: center;
     margin-bottom: 30px;
     :nth-last-child(1) {
         margin-bottom: 0;
     }
+<<<<<<< HEAD
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
+=======
 >>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
     input {
         width: 374px;
@@ -32,7 +38,10 @@ export const DivsaoSearching = styled.div`
     margin: 25px 0;
 `;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
 
 export const ConteSearchingSub = styled.div`
     @media (min-width: 750px) {
@@ -57,4 +66,7 @@ export const ConteSearchingSub = styled.div`
         }
     }
 `;
+<<<<<<< HEAD
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
+=======
 >>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84

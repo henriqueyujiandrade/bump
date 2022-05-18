@@ -1,10 +1,13 @@
 import { useContext } from "react";
 import { TasksContext } from "../../Providers/Tasks";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import styled from "styled-components";
 import "./styles.css";
 import { Link } from "react-router-dom";
 =======
+=======
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
 import {
     Container,
     Header,
@@ -22,12 +25,16 @@ import {
     Label,
     LabelExp,
 } from "./style";
+<<<<<<< HEAD
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
+=======
 >>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
 // --- modal ---
 import { useState } from "react";
 import { ModalMembro } from "../../Modals/ModalMembros";
 import { ModalMembroAdd } from "../../Modals/ModalMembrosAdd";
 //-- modal --
+<<<<<<< HEAD
 <<<<<<< HEAD
 import {
     AiFillHome,
@@ -46,6 +53,8 @@ import {
     AccordionPanel,
     AccordionIcon,
 =======
+=======
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
 
 import {
     AiOutlineLaptop,
@@ -55,6 +64,9 @@ import {
     AiOutlineEdit,
 } from "react-icons/ai";
 import {
+<<<<<<< HEAD
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
+=======
 >>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
     Box,
     Flex,
@@ -64,7 +76,10 @@ import {
     Heading,
 } from "@chakra-ui/react";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
 import { ModalAddTask } from "../../Modals/ModalAddTask";
 
 import { ModalEditTask } from "../../Modals/ModalEditTask";
@@ -74,17 +89,23 @@ import { ModalAddSubTask } from "../../Modals/ModalAddSubTask";
 import SideBar from "../../components/SideBar/SideBar";
 import getCurrentDate from "./getCurrentDate";
 import { CardNewTask } from "../../components/Cards/CardNewTask";
+<<<<<<< HEAD
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
+=======
 >>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
 
 const Projects = () => {
     const [openM, setOpenM] = useState(false);
     const [openMAdd, setOpenMAdd] = useState(false);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     const addMembros = () => {
         setOpenMAdd(true);
         setOpenM(false);
 =======
+=======
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
     const [openAddTask, setOpenAddTask] = useState(false);
     const [openEditTask, setOpenEditTask] = useState(false);
     const [openAddSubTask, setOpenAddSubTask] = useState(false);
@@ -99,12 +120,16 @@ const Projects = () => {
 
     const addMembros = () => {
         setOpenMAdd(true);
+<<<<<<< HEAD
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
+=======
 >>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
     };
     const checkMembers = () => {
         setOpenM(true);
         setOpenMAdd(false);
     };
+<<<<<<< HEAD
 <<<<<<< HEAD
 
     const { tasks, addTask, removeTask } = useContext(TasksContext);
@@ -236,6 +261,13 @@ const Projects = () => {
     };
 >>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
 
+=======
+    const openAddTaskFunc = () => {
+        /* setOpenM(true); */
+        setOpenAddTask(true);
+    };
+
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
     const handleOpenSideBar = () => {
         if (openSideBar === none) {
             setOpenSideBar(flex);
@@ -287,9 +319,12 @@ const Projects = () => {
     }
     return (
 <<<<<<< HEAD
+<<<<<<< HEAD
         <body>
             <>
 =======
+=======
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
         <Body>
             <>
                 {openAddSubTask && (
@@ -308,6 +343,9 @@ const Projects = () => {
                 {openAddTask && (
                     <ModalAddTask setOpenAddTask={setOpenAddTask} />
                 )}
+<<<<<<< HEAD
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
+=======
 >>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
                 {openMAdd && (
                     <ModalMembroAdd
@@ -320,6 +358,7 @@ const Projects = () => {
                 )}
             </>
             <Container>
+<<<<<<< HEAD
 <<<<<<< HEAD
                 <MenuLateral>
                     <Logo>
@@ -381,6 +420,8 @@ const Projects = () => {
                         <nav className="nav-header">
                             <AddTask>Adicionar +</AddTask>
 =======
+=======
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
                 <SideBar
                     setShowSideBar={setOpenSideBar}
                     showSideBar={openSideBar}
@@ -402,11 +443,15 @@ const Projects = () => {
                             <AddTask onClick={openAddTaskFunc}>
                                 Adicionar +
                             </AddTask>
+<<<<<<< HEAD
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
+=======
 >>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
 
                             <Group onClick={checkMembers}>
                                 <AiOutlineTeam />2
                             </Group>
+<<<<<<< HEAD
 <<<<<<< HEAD
                         </nav>
                     </Header>
@@ -466,6 +511,8 @@ const Projects = () => {
             </Container>
         </body>
 =======
+=======
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
                         </Nav>
                     </Header>
 
@@ -556,6 +603,9 @@ const Projects = () => {
                 </ContainerPrincipal>
             </Container>
         </Body>
+<<<<<<< HEAD
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
+=======
 >>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
     );
 };

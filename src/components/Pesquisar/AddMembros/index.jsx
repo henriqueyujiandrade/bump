@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { ConteSearching, DivsaoSearching } from "../styled";
 
 export const Searching = ({ children }) => {
@@ -8,6 +9,8 @@ export const Searching = ({ children }) => {
             <DivsaoSearching />
         </ConteSearching>
 =======
+=======
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
 import { ConteSearching, ConteSearchingSub } from "../styled";
 
 export const Searching = ({ children, type, subTask }) => {
@@ -23,6 +26,9 @@ export const Searching = ({ children, type, subTask }) => {
                 </ConteSearching>
             )}
         </>
+<<<<<<< HEAD
+>>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
+=======
 >>>>>>> eca2488c70fe51d09de1780c557d161029ca7d84
     );
 };
