@@ -4,10 +4,14 @@ import { Searching } from "../../components/Pesquisar/AddMembros";
 import { DivsaoSearching } from "../../components/Pesquisar/styled";
 import { ModMembroAddConte, ModMembroAddList } from "./style";
 
-export const ModalMembroAdd = ({ setOpenMAdd, setOpenM }) => {
+export const ModalMembroAdd = ({ setOpenMAdd, setOpenM, Membros }) => {
     const close = () => {
-        setOpenMAdd(false);
-        setOpenM(true);
+        if (Membros) {
+            setOpenMAdd(false);
+            setOpenM(true);
+        } else {
+            setOpenMAdd(false);
+        }
     };
     return (
         <ModMembroAddConte>
