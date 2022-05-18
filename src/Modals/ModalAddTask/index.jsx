@@ -21,6 +21,7 @@ export const ModalAddTask = ({ setOpenAddTask }) => {
         setTask(...task, (task.description = e.target[0].value));
         setTask(...task, (task.members = e.target[1].value));
         setTask(...task, (task.expirationDate = e.target[2].value));
+        setTask(...task, (task.creationDate = date));
         setTask(...task, (task.status = "andamento"));
         addTask(task);
     };

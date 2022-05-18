@@ -1,12 +1,22 @@
-import { ConteClose } from "./styled";
+import { ConteClose, ConteCloseTask } from "./styled";
 import X from "./X.svg";
 
-export const Close = ({ close }) => {
+export const Close = ({ close, addTesk }) => {
     return (
-        <ConteClose onClick={close}>
-            <div>
-                <img src={X} />
-            </div>
-        </ConteClose>
+        <>
+            {addTesk ? (
+                <ConteCloseTask onClick={close}>
+                    <div>
+                        <img src={X} />
+                    </div>
+                </ConteCloseTask>
+            ) : (
+                <ConteClose onClick={close}>
+                    <div>
+                        <img src={X} />
+                    </div>
+                </ConteClose>
+            )}
+        </>
     );
 };

@@ -28,7 +28,7 @@ import {
     AiOutlineTeam,
     AiOutlineClockCircle,
     //AiOutlineWechat,
-    AiOutlineClose,
+    AiOutlineEdit,
 } from "react-icons/ai";
 import {
     Box,
@@ -39,14 +39,25 @@ import {
     Heading,
 } from "@chakra-ui/react";
 import { ModalAddTask } from "../../Modals/ModalAddTask";
+
+import { ModalEditTask } from "../../Modals/ModalEditTask";
+import { ModalAddSubTask } from "../../Modals/ModalAddSubTask";
+
 // -- sideBar --
 import SideBar from "../../components/SideBar/SideBar";
 import getCurrentDate from "./getCurrentDate";
+import { CardNewTask } from "../../components/Cards/CardNewTask";
 
 const Projects = () => {
     const [openM, setOpenM] = useState(false);
     const [openMAdd, setOpenMAdd] = useState(false);
     const [openAddTask, setOpenAddTask] = useState(false);
+    const [openEditTask, setOpenEditTask] = useState(false);
+    const [openAddSubTask, setOpenAddSubTask] = useState(false);
+
+    const editTesk = (target) => {
+        setOpenEditTask(true);
+    };
 
     const none = "none";
     const flex = "flex";
@@ -54,7 +65,6 @@ const Projects = () => {
 
     const addMembros = () => {
         setOpenMAdd(true);
-        setOpenM(false);
     };
     const checkMembers = () => {
         setOpenM(true);
@@ -72,22 +82,21 @@ const Projects = () => {
             setOpenSideBar(none);
         }
     };
-
     const { tasks, removeTask } = useContext(TasksContext);
     const [showTasks, setShowTasks] = useState(tasks);
 
     function clickClose(target) {
         removeTask(target);
+        setShowTasks(tasks);
     }
 
     function filtrar(event) {
-        if (event.target.innerText === "Todas") return setShowTasks(tasks);
-
-        if (event.target.innerText === "Concluídas") {
+        if (event === "Todas") return setShowTasks(tasks);
+        if (event === "Concluídas") {
             setShowTasks(tasks.filter((tasks) => tasks.status === "concluida"));
         }
 
-        if (event.target.innerText === "Atrasadas") {
+        if (event === "Atrasadas") {
             setShowTasks([]);
             const filtradas = [];
             for (let i = 0; i < tasks.length; i++) {
@@ -114,18 +123,25 @@ const Projects = () => {
             }
             setShowTasks(filtradas);
         }
-        if (event.target.innerText === "Data") {
-            setShowTasks(tasks);
-        }
     }
     return (
         <Body>
             <>
-                {openAddTask && (
-                    <ModalAddTask
-                        setOpenAddTask={setOpenAddTask} /* 
-                        setOpenMAdd={setOpenMAdd} */
+                {openAddSubTask && (
+                    <ModalAddSubTask
+                        subTask
+                        setOpenEditTask={setOpenEditTask}
+                        setOpenAddSubTask={setOpenAddSubTask}
                     />
+                )}
+                {openEditTask && (
+                    <ModalEditTask
+                        setOpenAddSubTask={setOpenAddSubTask}
+                        setOpenEditTask={setOpenEditTask}
+                    />
+                )}
+                {openAddTask && (
+                    <ModalAddTask setOpenAddTask={setOpenAddTask} />
                 )}
                 {openMAdd && (
                     <ModalMembroAdd
@@ -167,21 +183,28 @@ const Projects = () => {
                     </Header>
 
                     <NavFilter>
-                        <ButtonFilter onClick={(event) => filtrar(event)}>
+                        <ButtonFilter
+                            onClick={(event) => filtrar(event.target.innerText)}
+                        >
                             Data
                         </ButtonFilter>
-                        <ButtonFilter onClick={(event) => filtrar(event)}>
+                        <ButtonFilter
+                            onClick={(event) => filtrar(event.target.innerText)}
+                        >
                             Concluídas
                         </ButtonFilter>
-                        <ButtonFilter onClick={(event) => filtrar(event)}>
+                        <ButtonFilter
+                            onClick={(event) => filtrar(event.target.innerText)}
+                        >
                             Atrasadas
                         </ButtonFilter>
-                        <ButtonFilter onClick={(event) => filtrar(event)}>
+                        <ButtonFilter
+                            onClick={(event) => filtrar(event.target.innerText)}
+                        >
                             Todas
                         </ButtonFilter>
                     </NavFilter>
                     <Display>
-                        {/* filtrar rotinas e jogar dentro dos cards */}
                         {showTasks.map((results) => {
                             return (
                                 <Flex
@@ -200,15 +223,14 @@ const Projects = () => {
                                         justifyContent={"space-between"}
                                     >
                                         <Label>{results.creationDate}</Label>
-                                        <Button
-                                            colorScheme="none"
-                                            color={"black"}
+                                        <Label
+                                            href=""
                                             onClick={() =>
                                                 clickClose(results.id)
                                             }
                                         >
-                                            <AiOutlineClose size={"25"} />
-                                        </Button>
+                                            X
+                                        </Label>
                                     </Heading>
                                     <Box
                                         fontSize={"30"}
@@ -225,6 +247,12 @@ const Projects = () => {
                                                 <AiOutlineClockCircle />
                                                 {results.expirationDate}
                                             </LabelExp>
+                                            <AiOutlineEdit
+                                                size="40"
+                                                onClick={() =>
+                                                    editTesk(results.id)
+                                                }
+                                            />
                                             <TagTeam
                                                 className="tag-team"
                                                 onClick={addMembros}

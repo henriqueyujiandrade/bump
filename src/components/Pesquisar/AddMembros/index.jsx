@@ -1,9 +1,17 @@
-import { ConteSearching, DivsaoSearching } from "../styled";
+import { ConteSearching, ConteSearchingSub } from "../styled";
 
-export const Searching = ({ children, type }) => {
+export const Searching = ({ children, type, subTask }) => {
     return (
-        <ConteSearching>
-            <input type={type} placeholder={children} />
-        </ConteSearching>
+        <>
+            {subTask ? (
+                <ConteSearchingSub>
+                    <input type={type} placeholder={children} />
+                </ConteSearchingSub>
+            ) : (
+                <ConteSearching>
+                    <input type={type} placeholder={children} />
+                </ConteSearching>
+            )}
+        </>
     );
 };
