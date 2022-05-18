@@ -11,7 +11,7 @@ export const MemberProvider = ({children}) => {
     const[member, setMember] = useState([])
     const [token, setToken] = useState( JSON.parse(localStorage.getItem("@bump:token")) || "")
     const [users, setUsers] = useState([])
-    console.log(member)
+    
    
     useEffect(()=>{
         if(token){       
@@ -21,7 +21,7 @@ export const MemberProvider = ({children}) => {
             }
         })
         .then((response) =>{
-            const thisGp = response.data.filter((gp) => gp.groupId == "8da51ca4-204f-4264-a9bb-9895a3")
+            const thisGp = response.data.filter((gp) => gp.groupId == "8da51ca4-204f-4264-a9bb-989851c5aadb")
             
             setMember(thisGp[0].membros) 
            
@@ -41,9 +41,12 @@ export const MemberProvider = ({children}) => {
 
     },[token])
 
-    const addMember = (data) =>{
+    const addMember = (idDefault,data) =>{
         if(!users.find((user) => user.email == data.email) || member.find((mb) => mb.email == data.email)){
             console.log('usuário não encontrado ou já adicionado')
+        }
+        else if(!member.filter((mb)=> mb.status == "admin").find((adm)=> adm.id == 2)){
+            console.log('Você deve ser administrador para adicionar membros')
         }
         else{
         const dev = users.find((user) => user.email == data.email)
@@ -51,7 +54,7 @@ export const MemberProvider = ({children}) => {
         const status = "dev"
         const newMember = {...data, status, name, id}
         const membros = [...member, newMember]
-        api.patch(`group/2`,{membros:membros}, {
+        api.patch(`group/${idDefault}`,{membros:membros}, {
             headers: {
                 Authorization: `Bearer ${token}`,
             }
@@ -60,14 +63,21 @@ export const MemberProvider = ({children}) => {
         }
     }
     
-    const removeMember = (id) =>{
+    const removeMember = (idDefault,id) =>{
+        if(!member.filter((mb)=> mb.status == "admin").find((adm)=> adm.id == 2)){
+            console.log('Você deve ser administrador para remover membros')
+        }
+        else{
+
+        
         const filteredMembers = member.filter((user) => user.id != id)
-        api.patch(`group/2`,{membros:filteredMembers}, {
+        api.patch(`group/${idDefault}`,{membros:filteredMembers}, {
             headers: {
                 Authorization: `Bearer ${token}`,
             }
         })
         .then((response) => setMember(filteredMembers))
+        }
     }
     
 
@@ -78,3 +88,4 @@ export const MemberProvider = ({children}) => {
         </MemberContext.Provider>
     );
 };
+
