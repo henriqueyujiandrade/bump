@@ -26,9 +26,7 @@ export const ModMembroList = styled.div`
             font-weight: 700;
             font-size: 26.6341px;
             line-height: 40px;
-
             color: #ffffff;
-
             margin-bottom: 24px;
         }
     }

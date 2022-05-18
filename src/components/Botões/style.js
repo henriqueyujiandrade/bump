@@ -8,7 +8,6 @@ export const BtnMembros = styled.button`
     font-weight: 500;
     font-size: 25.5292px;
     line-height: 43px;
-
     color: #4f4f4f;
     padding: 5px 10px;
     margin-bottom: 20px;
