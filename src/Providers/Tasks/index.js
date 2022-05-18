@@ -5,22 +5,39 @@ import api from "../../Services/api";
 export const TasksContext = createContext();
 
 export const TasksProvider = ({ children }) => {
-    const [tasks, setTasks] = useState([]);
+    const [tasks, setTasks] = useState([
+        {
+            description: "Atividade 01",
+            status: "andamento",
+            expirationDate: "16-05-2022",
+            creationDate: "01-01-2021",
+            members: [1, 1, 1],
+            id: 1,
+            subTasks: [],
+        },
+        {
+            description: "Atividade 02",
+            status: "concluida",
+            expirationDate: "22-05-2022",
+            creationDate: "01-01-2021",
+            members: [1, 1, 1],
+            id: 2,
+            subTasks: [],
+        },
+    ]);
     const [token, setToken] = useState(
         JSON.parse(localStorage.getItem("@bump:token")) || ""
     );
 
-    // useEffect(()=>{
-    //     api.get('group',{
-    //         headers: {
-    //             Authorization: `Bearer ${token}`,
-    //         }
-    //     })
-    //     .then((response) =>{
-
-    //     })
-
-    // },[])
+    useEffect(() => {
+        api.get("group", {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }).then((response) => {
+            console.log(response);
+        });
+    }, []);
 
     const addTask = (data) => {
         api.post(`group`, data, {

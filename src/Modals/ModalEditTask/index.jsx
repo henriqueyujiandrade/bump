@@ -57,7 +57,6 @@ export const ModalEditTask = ({ setOpenEditTask, setOpenAddSubTask }) => {
 
         color: #ffffff;
     `;
-
     return (
         <ModTaskEditConte>
             <Modal
