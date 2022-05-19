@@ -19,7 +19,11 @@ import { ModTaskEditConte } from "./styled";
 import { CardNewTask } from "../../components/Cards/CardNewTask";
 import { Close } from "../../components/Close";
 
-export const ModalEditTask = ({ setOpenEditTask, setOpenAddSubTask }) => {
+export const ModalEditTask = ({
+    setOpenEditTask,
+    setOpenAddSubTask,
+    modalexcluirST,
+}) => {
     const close = () => {
         setOpenEditTask(false);
     };
@@ -71,7 +75,7 @@ export const ModalEditTask = ({ setOpenEditTask, setOpenAddSubTask }) => {
                         </Button>
                         <Close close={close} addTesk="true" />
                     </ModalFooter>
-                    <CardNewTask />
+                    <CardNewTask modalexcluirST={modalexcluirST} />
                     <CardNewTask />
                     <CardNewTask />
                     <ModalBody pb={6}>Tarefa do dia 10/05/2022</ModalBody>
