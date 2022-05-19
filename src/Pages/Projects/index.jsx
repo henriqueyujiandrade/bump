@@ -126,11 +126,10 @@ const Projects = () => {
     const { group, addGroup, removeGroup, setTokenGroup } =
         useContext(GroupContext);
     const [showTasks, setShowTasks] = useState(tasks);
-    
-    useEffect(() => {
-        setShowTasks(tasks)
 
-    }, [tasks])
+    useEffect(() => {
+        setShowTasks(tasks);
+    }, [tasks]);
 
     function clickClose(target) {
         removeTask(target);
@@ -302,8 +301,6 @@ const Projects = () => {
                     </NavFilter>
                     <Display>
                         {showTasks.map((results) => {
-
-                    
                             return (
                                 <Flex
                                     background={"white"}
@@ -357,7 +354,8 @@ const Projects = () => {
                                                 onClick={checkMembersT}
                                             >
                                                 <AiOutlineTeam />
-                                                {results.members && results.members.length}
+                                                {results.members &&
+                                                    results.members.length}
                                             </TagTeam>
                                         </Date>
                                     </ButtonGroup>
