@@ -56,7 +56,11 @@ import { GroupContext } from "../../Providers/Group";
 
 import { ModalExcluir } from "../../Modals/ModalExcluir";
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 const Projects = () => {
+    const param = useParams();
+    const idGrupe = param.id;
+
     const [openExcluirG, setOpenExcluirG] = useState(false);
     const [openExcluirT, setOpenExcluirT] = useState(false);
     const [openExcluirST, setOpenExcluirST] = useState(false);
@@ -108,7 +112,6 @@ const Projects = () => {
     };
 
     const openAddTaskFunc = () => {
-        /* setOpenM(true); */
         setOpenAddTask(true);
     };
 
@@ -120,7 +123,7 @@ const Projects = () => {
         }
     };
     const { tasks, removeTask } = useContext(TasksContext);
-    const { member, addMember, removeMember, setGpId, setTokenMember } =
+    const { infoGroup, addMember, removeMember, setGpId, setTokenMember } =
         useContext(GroupContext);
     const { group, addGroup, removeGroup, setTokenGroup } =
         useContext(GroupContext);
@@ -202,7 +205,11 @@ const Projects = () => {
                     />
                 )}
                 {openAddTask && (
-                    <ModalAddTask addTasks setOpenAddTask={setOpenAddTask} />
+                    <ModalAddTask
+                        idGrupe={idGrupe}
+                        addTasks
+                        setOpenAddTask={setOpenAddTask}
+                    />
                 )}
 
                 {openMAdd && (
@@ -221,6 +228,8 @@ const Projects = () => {
                 )}
                 {openMT && (
                     <ModalMembro
+                        idGrupe={idGrupe}
+                        infoGroup={infoGroup}
                         membrosT
                         addMembrosT={addMembrosT}
                         setOpenMT={setOpenMT}

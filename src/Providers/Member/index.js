@@ -11,9 +11,11 @@ export const MemberProvider = ({ children }) => {
     const [tokenMember, setTokenMember] = useState(
         JSON.parse(localStorage.getItem("@bump:token")) || ""
     );
-    const [users, setUsers] = useState([]); 
-    const [myInfoInMembers, setMyInfoInMembers] = useState(JSON.parse(localStorage.getItem("@bump:myInfo")) || "")
-    const [gpId, setGpId] = useState("2")
+    const [users, setUsers] = useState([]);
+    const [myInfoInMembers, setMyInfoInMembers] = useState(
+        JSON.parse(localStorage.getItem("@bump:myInfo")) || ""
+    );
+    const [gpId, setGpId] = useState("");
 
     useEffect(() => {
         if (tokenMember && gpId) {
@@ -22,9 +24,7 @@ export const MemberProvider = ({ children }) => {
                     Authorization: `Bearer ${tokenMember}`,
                 },
             }).then((response) => {
-                const thisGp = response.data.filter(
-                    (gp) => gp.id == gpId
-                );
+                const thisGp = response.data.filter((gp) => gp.id == gpId);
 
                 setMember(thisGp[0].membros);
             });
@@ -39,18 +39,20 @@ export const MemberProvider = ({ children }) => {
         }
     }, [tokenMember, gpId]);
 
-    const addMember = (groupId,data) => {
+    const addMember = (groupId, data) => {
         if (
             !users.find((user) => user.email == data.email) ||
             member.find((mb) => mb.email == data.email)
         ) {
-            toast.warn('usuário não encontrado ou já adicionado')
-            
-        }
-        else if(!member.filter((mb)=> mb.status == "admin").find((adm)=> adm.id == myInfoInMembers.id)){
-            toast.error('Você deve ser administrador para adicionar membros')
-        }
-         else {
+            toast.warn("usuário não encontrado ou já adicionado");
+        } else if (
+            !member
+                .filter((mb) => mb.status == "admin")
+                .find((adm) => adm.id == myInfoInMembers.id)
+        ) {
+            console.log(member);
+            toast.error("Você deve ser administrador para adicionar membros");
+        } else {
             const dev = users.find((user) => user.email == data.email);
             const { name, id } = dev;
             const status = "dev";
@@ -68,26 +70,39 @@ export const MemberProvider = ({ children }) => {
         }
     };
 
-    const removeMember = (groupId,id) => {
-        if(!member.filter((mb)=> mb.status == "admin").find((adm)=> adm.id == myInfoInMembers.id)){
-            toast.error('Você deve ser administrador para remover membros')
-        }
-        else{        
-        const filteredMembers = member.filter((user) => user.id != id);
-        api.patch(
-            `group/${groupId}`,
-            { membros: filteredMembers },
-            {
-                headers: {
-                    Authorization: `Bearer ${tokenMember}`,
-                },
-            }
-        ).then((response) => setMember(filteredMembers));
+    const removeMember = (groupId, id) => {
+        if (
+            !member
+                .filter((mb) => mb.status == "admin")
+                .find((adm) => adm.id == myInfoInMembers.id)
+        ) {
+            toast.error("Você deve ser administrador para remover membros");
+        } else {
+            const filteredMembers = member.filter((user) => user.id != id);
+            api.patch(
+                `group/${groupId}`,
+                { membros: filteredMembers },
+                {
+                    headers: {
+                        Authorization: `Bearer ${tokenMember}`,
+                    },
+                }
+            ).then((response) => setMember(filteredMembers));
         }
     };
 
     return (
-        <MemberContext.Provider value={{ member, addMember, removeMember, setGpId, setTokenMember, setMyInfoInMembers }}>
+        <MemberContext.Provider
+            value={{
+                users,
+                member,
+                addMember,
+                removeMember,
+                setGpId,
+                setTokenMember,
+                setMyInfoInMembers,
+            }}
+        >
             {children}
         </MemberContext.Provider>
     );
