@@ -85,7 +85,7 @@ export default function WithSubnavigation({ login, register, homeLogado, homeDes
                 fontWeight={400}
                 color={" #FFFFFF"}
                 variant={"link"}
-                href={"../../Pages/Register"}
+                href={"/register"}
                 _hover={{
                   bg: {hover},
                 }}
@@ -98,7 +98,7 @@ export default function WithSubnavigation({ login, register, homeLogado, homeDes
                 fontWeight={600}
                 color={"black"}
                 bg={button}
-                href={"../../Pages/Login"}
+                href={"/login"}
                 _hover={{
                   bg: {buttonH},
                 }}
