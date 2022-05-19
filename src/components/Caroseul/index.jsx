@@ -42,18 +42,19 @@ export default function SimpleSlider() {
             },
         ],
     };
-    return;
-    <Container>
-        <Slider {...settings} className="teste">
-            <div>
-                <img src={img1} alt="img1" />
-            </div>
-            <div>
-                <img src={img2} alt="img2" />
-            </div>
-            <div>
-                <img src={img3} alt="img3" />
-            </div>
-        </Slider>
-    </Container>;
+    return(
+        <Container>
+            <Slider {...settings} className="teste">
+                <div>
+                    <img src={img1} alt="img1" />
+                </div>
+                <div>
+                    <img src={img2} alt="img2" />
+                </div>
+                <div>
+                    <img src={img3} alt="img3" />
+                </div>
+            </Slider>
+        </Container>
+    )
 }
