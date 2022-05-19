@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    width: 100%;
     min-width: fit-content;
     min-height: 100%;
     display: flex;
     background-color: #02072f;
+    width: 100%;
     @media only screen and (max-width: 767px) {
         margin-left: 0px;
     }
@@ -134,7 +134,7 @@ export const ButtonFilter = styled.button`
 export const Display = styled.div`
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
+    width: 75%;
     @media only screen and (max-width: 768px) {
         padding-right: 20px;
         margin-left: 0px;
@@ -142,8 +142,10 @@ export const Display = styled.div`
         align-items: center;
         justify-content: center;
         margin: 0px;
+        width: 100%;
     }
 `;
+
 export const Date = styled.div`
     margin-left: 5px;
     width: 100%;
@@ -156,6 +158,13 @@ export const Body = styled.body`
     width: 100vw;
     min-height: 100vh;
     height: 100%;
+`;
+export const Chat = styled.div`
+    align-self: center;
+    display: flex;
+    width: 20%;
+    align-self: flex-end;
+    cursor: pointer;
 `;
 export const Icone = styled.img`
     width: 90%;

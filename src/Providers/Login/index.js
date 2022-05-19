@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 import api from "../../Services/api";
 import { useHistory } from "react-router-dom";
 
-import { toast } from "react-toastify"
+import { toast } from "react-toastify";
 
 export const LoginContext = createContext();
 
@@ -11,7 +11,7 @@ export const LoginProvider = ({ children }) => {
 
     const history = useHistory();
 
-    const confirmLogin = async (data) => {
+    const confirmLogin = async (setToken,setInfo,data) => {
         await api
             .post("login", data)
             .then((response) => {
@@ -23,10 +23,12 @@ export const LoginProvider = ({ children }) => {
                 );
                 window.localStorage.setItem(
                     "@bump:myInfo",
-                    JSON.stringify(response.data.user)
+                    JSON.stringify(response.data.user) 
                 );
+                setToken(response.data.accessToken)
+                setInfo(response.data.user) 
 
-                toast.success("Login realizado com sucesso!")
+                toast.success("Login realizado com sucesso!");
 
                 /*
                 history.push(`/dashboard/${response.data.user.id}`) */
@@ -35,7 +37,7 @@ export const LoginProvider = ({ children }) => {
                 return response.data;
             })
             .catch(() => {
-                toast.error("Senha e/ou Email invalidos")
+                toast.error("Senha e/ou Email invalidos");
             });
     };
 

@@ -10,8 +10,10 @@ import { Flex, Button, Image, Heading } from "@chakra-ui/react";
 import React, { useContext, useState } from "react";
 import { GroupContext } from "../../Providers/Group/index.js";
 import { useHistory } from "react-router-dom";
+import { TasksContext } from "../../Providers/Tasks";
 
 const SideBar = ({ showSideBar, setShowSideBar }) => {
+    const { setGroupId } = useContext(TasksContext);
     const { group } = useContext(GroupContext);
     const [drop, setDrop] = useState("isClose");
     const history = useHistory();
@@ -26,20 +28,24 @@ const SideBar = ({ showSideBar, setShowSideBar }) => {
         }
     };
     const handleLogOut = () => {
-        localStorage.removeItem("User");
-        localStorage.removeItem("Token");
+        localStorage.removeItem("@bump:myInfo");
+        localStorage.removeItem("@bump:token");
         history.push("/");
     };
 
     const handleProject = (e) => {
         history.push(`/dashboard/${e.target.id}`);
+        setGroupId(e.target.id);
     };
     return (
         <>
             <Flex
+                position={["absolute", "absolute", "sticky"]}
+                zIndex={"2000"}
                 flexDir="column"
                 justifyContent="space-between"
                 w={["175px", "205px", "225px"]}
+                h={"100vh"}
                 backgroundColor="#6D17B0"
                 alignItems={"center "}
                 p={["8px", "12px", "16px"]}
@@ -126,20 +132,20 @@ const SideBar = ({ showSideBar, setShowSideBar }) => {
                             flexDir="column"
                             maxHeight={"40vh"}
                             overflowY="auto"
+                            css={{
+                                "&::-webkit-scrollbar": {
+                                    width: "4px",
+                                },
+                                "&::-webkit-scrollbar-track": {
+                                    width: "6px",
+                                },
+                                "&::-webkit-scrollbar-thumb": {
+                                    background: "rgba(195, 118, 255, 0.98)",
+                                    borderRadius: "24px",
+                                },
+                            }}
                         >
                             <Flex flexDir={"column"} alignItems={"flex-start"}>
-                                <Button
-                                    onClick={(e) => {
-                                        handleProject(e);
-                                    }}
-                                    backgroundColor="#6D17B0"
-                                    color="#ffffff"
-                                    _hover={{ background: "#6D17B0" }}
-                                    id={"daily"}
-                                >
-                                    <Image src={UserIcon} marginRight={"3px"} />
-                                    Daily
-                                </Button>
                                 {group?.map((item) => {
                                     return (
                                         <Button
@@ -149,8 +155,8 @@ const SideBar = ({ showSideBar, setShowSideBar }) => {
                                             backgroundColor="#6D17B0"
                                             color="#ffffff"
                                             _hover={{ background: "#6D17B0" }}
-                                            key={item.groupId}
-                                            id={item.groupId}
+                                            key={item.id}
+                                            id={item.id}
                                         >
                                             <Image
                                                 src={UserIcon}

@@ -1,52 +1,49 @@
-import { useContext } from 'react';
-import { CardGroup } from '../../components/CardGroup';
-import { GroupContext } from '../../Providers/Group';
-import Header  from './../../components/Header'
-import { Container } from './style';
+import { useContext, useState } from "react";
+import { CardGroup } from "../../components/CardGroup";
+import { ModalAddGroup } from "../../Modals/ModalAddGroup";
+import { GroupContext } from "../../Providers/Group";
+import Header from "./../../components/Header";
+import { Container } from "./style";
 
 const Dashboard = () => {
-
     const { group } = useContext(GroupContext);
+    const [isOpen, setIsOpen] = useState(false);
 
-    console.log('Grupo: ', group);
+    const user = JSON.parse(localStorage.getItem("@bump:myInfo"));
+    console.log(user);
+
+    console.log("Grupo: ", group);
 
     return (
         <Container>
-            <Header homeLogado/>
+            <Header homeLogado />
 
-            <main>   
-                <h2 className="title-welcome">Bem vindo Valmir !</h2>
-                {
-                    group.length === 0 ? (
+            {isOpen && <ModalAddGroup setIsOpen={setIsOpen} />}
 
-                        <section className="no-task">
-                        <h3>Não possui nenhuma coleção? Crie uma clicando no botão abaixo</h3>
-                        <button className="add">
+            <main>
+                <h2 className="title-welcome">Bem vindo {user.name}!</h2>
+                {group.length === 0 ? (
+                    <section className="no-task">
+                        <h3>
+                            Não possui nenhuma coleção? Crie uma clicando no
+                            botão abaixo
+                        </h3>
+                        <button className="add" onClick={() => setIsOpen(true)}>
                             <p>+</p>
                         </button>
-                        </section>
+                    </section>
+                ) : (
+                    <section className="on-task">
+                        {group.map((item, index) => {
+                            return <CardGroup key={index} colection={item} />;
+                        })}
 
-                    ) : (
-                        <section className="on-task">
-
-                            {
-
-                                group.map((item, index) => {
-
-                                    return <CardGroup key={index} colection={item}/>
-
-                                })
-
-                            }
-
-                            <button className="add">
-                                <p>+</p>
-                            </button>
-                        </section>
-                    )
-                }
+                        <button className="add" onClick={() => setIsOpen(true)}>
+                            <p>+</p>
+                        </button>
+                    </section>
+                )}
             </main>
-
         </Container>
     );
 };
