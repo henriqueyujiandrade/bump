@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import { TasksContext } from "../../Providers/Tasks";
+import { GroupProvider } from "../../Providers/Group";
+import { MemberContext } from "../../Providers/Member";
 import {
     Container,
     Header,
@@ -29,6 +31,7 @@ import {
     AiOutlineClockCircle,
     //AiOutlineWechat,
     AiOutlineEdit,
+    AiFillDelete,
 } from "react-icons/ai";
 import {
     Box,
@@ -48,13 +51,17 @@ import SideBar from "../../components/SideBar/SideBar";
 import getCurrentDate from "./getCurrentDate";
 import { CardNewTask } from "../../components/Cards/CardNewTask";
 import filterDate from "./filterDate";
+import { GroupContext } from "../../Providers/Group";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router-dom";
+
 const Projects = () => {
     const [openM, setOpenM] = useState(false);
     const [openMAdd, setOpenMAdd] = useState(false);
     const [openAddTask, setOpenAddTask] = useState(false);
     const [openEditTask, setOpenEditTask] = useState(false);
     const [openAddSubTask, setOpenAddSubTask] = useState(false);
-
+    const history = useHistory();
     const editTesk = (target) => {
         setOpenEditTask(true);
     };
@@ -83,6 +90,10 @@ const Projects = () => {
         }
     };
     const { tasks, removeTask } = useContext(TasksContext);
+    const { member, addMember, removeMember, setGpId, setTokenMember } =
+        useContext(GroupContext);
+    const { group, addGroup, removeGroup, setTokenGroup } =
+        useContext(GroupContext);
     const [showTasks, setShowTasks] = useState(tasks);
 
     function clickClose(target) {
@@ -132,6 +143,11 @@ const Projects = () => {
             setShowTasks(array);
         }
     }
+    function deleteColecao() {
+        //->Passar o id removeGroup();
+        history.push("/dashboard");
+    }
+    console.log(Group);
     return (
         <Body>
             <>
@@ -177,7 +193,9 @@ const Projects = () => {
                         <Nav className="nav-header">
                             <AiOutlineLaptop size={100} />
                             <h6> Rotina</h6>
-                            <RemoveTask>Excluir Coleção</RemoveTask>
+                            <RemoveTask onClick={deleteColecao}>
+                                <AiFillDelete size={30} />
+                            </RemoveTask>
                         </Nav>
                         <Nav className="nav-header">
                             <AddTask onClick={openAddTaskFunc}>
@@ -256,6 +274,7 @@ const Projects = () => {
                                                 {results.expirationDate}
                                             </LabelExp>
                                             <AiOutlineEdit
+                                                cursor={"pointer"}
                                                 size="40"
                                                 onClick={() =>
                                                     editTesk(results.id)
