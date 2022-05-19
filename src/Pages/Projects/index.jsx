@@ -260,7 +260,7 @@ const Projects = () => {
                             </AddTask>
 
                             <Group onClick={checkMembersG}>
-                                <AiOutlineTeam />2
+                                <AiOutlineTeam /> 2
                             </Group>
                         </Nav>
                     </Header>
