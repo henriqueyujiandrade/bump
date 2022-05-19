@@ -11,7 +11,7 @@ export const LoginProvider = ({ children }) => {
 
     const history = useHistory();
 
-    const confirmLogin = async (data) => {
+    const confirmLogin = async (setToken,setInfo,data) => {
         await api
             .post("login", data)
             .then((response) => {
@@ -23,14 +23,16 @@ export const LoginProvider = ({ children }) => {
                 );
                 window.localStorage.setItem(
                     "@bump:myInfo",
-                    JSON.stringify(response.data.user)
+                    JSON.stringify(response.data.user) 
                 );
+                setToken(response.data.accessToken)
+                setInfo(response.data.user) 
 
                 toast.success("Login realizado com sucesso!")
 
                 /*
                 history.push(`/dashboard/${response.data.user.id}`) */
-                history.push(`/dashboard/1`);
+                history.push(`/dashboard`);
                 setAuthenticated(true);
                 return response.data;
             })
