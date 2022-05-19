@@ -63,7 +63,7 @@ export const ModalMembroAdd = ({
                             <Searching register={register} name={"email"}>
                                 Digite um email
                             </Searching>
-                            <BtnMembrosAdd>Procurar</BtnMembrosAdd>
+                            <BtnMembrosAdd modal>Procurar</BtnMembrosAdd>
                         </ConteForm>
 
                         <DivsaoSearching />

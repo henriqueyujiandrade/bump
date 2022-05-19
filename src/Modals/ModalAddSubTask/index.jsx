@@ -57,7 +57,7 @@ export const ModalAddSubTask = ({
                             subTask
                             type="date"
                         ></Searching>
-                        <BtnMembrosAdd>Adicionar</BtnMembrosAdd>
+                        <BtnMembrosAdd modal>Adicionar</BtnMembrosAdd>
                     </ConteFormSub>
                 </ModalContent>
             </Modal>

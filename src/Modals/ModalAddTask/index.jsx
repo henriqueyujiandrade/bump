@@ -45,7 +45,7 @@ export const ModalAddTask = ({ setOpenAddTask, addTasks }) => {
                                 name="expirationDate"
                                 type="date"
                             />
-                            <BtnMembrosAdd type={"submit"}>
+                            <BtnMembrosAdd modal type={"submit"}>
                                 Adicionar
                             </BtnMembrosAdd>
                         </ConteForm>

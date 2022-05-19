@@ -31,7 +31,7 @@ export const ModalMembro = ({
                             <CardMembros />
                             <CardMembros />
                         </ConteCard>
-                        <BtnMembrosAdd click={addMembros}>
+                        <BtnMembrosAdd modal click={addMembros}>
                             Adicionar +
                         </BtnMembrosAdd>
                     </ModMembroList>
@@ -47,7 +47,7 @@ export const ModalMembro = ({
                             <CardMembros />
                             <CardMembros />
                         </ConteCard>
-                        <BtnMembrosAdd click={addMembrosT}>
+                        <BtnMembrosAdd modal click={addMembrosT}>
                             Adicionar +
                         </BtnMembrosAdd>
                     </ModMembroList>

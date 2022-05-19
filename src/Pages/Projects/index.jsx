@@ -48,7 +48,11 @@ import SideBar from "../../components/SideBar/SideBar";
 import getCurrentDate from "./getCurrentDate";
 import { CardNewTask } from "../../components/Cards/CardNewTask";
 import filterDate from "./filterDate";
+import { ModalExcluir } from "../../Modals/ModalExcluir";
 const Projects = () => {
+    const [openExcluirG, setOpenExcluirG] = useState(false);
+    const [openExcluirT, setOpenExcluirT] = useState(false);
+    const [openExcluirST, setOpenExcluirST] = useState(false);
     const [openMG, setOpenMG] = useState(false);
     const [openMT, setOpenMT] = useState(false);
     const [openMAdd, setOpenMAdd] = useState(false);
@@ -60,6 +64,19 @@ const Projects = () => {
     const none = "none";
     const flex = "flex";
     const [openSideBar, setOpenSideBar] = useState(none);
+
+    const modalexcluirG = () => {
+        setOpenExcluirG(true);
+    };
+
+    const modalexcluirT = () => {
+        setOpenExcluirT(true);
+    };
+
+    const modalexcluirST = () => {
+        setOpenExcluirST(true);
+        setOpenEditTask(false);
+    };
 
     const addMembros = () => {
         setOpenMG(false);
@@ -149,6 +166,19 @@ const Projects = () => {
     return (
         <Body>
             <>
+                {openExcluirG && (
+                    <ModalExcluir excluirG setOpenExcluirG={setOpenExcluirG} />
+                )}
+                {openExcluirT && (
+                    <ModalExcluir excluirT setOpenExcluirT={setOpenExcluirT} />
+                )}
+                {openExcluirST && (
+                    <ModalExcluir
+                        excluirST
+                        setOpenEditTask={setOpenEditTask}
+                        setOpenExcluirST={setOpenExcluirST}
+                    />
+                )}
                 {openAddSubTask && (
                     <ModalAddSubTask
                         subTask
@@ -158,6 +188,7 @@ const Projects = () => {
                 )}
                 {openEditTask && (
                     <ModalEditTask
+                        modalexcluirST={modalexcluirST}
                         setOpenAddSubTask={setOpenAddSubTask}
                         setOpenEditTask={setOpenEditTask}
                     />
@@ -211,7 +242,9 @@ const Projects = () => {
                         <Nav className="nav-header">
                             <AiOutlineLaptop size={100} />
                             <h6> Rotina</h6>
-                            <RemoveTask>Excluir Coleção</RemoveTask>
+                            <RemoveTask onClick={modalexcluirG}>
+                                Excluir Coleção
+                            </RemoveTask>
                         </Nav>
                         <Nav className="nav-header">
                             <AddTask onClick={openAddTaskFunc}>
@@ -267,9 +300,9 @@ const Projects = () => {
                                         <Label>{results.creationDate}</Label>
                                         <Label
                                             href=""
-                                            onClick={() =>
-                                                clickClose(results.id)
-                                            }
+                                            onClick={modalexcluirT}
+                                            /* () =>
+                                                clickClose(results.id) */
                                         >
                                             X
                                         </Label>
