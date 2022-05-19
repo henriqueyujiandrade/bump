@@ -34,7 +34,6 @@ import {
     AiOutlineEdit,
     AiFillDelete,
 } from "react-icons/ai";
-//----icons
 import {
     Box,
     Flex,
