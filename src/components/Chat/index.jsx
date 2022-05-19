@@ -19,25 +19,17 @@ const Chat = ({ openChat, setOpenChat }) => {
 
     // const userId = userInfo.id;
     // const groupId = params.id;
-    // const groupMsg = chat.filter((item) => {
-    //     return item.groupId === groupId;
-    // });
+    // const groupMsg = chat;
     // const [objMsg, setObjMsg] = useState({
     //     name: userInfo.name,
     //     groupId: groupId,
     //     userId: userId,
     // });
     // const handleSubmit = () => {
-    //     console.log(objMsg, "corpo do objeto mensagem");
     //     if (msg.length > 0) {
-    //         addChat({ ...objMsg, description: msg });
+    //         addChat(msg, params.id);
     //         setMsg("");
     //     }
-    //     setObjMsg({
-    //         name: userInfo.name,
-    //         groupId: groupId,
-    //         userId: userId,
-    //     });
     // };
 
     //Dados chumbados para teste:
