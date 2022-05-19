@@ -20,7 +20,7 @@ export const ModalMembro = ({
 
     useEffect(() => {
         infoGroup(idGrupe);
-    }, []);
+    }, [infoGroup]);
 
     const close = () => {
         setOpenM(false);

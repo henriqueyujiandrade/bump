@@ -61,6 +61,7 @@ const Projects = () => {
     const param = useParams();
     const idGrupe = param.id;
 
+    const [groupInfo, setGroupInfo] = useState();
     const [openExcluirG, setOpenExcluirG] = useState(false);
     const [openExcluirT, setOpenExcluirT] = useState(false);
     const [openExcluirST, setOpenExcluirST] = useState(false);
@@ -123,13 +124,20 @@ const Projects = () => {
         }
     };
     const { tasks, removeTask } = useContext(TasksContext);
-    const { infoGroup, addMember, removeMember, setGpId, setTokenMember } =
-        useContext(GroupContext);
+    const {
+        infoGroup,
+        infoG,
+        addMember,
+        removeMember,
+        setGpId,
+        setTokenMember,
+    } = useContext(GroupContext);
     const { group, addGroup, removeGroup, setTokenGroup } =
         useContext(GroupContext);
     const [showTasks, setShowTasks] = useState(tasks);
     useEffect(() => {
         setShowTasks(tasks);
+        infoGroup(idGrupe);
     }, [tasks]);
 
     function filtrar(event) {
@@ -269,7 +277,8 @@ const Projects = () => {
                             </AddTask>
 
                             <Group onClick={checkMembersG}>
-                                <AiOutlineTeam /> 2
+                                <AiOutlineTeam />
+                                {infoG.membros && <>{infoG.membros.length}</>}
                             </Group>
                         </Nav>
                     </Header>
