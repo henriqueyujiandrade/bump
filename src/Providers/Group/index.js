@@ -7,6 +7,7 @@ export const GroupContext = createContext();
 
 export const GroupProvider = ({ children }) => {
     const [group, setGroup] = useState([]);
+    const [infoG, setInfoG] = useState([]);
     const [tokenGroup, setTokenGroup] = useState(
         JSON.parse(localStorage.getItem("@bump:token")) || ""
     );
@@ -29,6 +30,18 @@ export const GroupProvider = ({ children }) => {
             });
         }
     }, [tokenGroup, myInfo]);
+
+    const infoGroup = (id) => {
+        api.get(`group/${id}`, {
+            headers: {
+                Authorization: `Bearer ${tokenGroup}`,
+            },
+        })
+            .then((response) => {
+                setInfoG(response.data);
+            })
+            .catch((err) => console.log(err));
+    };
 
     const addGroup = (data) => {
         const status = "admin";
@@ -56,7 +69,15 @@ export const GroupProvider = ({ children }) => {
 
     return (
         <GroupContext.Provider
-            value={{ group, addGroup, removeGroup, setTokenGroup, setMyInfo }}
+            value={{
+                infoGroup,
+                infoG,
+                group,
+                addGroup,
+                removeGroup,
+                setTokenGroup,
+                setMyInfo,
+            }}
         >
             {children}
         </GroupContext.Provider>

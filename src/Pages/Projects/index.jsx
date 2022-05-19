@@ -56,7 +56,12 @@ import { GroupContext } from "../../Providers/Group";
 
 import { ModalExcluir } from "../../Modals/ModalExcluir";
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 const Projects = () => {
+    const param = useParams();
+    const idGrupe = param.id;
+
+    const [groupInfo, setGroupInfo] = useState();
     const [openExcluirG, setOpenExcluirG] = useState(false);
     const [openExcluirT, setOpenExcluirT] = useState(false);
     const [openExcluirST, setOpenExcluirST] = useState(false);
@@ -108,7 +113,6 @@ const Projects = () => {
     };
 
     const openAddTaskFunc = () => {
-        /* setOpenM(true); */
         setOpenAddTask(true);
     };
 
@@ -120,13 +124,20 @@ const Projects = () => {
         }
     };
     const { tasks, removeTask } = useContext(TasksContext);
-    const { member, addMember, removeMember, setGpId, setTokenMember } =
-        useContext(GroupContext);
+    const {
+        infoGroup,
+        infoG,
+        addMember,
+        removeMember,
+        setGpId,
+        setTokenMember,
+    } = useContext(GroupContext);
     const { group, addGroup, removeGroup, setTokenGroup } =
         useContext(GroupContext);
     const [showTasks, setShowTasks] = useState(tasks);
     useEffect(() => {
         setShowTasks(tasks);
+        infoGroup(idGrupe);
     }, [tasks]);
 
     function filtrar(event) {
@@ -202,7 +213,11 @@ const Projects = () => {
                     />
                 )}
                 {openAddTask && (
-                    <ModalAddTask addTasks setOpenAddTask={setOpenAddTask} />
+                    <ModalAddTask
+                        idGrupe={idGrupe}
+                        addTasks
+                        setOpenAddTask={setOpenAddTask}
+                    />
                 )}
 
                 {openMAdd && (
@@ -221,6 +236,8 @@ const Projects = () => {
                 )}
                 {openMT && (
                     <ModalMembro
+                        idGrupe={idGrupe}
+                        infoGroup={infoGroup}
                         membrosT
                         addMembrosT={addMembrosT}
                         setOpenMT={setOpenMT}
@@ -260,7 +277,8 @@ const Projects = () => {
                             </AddTask>
 
                             <Group onClick={checkMembersG}>
-                                <AiOutlineTeam /> 2
+                                <AiOutlineTeam />
+                                {infoG.membros && <>{infoG.membros.length}</>}
                             </Group>
                         </Nav>
                     </Header>
