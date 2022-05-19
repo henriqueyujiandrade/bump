@@ -28,6 +28,12 @@ export default function WithSubnavigation({
     const buttonH = useColorModeValue("#D6D793");
     const colorT = useColorModeValue("gray.200", "gray.900");
 
+    const sairUser = () => {
+        window.localStorage.removeItem("@bump:myInfo");
+        window.localStorage.removeItem("@bump:token");
+        history.push("/");
+    };
+
     return (
         <>
             {login || register ? (
@@ -75,11 +81,7 @@ export default function WithSubnavigation({
                             justify={{ base: "center", md: "start" }}
                         >
                             <Text>
-                                <img
-
-                                    src={logo}
-                                    alt="logo"
-                                />
+                                <img src={logo} alt="logo" />
                             </Text>
                         </Flex>
 
@@ -96,8 +98,7 @@ export default function WithSubnavigation({
                                 color={" #FFFFFF"}
                                 variant={"link"}
                                 href={"/register"}
-                                _hover={{bg: hover}}
-        
+                                _hover={{ bg: hover }}
                             >
                                 Cadastre-se
                             </Button>
@@ -109,7 +110,7 @@ export default function WithSubnavigation({
                                 bg={button}
                                 href={"/login"}
                                 _hover={{
-                                    bg: buttonH
+                                    bg: buttonH,
                                 }}
                             >
                                 Login
@@ -137,10 +138,7 @@ export default function WithSubnavigation({
                             justify={{ base: "start", md: "start" }}
                         >
                             <Text>
-                                <img
-                                    src={logo}
-                                    alt="logo"
-                                />
+                                <img src={logo} alt="logo" />
                             </Text>
                         </Flex>
 
@@ -153,15 +151,14 @@ export default function WithSubnavigation({
                             minH={"40px"}
                         >
                             <Button
-                                as={"a"}
                                 fontSize={"sm"}
                                 fontWeight={400}
                                 color={" #FFFFFF"}
                                 variant={"link"}
-                                href={"/"}
                                 _hover={{
-                                    bg: hover
+                                    bg: hover,
                                 }}
+                                onClick={sairUser}
                             >
                                 Sair
                             </Button>

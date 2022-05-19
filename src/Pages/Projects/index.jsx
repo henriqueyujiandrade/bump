@@ -177,7 +177,7 @@ const Projects = () => {
         //->Passar o id removeGroup();
         history.push("/dashboard");
     }
-    console.log(Group);
+    console.log(showTasks);
     return (
         <Body>
             <>
@@ -295,69 +295,77 @@ const Projects = () => {
                         </ButtonFilter>
                     </NavFilter>
                     <Display>
-                        {showTasks.map((results) => {
-
-                            console.log(results)
-                            return (
-                                <Flex
-                                    background={"white"}
-                                    margin={"35px"}
-                                    display={"flex"}
-                                    flexDir={"column"}
-                                    width={"300px"}
-                                    borderRadius={"15px"}
-                                    id={results.id}
-                                >
-                                    <Heading
-                                        size="xs"
-                                        padding={"10px"}
-                                        display={"flex"}
-                                        justifyContent={"space-between"}
-                                    >
-                                        <Label>{results.creationDate}</Label>
-                                        <Label
-                                            href=""
-                                            onClick={modalexcluirT}
-                                            /* () =>
-                                                clickClose(results.id) */
+                        {showTasks && (
+                            <>
+                                {showTasks.map((results) => {
+                                    console.log(results);
+                                    return (
+                                        <Flex
+                                            key={results.id}
+                                            background={"white"}
+                                            margin={"35px"}
+                                            display={"flex"}
+                                            flexDir={"column"}
+                                            width={"300px"}
+                                            borderRadius={"15px"}
+                                            id={results.id}
                                         >
-                                            X
-                                        </Label>
-                                    </Heading>
-                                    <Box
-                                        fontSize={"30"}
-                                        fontWeight={"500"}
-                                        padding={"0px 10px"}
-                                    >
-                                        {results.description}
-                                    </Box>
-
-                                    <Spacer />
-                                    <ButtonGroup gap="2">
-                                        <Date>
-                                            <LabelExp className="expiration-date">
-                                                <AiOutlineClockCircle />
-                                                {results.expirationDate}
-                                            </LabelExp>
-                                            <AiOutlineEdit
-                                                cursor={"pointer"}
-                                                size="40"
-                                                onClick={() =>
-                                                    editTesk(results.id)
-                                                }
-                                            />
-                                            <TagTeam
-                                                className="tag-team"
-                                                onClick={checkMembersT}
+                                            <Heading
+                                                size="xs"
+                                                padding={"10px"}
+                                                display={"flex"}
+                                                justifyContent={"space-between"}
                                             >
-                                                <AiOutlineTeam />
-                                                {results.members.length}
-                                            </TagTeam>
-                                        </Date>
-                                    </ButtonGroup>
-                                </Flex>
-                            );
-                        })}
+                                                <Label>
+                                                    {results.creationDate}
+                                                </Label>
+                                                <Label
+                                                    href=""
+                                                    onClick={modalexcluirT}
+                                                    /* () =>
+                                                clickClose(results.id) */
+                                                >
+                                                    X
+                                                </Label>
+                                            </Heading>
+                                            <Box
+                                                fontSize={"30"}
+                                                fontWeight={"500"}
+                                                padding={"0px 10px"}
+                                            >
+                                                {results.description}
+                                            </Box>
+
+                                            <Spacer />
+                                            <ButtonGroup gap="2">
+                                                <Date>
+                                                    <LabelExp className="expiration-date">
+                                                        <AiOutlineClockCircle />
+                                                        {results.expirationDate}
+                                                    </LabelExp>
+                                                    <AiOutlineEdit
+                                                        cursor={"pointer"}
+                                                        size="40"
+                                                        onClick={() =>
+                                                            editTesk(results.id)
+                                                        }
+                                                    />
+                                                    <TagTeam
+                                                        className="tag-team"
+                                                        onClick={checkMembersT}
+                                                    >
+                                                        <AiOutlineTeam />
+                                                        {results.members &&
+                                                            results.members
+                                                                .length}
+                                                    </TagTeam>
+                                                </Date>
+                                            </ButtonGroup>
+                                        </Flex>
+                                    );
+                                })}
+                            </>
+                        )}
                     </Display>
                 </ContainerPrincipal>
             </Container>
