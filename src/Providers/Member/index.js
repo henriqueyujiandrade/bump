@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { createContext, useState } from "react";
+import { toast } from "react-toastify";
 
 import api from "../../Services/api";
 
@@ -11,11 +12,11 @@ export const MemberProvider = ({ children }) => {
         JSON.parse(localStorage.getItem("@bump:token")) || ""
     );
     const [users, setUsers] = useState([]); 
-     
-    const [gpId, setGpId] = useState('1')
+    const [myInfoInMembers, setMyInfoInMembers] = useState(JSON.parse(localStorage.getItem("@bump:myInfo")) || "")
+    const [gpId, setGpId] = useState("2")
 
     useEffect(() => {
-        if (tokenMember) {
+        if (tokenMember && gpId) {
             api.get("group", {
                 headers: {
                     Authorization: `Bearer ${tokenMember}`,
@@ -43,8 +44,13 @@ export const MemberProvider = ({ children }) => {
             !users.find((user) => user.email == data.email) ||
             member.find((mb) => mb.email == data.email)
         ) {
-            console.log("usuário não encontrado ou já adicionado");
-        } else {
+            toast.warn('usuário não encontrado ou já adicionado')
+            
+        }
+        else if(!member.filter((mb)=> mb.status == "admin").find((adm)=> adm.id == myInfoInMembers.id)){
+            toast.error('Você deve ser administrador para adicionar membros')
+        }
+         else {
             const dev = users.find((user) => user.email == data.email);
             const { name, id } = dev;
             const status = "dev";
@@ -63,6 +69,10 @@ export const MemberProvider = ({ children }) => {
     };
 
     const removeMember = (groupId,id) => {
+        if(!member.filter((mb)=> mb.status == "admin").find((adm)=> adm.id == myInfoInMembers.id)){
+            toast.error('Você deve ser administrador para remover membros')
+        }
+        else{        
         const filteredMembers = member.filter((user) => user.id != id);
         api.patch(
             `group/${groupId}`,
@@ -73,10 +83,11 @@ export const MemberProvider = ({ children }) => {
                 },
             }
         ).then((response) => setMember(filteredMembers));
+        }
     };
 
     return (
-        <MemberContext.Provider value={{ member, addMember, removeMember, setGpId, setTokenMember }}>
+        <MemberContext.Provider value={{ member, addMember, removeMember, setGpId, setTokenMember, setMyInfoInMembers }}>
             {children}
         </MemberContext.Provider>
     );
