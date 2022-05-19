@@ -149,8 +149,8 @@ const SideBar = ({ showSideBar, setShowSideBar }) => {
                                             backgroundColor="#6D17B0"
                                             color="#ffffff"
                                             _hover={{ background: "#6D17B0" }}
-                                            key={item.groupId}
-                                            id={item.groupId}
+                                            key={item.id}
+                                            id={item.id}
                                         >
                                             <Image
                                                 src={UserIcon}
