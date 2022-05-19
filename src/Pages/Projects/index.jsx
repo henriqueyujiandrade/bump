@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import { TasksContext } from "../../Providers/Tasks";
+import { GroupProvider } from "../../Providers/Group";
+import { MemberContext } from "../../Providers/Member";
 import {
     Container,
     Header,
@@ -48,6 +50,10 @@ import SideBar from "../../components/SideBar/SideBar";
 import getCurrentDate from "./getCurrentDate";
 import { CardNewTask } from "../../components/Cards/CardNewTask";
 import filterDate from "./filterDate";
+import { GroupContext } from "../../Providers/Group";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router-dom";
+
 import { ModalExcluir } from "../../Modals/ModalExcluir";
 const Projects = () => {
     const [openExcluirG, setOpenExcluirG] = useState(false);
@@ -60,7 +66,7 @@ const Projects = () => {
     const [openAddTask, setOpenAddTask] = useState(false);
     const [openEditTask, setOpenEditTask] = useState(false);
     const [openAddSubTask, setOpenAddSubTask] = useState(false);
-
+    const history = useHistory();
     const none = "none";
     const flex = "flex";
     const [openSideBar, setOpenSideBar] = useState(none);
@@ -114,6 +120,10 @@ const Projects = () => {
         }
     };
     const { tasks, removeTask } = useContext(TasksContext);
+    const { member, addMember, removeMember, setGpId, setTokenMember } =
+        useContext(GroupContext);
+    const { group, addGroup, removeGroup, setTokenGroup } =
+        useContext(GroupContext);
     const [showTasks, setShowTasks] = useState(tasks);
 
     function clickClose(target) {
@@ -163,6 +173,11 @@ const Projects = () => {
             setShowTasks(array);
         }
     }
+    function deleteColecao() {
+        //->Passar o id removeGroup();
+        history.push("/dashboard");
+    }
+    console.log(Group);
     return (
         <Body>
             <>
