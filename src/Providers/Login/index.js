@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 import api from "../../Services/api";
 import { useHistory } from "react-router-dom";
 
-import { toast } from "react-toastify"
+import { toast } from "react-toastify";
 
 export const LoginContext = createContext();
 
@@ -26,16 +26,16 @@ export const LoginProvider = ({ children }) => {
                     JSON.stringify(response.data.user)
                 );
 
-                toast.success("Login realizado com sucesso!")
+                toast.success("Login realizado com sucesso!");
 
                 /*
                 history.push(`/dashboard/${response.data.user.id}`) */
-                history.push(`/dashboard/1`);
+                history.push(`/dashboard`);
                 setAuthenticated(true);
                 return response.data;
             })
             .catch(() => {
-                toast.error("Senha e/ou Email invalidos")
+                toast.error("Senha e/ou Email invalidos");
             });
     };
 
