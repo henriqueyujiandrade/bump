@@ -53,8 +53,6 @@ import getCurrentDate from "./getCurrentDate";
 import { CardNewTask } from "../../components/Cards/CardNewTask";
 import filterDate from "./filterDate";
 import { GroupContext } from "../../Providers/Group";
-import { Redirect, useParams } from "react-router-dom/cjs/react-router-dom.min";
-import { useHistory } from "react-router-dom";
 
 import { ModalExcluir } from "../../Modals/ModalExcluir";
 import { useEffect } from "react";
@@ -131,12 +129,9 @@ const Projects = () => {
         setShowTasks(tasks);
     }, [tasks]);
 
-    function clickClose(target) {
-        removeTask(target);
-    }
     function filtrar(event) {
         if (event === "Todas") {
-            return tasks;
+            return setShowTasks(tasks);
         }
         if (event === "Concluídas") {
             setShowTasks(tasks.filter((tasks) => tasks.status === "concluida"));
