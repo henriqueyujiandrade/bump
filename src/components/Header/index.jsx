@@ -161,6 +161,7 @@ export default function WithSubnavigation({
                                 _hover={{
                                     bg: hover
                                 }}
+                                onClick={() => localStorage.clear()}
                             >
                                 Sair
                             </Button>
