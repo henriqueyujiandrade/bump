@@ -97,7 +97,7 @@ export const Group = styled.button`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    height: 56.67px;
+    height: 45px;
     margin-left: 30px;
     font-weight: 700;
     @media only screen and (max-width: 768px) {
@@ -111,8 +111,9 @@ export const NavFilter = styled.nav`
     width: 90%;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
+    
     @media only screen and (max-width: 768px) {
+        flex-wrap: wrap;
         margin-left: 0px;
         align-items: center;
         justify-content: center;
@@ -134,7 +135,6 @@ export const ButtonFilter = styled.button`
 export const Display = styled.div`
     display: flex;
     flex-wrap: wrap;
-    width: 75%;
     @media only screen and (max-width: 768px) {
         padding-right: 20px;
         margin-left: 0px;

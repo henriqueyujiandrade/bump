@@ -248,13 +248,8 @@ const Projects = () => {
                     </Button>
                     <Header>
                         <Nav className="nav-header">
-<<<<<<< HEAD
                             <AiOutlineLaptop size={60} />
                             <h6> Rotina</h6>
-=======
-                            <AiOutlineLaptop size={100} />
-                            <h6> Coleção</h6>
->>>>>>> ef6398185e6ed2e79f03b42d4d406e540de6a8d4
                             <RemoveTask onClick={modalexcluirG}>
                                 <AiFillDelete />
                             </RemoveTask>
@@ -293,10 +288,6 @@ const Projects = () => {
                     </NavFilter>
                     <Display>
                         {showTasks.map((results) => {
-<<<<<<< HEAD
-
-=======
->>>>>>> ef6398185e6ed2e79f03b42d4d406e540de6a8d4
                             return (
                                 <Flex
                                     background={"white"}
@@ -324,7 +315,7 @@ const Projects = () => {
                                         </Label>
                                     </Heading>
                                     <Box
-                                        fontSize={"25"}
+                                        fontSize={"20"}
                                         fontWeight={"500"}
                                         padding={"0px 10px"}
                                     >
