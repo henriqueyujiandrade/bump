@@ -6,6 +6,9 @@ export const Container = styled.main`
     width: 100%;
     height: 100%;
 
+    display: flex;
+    align-items: center;
+
     position: absolute;
 
     z-index: 2;
@@ -14,6 +17,7 @@ export const Container = styled.main`
 
         position: absolute;
         left: 340px;
+        top: 490px;
 
         i {
 
@@ -24,20 +28,32 @@ export const Container = styled.main`
 
         @media (min-width: 768px) {
 
-            left: 700px;
+            left: 535px;
+            top: 305px;
 
         }
 
         @media (min-width: 1024px) {
 
-            left: 950px;
+            left: 660px;
+            top: 210px;
             font-size: 3rem;
+
+        }
+
+        @media (min-width: 1920px) {
+
+            left: 1100px;
+            top: 285px;
+            font-size: 4rem;
 
         }
 
     }
 
     form {
+
+        border-radius: 15px;
 
         background-color: #B84DEB;
         width: 375px;
@@ -63,6 +79,8 @@ export const Container = styled.main`
             padding: 10px;
             background-color: #FEEE35;
             border-radius: 10px;
+
+            font-weight: bold;
 
             opacity: 0.8;
             transition: 0.2s;

@@ -7,13 +7,13 @@ export const Close = ({ close, addTesk }) => {
             {addTesk ? (
                 <ConteCloseTask onClick={close}>
                     <div>
-                        <img src={X} />
+                        <img src={X} alt="close"/>
                     </div>
                 </ConteCloseTask>
             ) : (
                 <ConteClose onClick={close}>
                     <div>
-                        <img src={X} />
+                        <img src={X} alt="close"/>
                     </div>
                 </ConteClose>
             )}
