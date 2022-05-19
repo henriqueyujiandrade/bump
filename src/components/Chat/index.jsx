@@ -12,141 +12,141 @@ import { ChatContext } from "../../Providers/Chat/index.js";
 import { useParams } from "react-router-dom";
 
 const Chat = ({ openChat, setOpenChat }) => {
-    const params = useParams();
-    const userInfo = JSON.parse(localStorage.getItem("@bump:myInfo"));
-    const { chat, addChat, removeChat } = useContext(ChatContext);
-    const [msg, setMsg] = useState("");
-
-    const userId = userInfo.id;
-    const groupId = params.id;
-    const groupMsg = chat.filter((item) => {
-        return item.groupId === groupId;
-    });
-    const [objMsg, setObjMsg] = useState({
-        name: userInfo.name,
-        groupId: groupId,
-        userId: userId,
-    });
-    const handleSubmit = () => {
-        console.log(objMsg, "corpo do objeto mensagem");
-        if (msg.length > 0) {
-            addChat({ ...objMsg, description: msg });
-            setMsg("");
-        }
-        setObjMsg({
-            name: userInfo.name,
-            groupId: groupId,
-            userId: userId,
-        });
-    };
-
-    //Dados chumbados para teste:
-
+    // const params = useParams();
+    // const userInfo = JSON.parse(localStorage.getItem("@bump:myInfo"));
+    // const { chat, addChat, removeChat } = useContext(ChatContext);
     // const [msg, setMsg] = useState("");
-    // const userId = 2;
-    // const groupId = "8da51ca4-204f-4264-a9bb-989851c5aadb";
-    // const [objMsg, setObjMsg] = useState({
-    //     name: "Joao",
-    //     groupId: groupId,
-    //     userId: userId,
-    // });
-    // const [chat, setChat] = useState([
-    //     {
-    //         name: "Joao",
-    //         description: "sei la to testando email 1",
-    //         groupId: "8da51ca4-204f-4264-a9bb-989851c5badb",
-    //         userId: 2,
-    //         id: 1,
-    //     },
-    //     {
-    //         name: "Yasmin",
-    //         description: "sei la to testando email 1",
-    //         groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-    //         userId: 3,
-    //         id: 1,
-    //     },
-    //     {
-    //         name: "Joao",
-    //         description: "sei la to testando email 1",
-    //         groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-    //         userId: 2,
-    //         id: 1,
-    //     },
-    //     {
-    //         name: "Henrique",
-    //         description: "sei la to testando email 1",
-    //         groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-    //         userId: 4,
-    //         id: 1,
-    //     },
-    //     {
-    //         name: "Joao",
-    //         description: "sei la to testando email 1",
-    //         groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-    //         userId: 2,
-    //         id: 1,
-    //     },
-    //     {
-    //         name: "Valmir",
-    //         description: "sei la to testando email 1",
-    //         groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-    //         userId: 5,
-    //         id: 1,
-    //     },
-    //     {
-    //         name: "Joao",
-    //         description: "sei la to testando email 1",
-    //         groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-    //         userId: 2,
-    //         id: 1,
-    //     },
-    //     {
-    //         name: "Maykon",
-    //         description: "sei la to testando email 1",
-    //         groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-    //         userId: 6,
-    //         id: 1,
-    //     },
-    //     {
-    //         name: "Joao",
-    //         description: "sei la to testando email 1",
-    //         groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-    //         userId: 2,
-    //         id: 1,
-    //     },
-    //     {
-    //         name: "Igor",
-    //         description: "sei la to testando email 1",
-    //         groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-    //         userId: 7,
-    //         id: 1,
-    //     },
-    //     {
-    //         name: "Joao",
-    //         description: "sei la to testando email 1",
-    //         groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
-    //         userId: 2,
-    //         id: 1,
-    //     },
-    //     {
-    //         name: "Joao",
-    //         description: "sei la to testando email 1",
-    //         groupId: "8da51ca4-204f-4264-a9bb-989851c5badb",
-    //         userId: 2,
-    //         id: 1,
-    //     },
-    // ]);
 
+    // const userId = userInfo.id;
+    // const groupId = params.id;
     // const groupMsg = chat.filter((item) => {
     //     return item.groupId === groupId;
     // });
-
+    // const [objMsg, setObjMsg] = useState({
+    //     name: userInfo.name,
+    //     groupId: groupId,
+    //     userId: userId,
+    // });
     // const handleSubmit = () => {
+    //     console.log(objMsg, "corpo do objeto mensagem");
     //     if (msg.length > 0) {
-    //         setChat([...chat, { ...objMsg, description: msg }]);
+    //         addChat({ ...objMsg, description: msg });
     //         setMsg("");
     //     }
+    //     setObjMsg({
+    //         name: userInfo.name,
+    //         groupId: groupId,
+    //         userId: userId,
+    //     });
     // };
+
+    //Dados chumbados para teste:
+
+    const [msg, setMsg] = useState("");
+    const userId = 2;
+    const groupId = "8da51ca4-204f-4264-a9bb-989851c5aadb";
+    const [objMsg, setObjMsg] = useState({
+        name: "Joao",
+        groupId: groupId,
+        userId: userId,
+    });
+    const [chat, setChat] = useState([
+        {
+            name: "Joao",
+            description: "sei la to testando email 1",
+            groupId: "8da51ca4-204f-4264-a9bb-989851c5badb",
+            userId: 2,
+            id: 1,
+        },
+        {
+            name: "Yasmin",
+            description: "sei la to testando email 1",
+            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
+            userId: 3,
+            id: 1,
+        },
+        {
+            name: "Joao",
+            description: "sei la to testando email 1",
+            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
+            userId: 2,
+            id: 1,
+        },
+        {
+            name: "Henrique",
+            description: "sei la to testando email 1",
+            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
+            userId: 4,
+            id: 1,
+        },
+        {
+            name: "Joao",
+            description: "sei la to testando email 1",
+            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
+            userId: 2,
+            id: 1,
+        },
+        {
+            name: "Valmir",
+            description: "sei la to testando email 1",
+            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
+            userId: 5,
+            id: 1,
+        },
+        {
+            name: "Joao",
+            description: "sei la to testando email 1",
+            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
+            userId: 2,
+            id: 1,
+        },
+        {
+            name: "Maykon",
+            description: "sei la to testando email 1",
+            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
+            userId: 6,
+            id: 1,
+        },
+        {
+            name: "Joao",
+            description: "sei la to testando email 1",
+            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
+            userId: 2,
+            id: 1,
+        },
+        {
+            name: "Igor",
+            description: "sei la to testando email 1",
+            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
+            userId: 7,
+            id: 1,
+        },
+        {
+            name: "Joao",
+            description: "sei la to testando email 1",
+            groupId: "8da51ca4-204f-4264-a9bb-989851c5aadb",
+            userId: 2,
+            id: 1,
+        },
+        {
+            name: "Joao",
+            description: "sei la to testando email 1",
+            groupId: "8da51ca4-204f-4264-a9bb-989851c5badb",
+            userId: 2,
+            id: 1,
+        },
+    ]);
+
+    const groupMsg = chat.filter((item) => {
+        return item.groupId === groupId;
+    });
+
+    const handleSubmit = () => {
+        if (msg.length > 0) {
+            setChat([...chat, { ...objMsg, description: msg }]);
+            setMsg("");
+        }
+    };
 
     return (
         <>

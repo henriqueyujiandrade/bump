@@ -7,9 +7,13 @@ export const GroupContext = createContext();
 
 export const GroupProvider = ({ children }) => {
     const [group, setGroup] = useState([]);
-    const [tokenGroup, setTokenGroup] = useState(JSON.parse(localStorage.getItem("@bump:token")) || "");
-    const [myInfo, setMyInfo] = useState(JSON.parse(localStorage.getItem("@bump:myInfo")) || "");
-    
+    const [tokenGroup, setTokenGroup] = useState(
+        JSON.parse(localStorage.getItem("@bump:token")) || ""
+    );
+    const [myInfo, setMyInfo] = useState(
+        JSON.parse(localStorage.getItem("@bump:myInfo")) || ""
+    );
+
     useEffect(() => {
         if (tokenGroup) {
             api.get("group", {
@@ -22,15 +26,15 @@ export const GroupProvider = ({ children }) => {
                         gp.membros.find((membro) => membro.id == myInfo.id)
                     )
                 );
-            });            
+            });
         }
-    }, [tokenGroup,myInfo]);
+    }, [tokenGroup, myInfo]);
 
     const addGroup = (data) => {
         const status = "admin";
         const admin = { ...myInfo, status };
         const membros = [admin];
-        const newData = { ...data, membros};
+        const newData = { ...data, membros };
         api.post(`group`, newData, {
             headers: {
                 Authorization: `Bearer ${tokenGroup}`,
@@ -51,7 +55,9 @@ export const GroupProvider = ({ children }) => {
     };
 
     return (
-        <GroupContext.Provider value={{ group, addGroup, removeGroup, setTokenGroup, setMyInfo }}>
+        <GroupContext.Provider
+            value={{ group, addGroup, removeGroup, setTokenGroup, setMyInfo }}
+        >
             {children}
         </GroupContext.Provider>
     );
