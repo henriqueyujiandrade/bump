@@ -31,6 +31,7 @@ import {
     AiOutlineClockCircle,
     //AiOutlineWechat,
     AiOutlineEdit,
+    AiFillDelete,
 } from "react-icons/ai";
 import {
     Box,
@@ -66,7 +67,6 @@ const Projects = () => {
     const [openAddTask, setOpenAddTask] = useState(false);
     const [openEditTask, setOpenEditTask] = useState(false);
     const [openAddSubTask, setOpenAddSubTask] = useState(false);
-    const history = useHistory();
     const none = "none";
     const flex = "flex";
     const [openSideBar, setOpenSideBar] = useState(none);
@@ -125,16 +125,14 @@ const Projects = () => {
     const { group, addGroup, removeGroup, setTokenGroup } =
         useContext(GroupContext);
     const [showTasks, setShowTasks] = useState(tasks);
-
     function clickClose(target) {
         removeTask(target);
         setShowTasks(tasks);
     }
-
+    console.log(group);
     function filtrar(event) {
         if (event === "Todas") {
-            console.log(tasks);
-            return setShowTasks(tasks);
+            return tasks;
         }
         if (event === "Concluídas") {
             setShowTasks(tasks.filter((tasks) => tasks.status === "concluida"));
@@ -173,11 +171,6 @@ const Projects = () => {
             setShowTasks(array);
         }
     }
-    function deleteColecao() {
-        //->Passar o id removeGroup();
-        history.push("/dashboard");
-    }
-    console.log(Group);
     return (
         <Body>
             <>
@@ -258,7 +251,7 @@ const Projects = () => {
                             <AiOutlineLaptop size={100} />
                             <h6> Rotina</h6>
                             <RemoveTask onClick={modalexcluirG}>
-                                Excluir Coleção
+                                <AiFillDelete />
                             </RemoveTask>
                         </Nav>
                         <Nav className="nav-header">
@@ -349,7 +342,8 @@ const Projects = () => {
                                                 onClick={checkMembersT}
                                             >
                                                 <AiOutlineTeam />
-                                                {results.members.length}
+                                                {results.members &&
+                                                    results.members.length}
                                             </TagTeam>
                                         </Date>
                                     </ButtonGroup>

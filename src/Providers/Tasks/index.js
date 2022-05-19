@@ -5,8 +5,8 @@ import api from "../../Services/api";
 export const TasksContext = createContext();
 
 export const TasksProvider = ({ children }) => {
-    const [tasks, setTasks] = useState([
-        {
+    const [tasks, setTasks] = useState([]);
+    /*  {
             description: "Atividade 01",
             status: "andamento",
             expirationDate: "16-05-2022",
@@ -65,17 +65,18 @@ export const TasksProvider = ({ children }) => {
             members: [1, 1, 1],
             id: 222,
             subTasks: [],
-        },
-    ]);
+        }, */
 
     const [tokenTask, setTokenTask] = useState(
         JSON.parse(localStorage.getItem("@bump:token")) || ""
     );
-    const [myInfoInTask, setMyInfoInTask] = useState(JSON.parse(localStorage.getItem("@bump:myInfo")) || "")
+    const [myInfoInTask, setMyInfoInTask] = useState(
+        JSON.parse(localStorage.getItem("@bump:myInfo")) || ""
+    );
 
-    const [groupId, setGroupId] = ('2')
-    const [subTasks, setSubTasks] = useState([])
-    const [taskId, setTaskId] = useState('3')
+    const [groupId, setGroupId] = "2";
+    const [subTasks, setSubTasks] = useState([]);
+    const [taskId, setTaskId] = useState("3");
 
     useEffect(() => {
         if (tokenTask && groupId) {
@@ -101,19 +102,18 @@ export const TasksProvider = ({ children }) => {
         }
     }, [tokenTask, taskId]);
 
-    const addTask = (id,data) => {
+    const addTask = (id, data) => {
         const groupId = Number(id);
-        const status = "andamento";               
-        const finalData = {...data, groupId, status};
+        const status = "andamento";
+        const finalData = { ...data, groupId, status };
         api.post(`task`, finalData, {
             headers: {
                 Authorization: `Bearer ${tokenTask}`,
             },
-        })
-        .then((response) => setTasks([...tasks, response.data]))
+        }).then((response) => setTasks([...tasks, response.data]));
     };
 
-    const removeTask = (id) => {        
+    const removeTask = (id) => {
         api.delete(`task/${id}`, {
             headers: {
                 Authorization: `Bearer ${tokenTask}`,
@@ -123,17 +123,16 @@ export const TasksProvider = ({ children }) => {
             .catch((err) => console.log(err));
     };
 
-    const addSubTask = (id,data) => {
+    const addSubTask = (id, data) => {
         const taskId = Number(id);
         const status = "andamento";
-        const membro = [{...myInfoInTask}]               
-        const finalData = {...data, taskId, status, membro};
+        const membro = [{ ...myInfoInTask }];
+        const finalData = { ...data, taskId, status, membro };
         api.post(`subtask`, finalData, {
             headers: {
                 Authorization: `Bearer ${tokenTask}`,
             },
-        })
-        .then((response) => setSubTasks([...subTasks, response.data]))
+        }).then((response) => setSubTasks([...subTasks, response.data]));
     };
 
     const removeSubTask = (id) => {
@@ -142,13 +141,28 @@ export const TasksProvider = ({ children }) => {
                 Authorization: `Bearer ${tokenTask}`,
             },
         })
-            .then((response) => setTasks(subTasks.filter((subtk) => subtk.id !== id)))
+            .then((response) =>
+                setTasks(subTasks.filter((subtk) => subtk.id !== id))
+            )
             .catch((err) => console.log(err));
     };
 
     return (
-        <TasksContext.Provider value={{ tasks, subTasks, addTask, removeTask, setGroupId, setTokenTask, setMyInfoInTask, setTaskId, addSubTask, removeSubTask }}>
-            {children}           
+        <TasksContext.Provider
+            value={{
+                tasks,
+                subTasks,
+                addTask,
+                removeTask,
+                setGroupId,
+                setTokenTask,
+                setMyInfoInTask,
+                setTaskId,
+                addSubTask,
+                removeSubTask,
+            }}
+        >
+            {children}
         </TasksContext.Provider>
     );
 };
