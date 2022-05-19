@@ -56,7 +56,11 @@ import { useHistory } from "react-router-dom";
 
 import { ModalExcluir } from "../../Modals/ModalExcluir";
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 const Projects = () => {
+    const param = useParams();
+    const idGrupe = param.id;
+
     const [openExcluirG, setOpenExcluirG] = useState(false);
     const [openExcluirT, setOpenExcluirT] = useState(false);
     const [openExcluirST, setOpenExcluirST] = useState(false);
@@ -109,7 +113,6 @@ const Projects = () => {
     };
 
     const openAddTaskFunc = () => {
-        /* setOpenM(true); */
         setOpenAddTask(true);
     };
 
@@ -121,16 +124,15 @@ const Projects = () => {
         }
     };
     const { tasks, removeTask } = useContext(TasksContext);
-    const { member, addMember, removeMember, setGpId, setTokenMember } =
+    const { infoGroup, addMember, removeMember, setGpId, setTokenMember } =
         useContext(GroupContext);
     const { group, addGroup, removeGroup, setTokenGroup } =
         useContext(GroupContext);
     const [showTasks, setShowTasks] = useState(tasks);
-    
-    useEffect(() => {
-        setShowTasks(tasks)
 
-    }, [tasks])
+    useEffect(() => {
+        setShowTasks(tasks);
+    }, [tasks]);
 
     function clickClose(target) {
         removeTask(target);
@@ -139,7 +141,6 @@ const Projects = () => {
 
     function filtrar(event) {
         if (event === "Todas") {
-            console.log(tasks);
             return setShowTasks(tasks);
         }
         if (event === "Concluídas") {
@@ -215,7 +216,11 @@ const Projects = () => {
                     />
                 )}
                 {openAddTask && (
-                    <ModalAddTask addTasks setOpenAddTask={setOpenAddTask} />
+                    <ModalAddTask
+                        idGrupe={idGrupe}
+                        addTasks
+                        setOpenAddTask={setOpenAddTask}
+                    />
                 )}
 
                 {openMAdd && (
@@ -234,6 +239,8 @@ const Projects = () => {
                 )}
                 {openMT && (
                     <ModalMembro
+                        idGrupe={idGrupe}
+                        infoGroup={infoGroup}
                         membrosT
                         addMembrosT={addMembrosT}
                         setOpenMT={setOpenMT}
@@ -302,8 +309,6 @@ const Projects = () => {
                     </NavFilter>
                     <Display>
                         {showTasks.map((results) => {
-
-                    
                             return (
                                 <Flex
                                     background={"white"}
@@ -357,7 +362,8 @@ const Projects = () => {
                                                 onClick={checkMembersT}
                                             >
                                                 <AiOutlineTeam />
-                                                {results.members && results.members.length}
+                                                {results.members &&
+                                                    results.members.length}
                                             </TagTeam>
                                         </Date>
                                     </ButtonGroup>

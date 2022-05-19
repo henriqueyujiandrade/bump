@@ -6,25 +6,25 @@ import X from "./X.svg";
 import XRed from "./X_red.svg";
 import Aceitar from "./aceitar.svg";
 
-export const CardMembros = ({ statusAdm, add }) => {
+export const CardMembros = ({ statusAdm, add, elemento, addMemberG }) => {
     return (
         <>
             {add ? (
                 <CardMembrosConte>
                     <CardMembrosInfo>
                         <img src={User} />
-                        <h1>Usuario</h1>
+                        <h1>{elemento.email}</h1>
                     </CardMembrosInfo>
                     <CardMembrosAcao>
                         <img src={XRed} />
-                        <img src={Aceitar} />
+                        <img onClick={addMemberG} src={Aceitar} />
                     </CardMembrosAcao>
                 </CardMembrosConte>
             ) : (
                 <CardMembrosConte>
                     <CardMembrosInfo>
                         <img src={User} />
-                        <h1>Usuario</h1>
+                        <h1>{elemento.email}</h1>
                     </CardMembrosInfo>
                     <CardMembrosAcao>
                         {statusAdm ? <img src={Fire} /> : <img src={FireB} />}
