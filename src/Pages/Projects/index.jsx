@@ -49,27 +49,41 @@ import getCurrentDate from "./getCurrentDate";
 import { CardNewTask } from "../../components/Cards/CardNewTask";
 import filterDate from "./filterDate";
 const Projects = () => {
-    const [openM, setOpenM] = useState(false);
+    const [openMG, setOpenMG] = useState(false);
+    const [openMT, setOpenMT] = useState(false);
     const [openMAdd, setOpenMAdd] = useState(false);
+    const [openMTAdd, setOpenMTAdd] = useState(false);
     const [openAddTask, setOpenAddTask] = useState(false);
     const [openEditTask, setOpenEditTask] = useState(false);
     const [openAddSubTask, setOpenAddSubTask] = useState(false);
-
-    const editTesk = (target) => {
-        setOpenEditTask(true);
-    };
 
     const none = "none";
     const flex = "flex";
     const [openSideBar, setOpenSideBar] = useState(none);
 
     const addMembros = () => {
+        setOpenMG(false);
         setOpenMAdd(true);
     };
-    const checkMembers = () => {
-        setOpenM(true);
+    const addMembrosT = () => {
+        setOpenMT(false);
+        setOpenMTAdd(true);
+    };
+
+    const editTesk = (target) => {
+        setOpenEditTask(true);
+    };
+
+    const checkMembersG = () => {
+        setOpenMG(true);
         setOpenMAdd(false);
     };
+
+    const checkMembersT = () => {
+        setOpenMT(true);
+        setOpenMTAdd(false);
+    };
+
     const openAddTaskFunc = () => {
         /* setOpenM(true); */
         setOpenAddTask(true);
@@ -149,16 +163,36 @@ const Projects = () => {
                     />
                 )}
                 {openAddTask && (
-                    <ModalAddTask setOpenAddTask={setOpenAddTask} />
+                    <ModalAddTask addTasks setOpenAddTask={setOpenAddTask} />
                 )}
+
                 {openMAdd && (
                     <ModalMembroAdd
-                        setOpenM={setOpenM}
+                        addMembroG
+                        setOpenMG={setOpenMG}
                         setOpenMAdd={setOpenMAdd}
                     />
                 )}
-                {openM && (
-                    <ModalMembro addMembros={addMembros} setOpenM={setOpenM} />
+                {openMTAdd && (
+                    <ModalMembroAdd
+                        addMembroT
+                        setOpenMT={setOpenMT}
+                        setOpenMTAdd={setOpenMTAdd}
+                    />
+                )}
+                {openMT && (
+                    <ModalMembro
+                        membrosT
+                        addMembrosT={addMembrosT}
+                        setOpenMT={setOpenMT}
+                    />
+                )}
+                {openMG && (
+                    <ModalMembro
+                        membrosG
+                        addMembros={addMembros}
+                        setOpenM={setOpenMG}
+                    />
                 )}
             </>
             <Container>
@@ -184,7 +218,7 @@ const Projects = () => {
                                 Adicionar +
                             </AddTask>
 
-                            <Group onClick={checkMembers}>
+                            <Group onClick={checkMembersG}>
                                 <AiOutlineTeam />2
                             </Group>
                         </Nav>
@@ -256,6 +290,7 @@ const Projects = () => {
                                                 {results.expirationDate}
                                             </LabelExp>
                                             <AiOutlineEdit
+                                                cursor={"pointer"}
                                                 size="40"
                                                 onClick={() =>
                                                     editTesk(results.id)
@@ -263,7 +298,7 @@ const Projects = () => {
                                             />
                                             <TagTeam
                                                 className="tag-team"
-                                                onClick={addMembros}
+                                                onClick={checkMembersT}
                                             >
                                                 <AiOutlineTeam />
                                                 {results.members.length}
