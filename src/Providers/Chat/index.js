@@ -11,7 +11,7 @@ export const ChatProvider = ({children}) => {
     const [token, setToken] = useState( JSON.parse(localStorage.getItem("@bump:token")) || "")
     
     // useEffect(()=>{
-    //     api.get('chat',{
+    //     api.get(`group/1?_embed=chat`,{
     //         headers: {
     //             Authorization: `Bearer ${token}`,
     //         }

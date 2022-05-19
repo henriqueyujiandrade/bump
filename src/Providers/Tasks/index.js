@@ -73,7 +73,7 @@ export const TasksProvider = ({ children }) => {
     );
     const [myInfoInTask, setMyInfoInTask] = useState(JSON.parse(localStorage.getItem("@bump:myInfo")) || "")
 
-    const [groupId, setGroupId] = useState('')
+    const [groupId, setGroupId] = ('2')
     const [subTasks, setSubTasks] = useState([])
     const [taskId, setTaskId] = useState('3')
 

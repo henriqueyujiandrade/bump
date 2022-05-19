@@ -42,7 +42,7 @@ export default function SimpleSlider() {
             },
         ],
     };
-    return(
+    return (
         <Container>
             <Slider {...settings} className="teste">
                 <div>
@@ -56,5 +56,5 @@ export default function SimpleSlider() {
                 </div>
             </Slider>
         </Container>
-    )
+    );
 }

@@ -4,7 +4,6 @@ import { ListContainer } from "./style";
 export const CardGroup = ({colection}) => {
 
     const history = useHistory();
-    console.log(colection)
 
     return (
 
