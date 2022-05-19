@@ -147,7 +147,7 @@ export const TasksProvider = ({ children }) => {
     };
 
     return (
-        <TasksContext.Provider value={{ tasks, subTasks, addTask, removeTask, setGroupId, setTokenTask, setMyInfoInTask, setTaskId, addSubTask, removeSubTask }}>
+        <TasksContext.Provider value={{ tasks, subTasks, addTask, removeTask, groupId, setGroupId, setTokenTask, setMyInfoInTask, setTaskId, addSubTask, removeSubTask }}>
             {children}           
         </TasksContext.Provider>
     );

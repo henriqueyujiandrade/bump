@@ -296,6 +296,8 @@ const Projects = () => {
                     </NavFilter>
                     <Display>
                         {showTasks.map((results) => {
+
+                            console.log(results)
                             return (
                                 <Flex
                                     background={"white"}
