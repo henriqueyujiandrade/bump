@@ -8,35 +8,40 @@ export const ChatContext = createContext()
 export const ChatProvider = ({children}) => {
     
     const[chat, setChat] = useState([])
-    const [token, setToken] = useState( JSON.parse(localStorage.getItem("@bump:token")) || "")
-    
-    // useEffect(()=>{
-    //     api.get(`group/1?_embed=chat`,{
-    //         headers: {
-    //             Authorization: `Bearer ${token}`,
-    //         }
-    //     })
-    //     .then((response) =>{
-            
-    //     })
-
-    // },[])
-
-    const addChat = (data) =>{
-        api.post(`chat`,data, {
+    const [tokenChat, setTokenChat] = useState( JSON.parse(localStorage.getItem("@bump:token")) || "")
+    const [myInfoChat, setMyInfoChat] = useState(
+        JSON.parse(localStorage.getItem("@bump:myInfo")) || ""
+    );
+    const [idChat, setIdChat] = useState('')
+    console.log(chat)
+    useEffect(()=>{
+        if(tokenChat && idChat)
+        api.get(`group/${idChat}?_embed=chat`,{
             headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${tokenChat}`,
             }
         })
-    }
-    
-    const removeChat = () =>{
+        .then((response) =>{
+            setChat(response.data.chat)
+        })
 
-    }
+    },[tokenChat, idChat])
 
+    const addChat = (id,data) =>{
+        const groupId = Number(id);
+        const userId = myInfoChat.id
+        const name = myInfoChat.name
+        const final = {...data, groupId, userId, name}  
+        api.post(`chat`, final, {
+            headers: {
+                Authorization: `Bearer ${tokenChat}`,
+            }
+        })
+        .then((response) => setChat([...chat, response.data]))
+    }
 
     return (
-        <ChatContext.Provider value={{ chat,addChat, removeChat }}>
+        <ChatContext.Provider value={{ chat,addChat,setMyInfoChat,setIdChat,setTokenChat}}>
             {children}
         </ChatContext.Provider>
     );
