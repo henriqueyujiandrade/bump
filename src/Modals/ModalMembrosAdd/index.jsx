@@ -26,7 +26,7 @@ export const ModalMembroAdd = ({
     const idGroup = param.id;
     const { register, handleSubmit } = useForm();
     const [newMembro, setNewMembro] = useState("");
-    const [user, setUser] = useState("");
+    const [use, setUse] = useState("");
 
     const { users, addMember } = useContext(MemberContext);
 
@@ -41,9 +41,11 @@ export const ModalMembroAdd = ({
     };
 
     const onSubmitFunc = (data) => {
-        setUser(
+        console.log(users);
+        setUse(
             users.filter((user) => {
                 if (user.email == data.email) {
+                    console.log(user);
                     setNewMembro(data);
                     return users;
                 } else {
@@ -54,7 +56,6 @@ export const ModalMembroAdd = ({
     };
 
     const addMemberG = () => {
-        console.log(newMembro);
         addMember(idGroup, newMembro);
     };
 
@@ -78,11 +79,11 @@ export const ModalMembroAdd = ({
                         </ConteForm>
 
                         <DivsaoSearching />
-                        {user && (
+                        {use && (
                             <>
-                                {user.length != 0 ? (
+                                {use.length != 0 ? (
                                     <>
-                                        {user.map((elemento) => {
+                                        {use.map((elemento) => {
                                             return (
                                                 <CardMembros
                                                     addMemberG={addMemberG}

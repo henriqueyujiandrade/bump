@@ -5,6 +5,7 @@ export const CardMembrosConte = styled.div`
     border-radius: 25px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 7px 20px;
     margin-bottom: 30px;
     :nth-last-child(1) {
@@ -98,4 +99,3 @@ export const DivAcao = styled.div`
         cursor: pointer;
     }
 `;
-

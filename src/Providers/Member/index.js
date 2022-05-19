@@ -34,6 +34,7 @@ export const MemberProvider = ({ children }) => {
                     Authorization: `Bearer ${tokenMember}`,
                 },
             }).then((response) => {
+                console.log(response.data);
                 setUsers(response.data);
             });
         }
