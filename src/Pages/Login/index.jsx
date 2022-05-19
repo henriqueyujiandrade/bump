@@ -12,11 +12,17 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import Header from "../../components/Header"
 import { GroupContext } from '../../Providers/Group';
+import { TasksContext } from '../../Providers/Tasks';
+import { MemberContext } from '../../Providers/Member';
+import { ChatContext } from '../../Providers/Chat';
 
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
- const { setTokenGroup, setMyInfo} = useContext(GroupContext) 
+ const { setTokenGroup, setMyInfo} = useContext(GroupContext)
+ const {setTokenTask, setMyInfoInTask} = useContext(TasksContext)
+ const {setTokenMember, setMyInfoInMembers} = useContext(MemberContext)
+ const {setTokenChat, setMyInfoChat} = useContext(ChatContext) 
   const { confirmLogin } = useContext(LoginContext);
 
   const schema = yup.object().shape({
@@ -30,7 +36,7 @@ const Login = () => {
 
   const onSubmit = (data) => {
     console.log(data)
-    confirmLogin(setTokenGroup, setMyInfo,data)
+    confirmLogin(setTokenGroup, setMyInfo, setTokenTask, setMyInfoInTask,setTokenMember, setMyInfoInMembers,setTokenChat, setMyInfoChat,data)
 
   }
 
