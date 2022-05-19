@@ -30,7 +30,7 @@ export const LoginProvider = ({ children }) => {
 
                 /*
                 history.push(`/dashboard/${response.data.user.id}`) */
-                history.push(`/dashboard/1`);
+                history.push(`/dashboard`);
                 setAuthenticated(true);
                 return response.data;
             })

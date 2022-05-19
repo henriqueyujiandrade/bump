@@ -126,7 +126,6 @@ export default function WithSubnavigation({
                         minH={"60px"}
                         py={{ base: 2 }}
                         px={{ base: 20 }}
-                        borderBottom={1}
                         spacing={6}
                         borderStyle={"solid"}
                         borderColor={colorT}
