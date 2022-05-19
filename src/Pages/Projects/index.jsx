@@ -351,7 +351,7 @@ const Projects = () => {
                                                 onClick={checkMembersT}
                                             >
                                                 <AiOutlineTeam />
-                                                {results.members.length}
+                                                {results.members && results.members.length}
                                             </TagTeam>
                                         </Date>
                                     </ButtonGroup>
