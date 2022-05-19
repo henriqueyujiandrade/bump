@@ -22,7 +22,7 @@ export const GroupProvider = ({ children }) => {
                         gp.membros.find((membro) => membro.id == myInfo.id)
                     )
                 );
-            });
+            });            
         }
     }, [tokenGroup,myInfo]);
 

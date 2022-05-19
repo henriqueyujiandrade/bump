@@ -13,6 +13,7 @@ import {
     ButtonFilter,
     Display,
     Date,
+    Chat,
     TagTeam,
     Nav,
     ContainerPrincipal,
@@ -29,7 +30,7 @@ import {
     AiOutlineLaptop,
     AiOutlineTeam,
     AiOutlineClockCircle,
-    //AiOutlineWechat,
+    AiOutlineWechat,
     AiOutlineEdit,
     AiFillDelete,
 } from "react-icons/ai";
@@ -52,10 +53,11 @@ import getCurrentDate from "./getCurrentDate";
 import { CardNewTask } from "../../components/Cards/CardNewTask";
 import filterDate from "./filterDate";
 import { GroupContext } from "../../Providers/Group";
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
+import { Redirect, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useHistory } from "react-router-dom";
 
 import { ModalExcluir } from "../../Modals/ModalExcluir";
+import { useEffect } from "react";
 const Projects = () => {
     const [openExcluirG, setOpenExcluirG] = useState(false);
     const [openExcluirT, setOpenExcluirT] = useState(false);
@@ -125,11 +127,13 @@ const Projects = () => {
     const { group, addGroup, removeGroup, setTokenGroup } =
         useContext(GroupContext);
     const [showTasks, setShowTasks] = useState(tasks);
+    useEffect(() => {
+        setShowTasks(tasks);
+    }, [tasks]);
+
     function clickClose(target) {
         removeTask(target);
-        setShowTasks(tasks);
     }
-    console.log(group);
     function filtrar(event) {
         if (event === "Todas") {
             return tasks;
@@ -171,6 +175,7 @@ const Projects = () => {
             setShowTasks(array);
         }
     }
+
     return (
         <Body>
             <>
@@ -249,7 +254,7 @@ const Projects = () => {
                     <Header>
                         <Nav className="nav-header">
                             <AiOutlineLaptop size={100} />
-                            <h6> Rotina</h6>
+                            <h6> Coleção</h6>
                             <RemoveTask onClick={modalexcluirG}>
                                 <AiFillDelete />
                             </RemoveTask>
@@ -264,7 +269,6 @@ const Projects = () => {
                             </Group>
                         </Nav>
                     </Header>
-
                     <NavFilter>
                         <ButtonFilter
                             onClick={(event) => filtrar(event.target.innerText)}
@@ -342,6 +346,7 @@ const Projects = () => {
                                                 onClick={checkMembersT}
                                             >
                                                 <AiOutlineTeam />
+
                                                 {results.members &&
                                                     results.members.length}
                                             </TagTeam>
@@ -352,6 +357,9 @@ const Projects = () => {
                         })}
                     </Display>
                 </ContainerPrincipal>
+                <Chat>
+                    <AiOutlineWechat color="white" size={80} />
+                </Chat>
             </Container>
         </Body>
     );
