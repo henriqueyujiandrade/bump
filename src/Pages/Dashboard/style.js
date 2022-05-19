@@ -77,7 +77,7 @@ export const Container = styled.main`
 
         .on-task {
 
-            width: 800px;
+            width: 375px;
 
             margin: 0 auto;
 
@@ -91,6 +91,17 @@ export const Container = styled.main`
             color: white;
 
             @media (min-width: 768px) {
+
+                width: 500px;
+
+                flex-direction: row;
+                flex-wrap: wrap;
+
+            }
+
+            @media (min-width: 768px) {
+
+                width: 800px;
 
                 flex-direction: row;
                 flex-wrap: wrap;

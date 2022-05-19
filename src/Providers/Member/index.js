@@ -1,79 +1,93 @@
 import { useEffect } from "react";
 import { createContext, useState } from "react";
+import { toast } from "react-toastify";
 
 import api from "../../Services/api";
 
+export const MemberContext = createContext();
 
-export const MemberContext = createContext()
+export const MemberProvider = ({ children }) => {
+    const [member, setMember] = useState([]);
+    const [tokenMember, setTokenMember] = useState(
+        JSON.parse(localStorage.getItem("@bump:token")) || ""
+    );
+    const [users, setUsers] = useState([]); 
+    const [myInfoInMembers, setMyInfoInMembers] = useState(JSON.parse(localStorage.getItem("@bump:myInfo")) || "")
+    const [gpId, setGpId] = useState("2")
 
-export const MemberProvider = ({children}) => {
-    
-    const[member, setMember] = useState([])
-    const [token, setToken] = useState( JSON.parse(localStorage.getItem("@bump:token")) || "")
-    const [users, setUsers] = useState([])
-    console.log(member)
-   
-    useEffect(()=>{
-        if(token){       
-        api.get("group",{
-            headers: {
-                Authorization: `Bearer ${token}`,
-            }
-        })
-        .then((response) =>{
-            const thisGp = response.data.filter((gp) => gp.groupId == "8da51ca4-204f-4264-a9bb-9895a3")
-            
-            setMember(thisGp[0].membros) 
-           
-        })
+    useEffect(() => {
+        if (tokenMember && gpId) {
+            api.get("group", {
+                headers: {
+                    Authorization: `Bearer ${tokenMember}`,
+                },
+            }).then((response) => {
+                const thisGp = response.data.filter(
+                    (gp) => gp.id == gpId
+                );
 
-        api.get("users",{
-            headers: {
-                Authorization: `Bearer ${token}`,
-            }
-        })
-        .then((response) =>{            
-            
-            setUsers(response.data) 
-           
-        })
-    }
+                setMember(thisGp[0].membros);
+            });
 
-    },[token])
-
-    const addMember = (data) =>{
-        if(!users.find((user) => user.email == data.email) || member.find((mb) => mb.email == data.email)){
-            console.log('usuário não encontrado ou já adicionado')
+            api.get("users", {
+                headers: {
+                    Authorization: `Bearer ${tokenMember}`,
+                },
+            }).then((response) => {
+                setUsers(response.data);
+            });
         }
-        else{
-        const dev = users.find((user) => user.email == data.email)
-        const {name,id} = dev
-        const status = "dev"
-        const newMember = {...data, status, name, id}
-        const membros = [...member, newMember]
-        api.patch(`group/2`,{membros:membros}, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            }
-        })
-        .then((response) => setMember(membros))
-        }
-    }
-    
-    const removeMember = (id) =>{
-        const filteredMembers = member.filter((user) => user.id != id)
-        api.patch(`group/2`,{membros:filteredMembers}, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            }
-        })
-        .then((response) => setMember(filteredMembers))
-    }
-    
+    }, [tokenMember, gpId]);
 
+    const addMember = (groupId,data) => {
+        if (
+            !users.find((user) => user.email == data.email) ||
+            member.find((mb) => mb.email == data.email)
+        ) {
+            toast.warn('usuário não encontrado ou já adicionado')
+            
+        }
+        else if(!member.filter((mb)=> mb.status == "admin").find((adm)=> adm.id == myInfoInMembers.id)){
+            toast.error('Você deve ser administrador para adicionar membros')
+        }
+         else {
+            const dev = users.find((user) => user.email == data.email);
+            const { name, id } = dev;
+            const status = "dev";
+            const newMember = { ...data, status, name, id };
+            const membros = [...member, newMember];
+            api.patch(
+                `group/${groupId}`,
+                { membros: membros },
+                {
+                    headers: {
+                        Authorization: `Bearer ${tokenMember}`,
+                    },
+                }
+            ).then((response) => setMember(membros));
+        }
+    };
+
+    const removeMember = (groupId,id) => {
+        if(!member.filter((mb)=> mb.status == "admin").find((adm)=> adm.id == myInfoInMembers.id)){
+            toast.error('Você deve ser administrador para remover membros')
+        }
+        else{        
+        const filteredMembers = member.filter((user) => user.id != id);
+        api.patch(
+            `group/${groupId}`,
+            { membros: filteredMembers },
+            {
+                headers: {
+                    Authorization: `Bearer ${tokenMember}`,
+                },
+            }
+        ).then((response) => setMember(filteredMembers));
+        }
+    };
 
     return (
-        <MemberContext.Provider value={{ member,addMember, removeMember }}>
+        <MemberContext.Provider value={{ member, addMember, removeMember, setGpId, setTokenMember, setMyInfoInMembers }}>
             {children}
         </MemberContext.Provider>
     );

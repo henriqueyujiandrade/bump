@@ -20,7 +20,7 @@ const Login = () => {
 
   const schema = yup.object().shape({
     email: yup.string().required("Campo Obrigatório").email("Email inválido"),
-    password: yup.string().required("Campo Obrigatório").min(6, "Minimo 6 caracteres!"),
+    password: yup.string().required("Campo Obrigatório"),
   })
 
   const { register, handleSubmit, formState: { errors } } = useForm({

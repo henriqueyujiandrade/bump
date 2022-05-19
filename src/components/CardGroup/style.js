@@ -16,10 +16,17 @@ export const ListContainer = styled.ul`
         opacity: 0.8;
 
         background-color: #6D17B0;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
         text-align: center;
 
         border-radius: 10px;
-        padding: 50px;
+        width: 180px;
+        height: 180px;
         transition: 0.2s;
 
         .card-name {

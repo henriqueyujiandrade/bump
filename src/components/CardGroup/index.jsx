@@ -1,20 +1,24 @@
+import { useHistory } from "react-router-dom";
 import { ListContainer } from "./style";
 
 export const CardGroup = ({colection}) => {
+
+    const history = useHistory();
+    console.log(colection)
 
     return (
 
         <ListContainer>
 
-                    <li>
+                    <li onClick={() => history.push(`/dashboard/${colection.id}`)}>
                         <div>
 
-                            <p>Membros: {colection.members.length}</p>
+                            <p>Membros: {colection.membros.length}</p>
 
                         </div>
 
                         <p className="card-name">{colection.name}</p>
-                        <p className="card-tasks">-/- concluidas</p>
+                
                     </li>         
 
         </ListContainer>

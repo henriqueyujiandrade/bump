@@ -1,7 +1,7 @@
-import axios from 'axios'
+import axios from "axios";
 
 const api = axios.create({
-    baseURL:'https://bump-capstone.herokuapp.com/'
-})
+    baseURL: "https://bump-capstone.herokuapp.com/",
+});
 
-export default api
+export default api;

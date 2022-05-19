@@ -1,5 +1,4 @@
-
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { CardGroup } from '../../components/CardGroup';
 import { GroupContext } from '../../Providers/Group';
 import Header  from './../../components/Header'
@@ -7,15 +6,9 @@ import { Container } from './style';
 
 const Dashboard = () => {
 
-    const [colection, setColection] = useState([
-
-        
-      
-    ]);
-
     const { group } = useContext(GroupContext);
 
-    console.log(group);
+    console.log('Grupo: ', group);
 
     return (
         <Container>
@@ -24,7 +17,7 @@ const Dashboard = () => {
             <main>   
                 <h2 className="title-welcome">Bem vindo Valmir !</h2>
                 {
-                    colection.length === 0 ? (
+                    group.length === 0 ? (
 
                         <section className="no-task">
                         <h3>Não possui nenhuma coleção? Crie uma clicando no botão abaixo</h3>
@@ -38,7 +31,7 @@ const Dashboard = () => {
 
                             {
 
-                                colection.map((item, index) => {
+                                group.map((item, index) => {
 
                                     return <CardGroup key={index} colection={item}/>
 

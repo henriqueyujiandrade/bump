@@ -67,45 +67,88 @@ export const TasksProvider = ({ children }) => {
             subTasks: [],
         },
     ]);
-    const [token, setToken] = useState(
+
+    const [tokenTask, setTokenTask] = useState(
         JSON.parse(localStorage.getItem("@bump:token")) || ""
     );
+    const [myInfoInTask, setMyInfoInTask] = useState(JSON.parse(localStorage.getItem("@bump:myInfo")) || "")
+
+    const [groupId, setGroupId] = useState('')
+    const [subTasks, setSubTasks] = useState([])
+    const [taskId, setTaskId] = useState('3')
 
     useEffect(() => {
-        api.get("group", {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        }).then((response) => {
-            console.log(response);
-        });
-    }, []);
+        if (tokenTask && groupId) {
+            api.get(`group/${groupId}?_embed=task`, {
+                headers: {
+                    Authorization: `Bearer ${tokenTask}`,
+                },
+            }).then((response) => {
+                setTasks(response.data.task);
+            });
+        }
+    }, [tokenTask, groupId]);
 
-    const addTask = (data) => {
-        api.post(`group`, data, {
+    useEffect(() => {
+        if (tokenTask && taskId) {
+            api.get(`task/${taskId}?_embed=subtask`, {
+                headers: {
+                    Authorization: `Bearer ${tokenTask}`,
+                },
+            }).then((response) => {
+                setSubTasks(response.data.subtask);
+            });
+        }
+    }, [tokenTask, taskId]);
+
+    const addTask = (id,data) => {
+        const groupId = Number(id);
+        const status = "andamento";               
+        const finalData = {...data, groupId, status};
+        api.post(`task`, finalData, {
             headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${tokenTask}`,
             },
-        });
+        })
+        .then((response) => setTasks([...tasks, response.data]))
     };
 
-    const removeTask = (id) => {
-        const list = tasks.filter((product) => product.id !== id);
-        setTasks(list);
+    const removeTask = (id) => {        
+        api.delete(`task/${id}`, {
+            headers: {
+                Authorization: `Bearer ${tokenTask}`,
+            },
+        })
+            .then((response) => setTasks(tasks.filter((tk) => tk.id !== id)))
+            .catch((err) => console.log(err));
     };
 
-    const addSubTask = (product) => {
-        setTasks([...tasks, product]);
+    const addSubTask = (id,data) => {
+        const taskId = Number(id);
+        const status = "andamento";
+        const membro = [{...myInfoInTask}]               
+        const finalData = {...data, taskId, status, membro};
+        api.post(`subtask`, finalData, {
+            headers: {
+                Authorization: `Bearer ${tokenTask}`,
+            },
+        })
+        .then((response) => setSubTasks([...subTasks, response.data]))
     };
 
     const removeSubTask = (id) => {
-        const list = tasks.filter((product) => product.id !== id);
-        setTasks(list);
+        api.delete(`subtask/${id}`, {
+            headers: {
+                Authorization: `Bearer ${tokenTask}`,
+            },
+        })
+            .then((response) => setTasks(subTasks.filter((subtk) => subtk.id !== id)))
+            .catch((err) => console.log(err));
     };
 
     return (
-        <TasksContext.Provider value={{ tasks, addTask, removeTask }}>
-            {children}
+        <TasksContext.Provider value={{ tasks, subTasks, addTask, removeTask, groupId, setGroupId, setTokenTask, setMyInfoInTask, setTaskId, addSubTask, removeSubTask }}>
+            {children}           
         </TasksContext.Provider>
     );
 };

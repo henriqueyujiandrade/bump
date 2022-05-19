@@ -6,8 +6,7 @@ export const Container = styled.div`
     min-height: 100%;
     display: flex;
     background-color: #02072f;
-    @media only screen and (max-width: 600px) {
-        padding-right: 20px;
+    @media only screen and (max-width: 767px) {
         margin-left: 0px;
     }
 `;
@@ -24,7 +23,6 @@ export const Home = styled.a`
     width: 100%;
     justify-content: center;
     @media only screen and (max-width: 600px) {
-        padding-right: 20px;
         margin-left: 0px;
     }
 `;
@@ -61,6 +59,12 @@ export const Header = styled.header`
     font-size: 50px;
     justify-content: space-between;
     flex-wrap: wrap;
+    @media only screen and (max-width: 768px) {
+        margin-left: 0px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
 `;
 export const AddTask = styled.button`
     background-color: #feee35;
@@ -76,12 +80,7 @@ export const RemoveTask = styled.button`
     background-color: #6d17b0;
     border-radius: 25.8319px;
     padding: 7px;
-    color: #ffff;
-    margin-left: 20px;
-    height: 56.67px;
     font-weight: 500;
-    min-width: 200px;
-    max-width: 200px;
 `;
 export const Group = styled.button`
     background-color: #57aad9;
@@ -94,6 +93,11 @@ export const Group = styled.button`
     height: 56.67px;
     margin-left: 30px;
     font-weight: 700;
+    @media only screen and (max-width: 768px) {
+        margin-left: 0px;
+        padding: 7px;
+        margin-right: 0px;
+    }
 `;
 export const NavFilter = styled.nav`
     display: flex;
@@ -101,6 +105,12 @@ export const NavFilter = styled.nav`
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
+    @media only screen and (max-width: 768px) {
+        margin-left: 0px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
 `;
 export const ButtonFilter = styled.button`
     background-color: #feee35;
@@ -118,6 +128,14 @@ export const Display = styled.div`
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    @media only screen and (max-width: 768px) {
+        padding-right: 20px;
+        margin-left: 0px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0px;
+    }
 `;
 export const Date = styled.div`
     margin-left: 5px;
@@ -158,6 +176,13 @@ export const Nav = styled.nav`
         margin-right: 20px;
     }
     flex-wrap: wrap;
+    @media only screen and (max-width: 768px) {
+        padding-right: 0px;
+        margin: 0px;
+        margin-bottom: 20px;
+        justify-content: center;
+        flex-direction: column;
+    }
 `;
 export const ContainerPrincipal = styled.div`
     width: 100%;
