@@ -13,6 +13,7 @@ import {
     ButtonFilter,
     Display,
     Date,
+    Chat,
     TagTeam,
     Nav,
     ContainerPrincipal,
@@ -29,8 +30,9 @@ import {
     AiOutlineLaptop,
     AiOutlineTeam,
     AiOutlineClockCircle,
-    //AiOutlineWechat,
+    AiOutlineWechat,
     AiOutlineEdit,
+    AiFillDelete,
 } from "react-icons/ai";
 import {
     Box,
@@ -51,8 +53,6 @@ import getCurrentDate from "./getCurrentDate";
 import { CardNewTask } from "../../components/Cards/CardNewTask";
 import filterDate from "./filterDate";
 import { GroupContext } from "../../Providers/Group";
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
-import { useHistory } from "react-router-dom";
 
 import { ModalExcluir } from "../../Modals/ModalExcluir";
 import { useEffect } from "react";
@@ -67,7 +67,6 @@ const Projects = () => {
     const [openAddTask, setOpenAddTask] = useState(false);
     const [openEditTask, setOpenEditTask] = useState(false);
     const [openAddSubTask, setOpenAddSubTask] = useState(false);
-    const history = useHistory();
     const none = "none";
     const flex = "flex";
     const [openSideBar, setOpenSideBar] = useState(none);
@@ -126,19 +125,12 @@ const Projects = () => {
     const { group, addGroup, removeGroup, setTokenGroup } =
         useContext(GroupContext);
     const [showTasks, setShowTasks] = useState(tasks);
-
     useEffect(() => {
         setShowTasks(tasks);
     }, [tasks]);
 
-    function clickClose(target) {
-        removeTask(target);
-        setShowTasks(tasks);
-    }
-
     function filtrar(event) {
         if (event === "Todas") {
-            console.log(tasks);
             return setShowTasks(tasks);
         }
         if (event === "Concluídas") {
@@ -177,10 +169,6 @@ const Projects = () => {
             filterDate(array);
             setShowTasks(array);
         }
-    }
-    function deleteColecao() {
-        //->Passar o id removeGroup();
-        history.push("/dashboard");
     }
 
     return (
@@ -261,9 +249,9 @@ const Projects = () => {
                     <Header>
                         <Nav className="nav-header">
                             <AiOutlineLaptop size={100} />
-                            <h6> Rotina</h6>
+                            <h6> Coleção</h6>
                             <RemoveTask onClick={modalexcluirG}>
-                                Excluir Coleção
+                                <AiFillDelete />
                             </RemoveTask>
                         </Nav>
                         <Nav className="nav-header">
@@ -272,11 +260,10 @@ const Projects = () => {
                             </AddTask>
 
                             <Group onClick={checkMembersG}>
-                                <AiOutlineTeam />2
+                                <AiOutlineTeam /> 2
                             </Group>
                         </Nav>
                     </Header>
-
                     <NavFilter>
                         <ButtonFilter
                             onClick={(event) => filtrar(event.target.innerText)}
@@ -364,6 +351,9 @@ const Projects = () => {
                         })}
                     </Display>
                 </ContainerPrincipal>
+                <Chat>
+                    <AiOutlineWechat color="white" size={80} />
+                </Chat>
             </Container>
         </Body>
     );
