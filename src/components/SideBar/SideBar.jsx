@@ -10,8 +10,10 @@ import { Flex, Button, Image, Heading } from "@chakra-ui/react";
 import React, { useContext, useState } from "react";
 import { GroupContext } from "../../Providers/Group/index.js";
 import { useHistory } from "react-router-dom";
+import { TasksContext } from "../../Providers/Tasks";
 
 const SideBar = ({ showSideBar, setShowSideBar }) => {
+    const { setGroupId } = useContext(TasksContext);
     const { group } = useContext(GroupContext);
     const [drop, setDrop] = useState("isClose");
     const history = useHistory();
@@ -33,13 +35,17 @@ const SideBar = ({ showSideBar, setShowSideBar }) => {
 
     const handleProject = (e) => {
         history.push(`/dashboard/${e.target.id}`);
+        setGroupId(e.target.id);
     };
     return (
         <>
             <Flex
+                position={["absolute", "absolute", "sticky"]}
+                zIndex={"2000"}
                 flexDir="column"
                 justifyContent="space-between"
                 w={["175px", "205px", "225px"]}
+                h={"100vh"}
                 backgroundColor="#6D17B0"
                 alignItems={"center "}
                 p={["8px", "12px", "16px"]}
