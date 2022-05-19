@@ -18,7 +18,7 @@ const Chat = ({ openChat, setOpenChat }) => {
     // const [msg, setMsg] = useState("");
 
     // const userId = userInfo.id;
-    // const groupId = params.id;
+    // const [groupId, setGroupId] = useState(params.id) ;
     // const groupMsg = chat;
     // const [objMsg, setObjMsg] = useState({
     //     name: userInfo.name,
@@ -27,7 +27,7 @@ const Chat = ({ openChat, setOpenChat }) => {
     // });
     // const handleSubmit = () => {
     //     if (msg.length > 0) {
-    //         addChat(msg, params.id);
+    //         addChat(msg, groupId);
     //         setMsg("");
     //     }
     // };
