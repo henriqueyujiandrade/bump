@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { CardGroup } from '../../components/CardGroup';
 import { GroupContext } from '../../Providers/Group';
 import Header  from './../../components/Header'
@@ -6,9 +6,8 @@ import { Container } from './style';
 
 const Dashboard = () => {
 
-    const { group } = useContext(GroupContext);
-
-    console.log('Grupo: ', group);
+    const { group} = useContext(GroupContext);
+    
 
     return (
         <Container>

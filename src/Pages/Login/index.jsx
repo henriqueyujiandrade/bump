@@ -11,11 +11,12 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import Header from "../../components/Header"
+import { GroupContext } from '../../Providers/Group';
 
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-
+ const { setTokenGroup, setMyInfo} = useContext(GroupContext) 
   const { confirmLogin } = useContext(LoginContext);
 
   const schema = yup.object().shape({
@@ -29,7 +30,7 @@ const Login = () => {
 
   const onSubmit = (data) => {
     console.log(data)
-    confirmLogin(data)
+    confirmLogin(setTokenGroup, setMyInfo,data)
 
   }
 

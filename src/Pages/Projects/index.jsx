@@ -55,6 +55,7 @@ import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import { useHistory } from "react-router-dom";
 
 import { ModalExcluir } from "../../Modals/ModalExcluir";
+import { useEffect } from "react";
 const Projects = () => {
     const [openExcluirG, setOpenExcluirG] = useState(false);
     const [openExcluirT, setOpenExcluirT] = useState(false);
@@ -125,6 +126,11 @@ const Projects = () => {
     const { group, addGroup, removeGroup, setTokenGroup } =
         useContext(GroupContext);
     const [showTasks, setShowTasks] = useState(tasks);
+    
+    useEffect(() => {
+        setShowTasks(tasks)
+
+    }, [tasks])
 
     function clickClose(target) {
         removeTask(target);
@@ -177,7 +183,7 @@ const Projects = () => {
         //->Passar o id removeGroup();
         history.push("/dashboard");
     }
-    console.log(Group);
+
     return (
         <Body>
             <>
@@ -297,7 +303,7 @@ const Projects = () => {
                     <Display>
                         {showTasks.map((results) => {
 
-                            console.log(results)
+                    
                             return (
                                 <Flex
                                     background={"white"}
@@ -351,7 +357,7 @@ const Projects = () => {
                                                 onClick={checkMembersT}
                                             >
                                                 <AiOutlineTeam />
-                                                {results.members.length}
+                                                {results.members && results.members.length}
                                             </TagTeam>
                                         </Date>
                                     </ButtonGroup>
