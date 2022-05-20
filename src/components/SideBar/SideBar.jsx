@@ -131,6 +131,7 @@ const SideBar = ({ showSideBar, setShowSideBar }) => {
                             display={drop === "isClose" ? "none" : "flex"}
                             flexDir="column"
                             maxHeight={"40vh"}
+                            maxWidth={["113px", "139px", "155px"]}
                             overflowY="auto"
                             css={{
                                 "&::-webkit-scrollbar": {

@@ -54,6 +54,9 @@ import { CardNewTask } from "../../components/Cards/CardNewTask";
 import filterDate from "./filterDate";
 import { GroupContext } from "../../Providers/Group";
 
+//-- chat--
+import Chatt from "../../components/Chat/index";
+
 import { ModalExcluir } from "../../Modals/ModalExcluir";
 import { useEffect } from "react";
 const Projects = () => {
@@ -352,6 +355,7 @@ const Projects = () => {
                     </Display>
                 </ContainerPrincipal>
                 <Chat>
+                    <Chatt />
                     <AiOutlineWechat color="white" size={80} />
                 </Chat>
             </Container>
