@@ -10,7 +10,7 @@ export const CardDev = ({name, link, img}) => {
 
                 <img className="photo" src={img} alt={name} />
                 <p>{name}</p>
-                <a href={link}>GitHub</a>
+                <a href={link} target="_blank" rel="noopener noreferrer"><i className='bx bxl-github'></i> GitHub</a>
 
             </div>
 

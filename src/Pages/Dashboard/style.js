@@ -101,6 +101,15 @@ export const Container = styled.main`
 
             @media (min-width: 768px) {
 
+                width: 600px;
+
+                flex-direction: row;
+                flex-wrap: wrap;
+
+            }
+
+            @media (min-width: 1920px) {
+
                 width: 800px;
 
                 flex-direction: row;
