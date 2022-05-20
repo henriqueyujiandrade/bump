@@ -1,13 +1,14 @@
 import { useEffect } from "react";
 import { createContext, useState } from "react";
-import uuid from "react-uuid";
+
 import api from "../../Services/api";
 
 export const GroupContext = createContext();
 
 export const GroupProvider = ({ children }) => {
     const [group, setGroup] = useState([]);
-    const [token, setToken] = useState(
+    const [infoG, setInfoG] = useState([]);
+    const [tokenGroup, setTokenGroup] = useState(
         JSON.parse(localStorage.getItem("@bump:token")) || ""
     );
     const [myInfo, setMyInfo] = useState(
@@ -15,10 +16,10 @@ export const GroupProvider = ({ children }) => {
     );
 
     useEffect(() => {
-        if (token) {
+        if (tokenGroup) {
             api.get("group", {
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${tokenGroup}`,
                 },
             }).then((response) => {
                 setGroup(
@@ -28,18 +29,33 @@ export const GroupProvider = ({ children }) => {
                 );
             });
         }
-    }, [token]);
+    }, [tokenGroup, myInfo]);
+
+    const infoGroup = (id) => {
+        api.get(`group/${id}`, {
+            headers: {
+                Authorization: `Bearer ${tokenGroup}`,
+            },
+        })
+            .then((response) => {
+                setInfoG(response.data);
+            })
+            .catch((err) => console.log(err));
+    };
 
     const addGroup = (data) => {
-        const groupId = uuid();
         const status = "admin";
         const admin = { ...myInfo, status };
         const membros = [admin];
+<<<<<<< HEAD
         
         const newData = { ...data, membros, groupId };
+=======
+        const newData = { ...data, membros };
+>>>>>>> 692df1215bf2d46bd6438bb2fea81022b6fcb1e3
         api.post(`group`, newData, {
             headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${tokenGroup}`,
             },
         })
             .then((response) => setGroup([...group, response.data]))
@@ -49,7 +65,7 @@ export const GroupProvider = ({ children }) => {
     const removeGroup = (id) => {
         api.delete(`group/${id}`, {
             headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${tokenGroup}`,
             },
         })
             .then((response) => setGroup(group.filter((gp) => gp.id != id)))
@@ -57,7 +73,17 @@ export const GroupProvider = ({ children }) => {
     };
 
     return (
-        <GroupContext.Provider value={{ group, addGroup, removeGroup }}>
+        <GroupContext.Provider
+            value={{
+                infoGroup,
+                infoG,
+                group,
+                addGroup,
+                removeGroup,
+                setTokenGroup,
+                setMyInfo,
+            }}
+        >
             {children}
         </GroupContext.Provider>
     );

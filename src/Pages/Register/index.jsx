@@ -23,10 +23,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import Header from "../../components/Header";
 
+import { toast } from "react-toastify"
+
 import api from "../../Services/api";
 
 const Register = () => {
-
     const [showPassword, setShowPassword] = useState(false);
 
     const history = useHistory();
@@ -56,14 +57,15 @@ const Register = () => {
     });
 
     const onSubmit = (data) => {
-        console.log(data);
+        delete data.passwordConfirm;
+
         api.post("register", data)
-            .then((response) => {
-                console.log("funfou");
+            .then(() => {
+                toast.success('Conta criada com sucesso')
                 return history.push("/login");
             })
-            .catch((err) => {
-                console.log("n funfou");
+            .catch(() => {
+                toast.error('Verifique se colocou todas as informações corretamente ou tente outro email')
             });
     };
 

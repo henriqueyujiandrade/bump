@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ModMembroAddConte = styled.div`
+export const ModExcluirConte = styled.div`
     @media (min-width: 750px) {
         position: absolute;
         display: flex;
@@ -11,7 +11,8 @@ export const ModMembroAddConte = styled.div`
         background-color: rgb(0, 0, 0, 0.5);
     }
 `;
-export const ModMembroAddList = styled.div`
+
+export const ModExcluir = styled.div`
     @media (min-width: 750px) {
         background: #b84deb;
         border-radius: 25px;
@@ -25,26 +26,16 @@ export const ModMembroAddList = styled.div`
             font-weight: 700;
             font-size: 26.6341px;
             line-height: 40px;
-
             color: #ffffff;
-
-            margin-bottom: 24px;
+            margin: 30px 0 24px 0;
         }
-    }
-`;
-
-export const ConteForm = styled.form`
-    @media (min-width: 750px) {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-`;
-
-export const DivNao = styled.form`
-    @media (min-width: 750px) {
-        font-size: 1.5em;
-        font-weight: 600;
-        color: white;
+        > div {
+            button {
+                margin-right: 30px;
+                :nth-last-child(1) {
+                    margin-right: 0px;
+                }
+            }
+        }
     }
 `;

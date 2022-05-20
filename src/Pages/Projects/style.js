@@ -1,13 +1,12 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    width: 100%;
     min-width: fit-content;
     min-height: 100%;
     display: flex;
     background-color: #02072f;
-    @media only screen and (max-width: 600px) {
-        padding-right: 20px;
+    width: 100%;
+    @media only screen and (max-width: 767px) {
         margin-left: 0px;
     }
 `;
@@ -24,7 +23,6 @@ export const Home = styled.a`
     width: 100%;
     justify-content: center;
     @media only screen and (max-width: 600px) {
-        padding-right: 20px;
         margin-left: 0px;
     }
 `;
@@ -56,32 +54,40 @@ export const Header = styled.header`
     display: flex;
     flex-direction: row;
     color: #ffff;
-    margin-top: 60px;
+    margin-top: 20px;
     width: 90%;
     font-size: 50px;
     justify-content: space-between;
     flex-wrap: wrap;
+
+    @media only screen and (max-width: 768px) {
+        margin-left: 0px;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
 `;
 export const AddTask = styled.button`
     background-color: #feee35;
     border-radius: 25.8319px;
-    padding: 7px;
+    padding: 9px;
     color: #444444;
-    height: 56.67px;
     font-weight: 600;
-    min-width: 150px;
-    max-width: 150px;
+    width: 100px;
+    margin-right: 20px;
+    :hover{
+        background-color:#D6D793;
+    }
 `;
 export const RemoveTask = styled.button`
     background-color: #6d17b0;
     border-radius: 25.8319px;
-    padding: 7px;
-    color: #ffff;
-    margin-left: 20px;
-    height: 56.67px;
+    padding: 10px;
     font-weight: 500;
-    min-width: 200px;
-    max-width: 200px;
+
+    :hover{
+        background-color:#AF3DFF;
+    }
 `;
 export const Group = styled.button`
     background-color: #57aad9;
@@ -91,34 +97,55 @@ export const Group = styled.button`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    height: 56.67px;
+    height: 45px;
     margin-left: 30px;
     font-weight: 700;
+    @media only screen and (max-width: 768px) {
+        margin-left: 0px;
+        padding: 7px;
+        margin-right: 0px;
+    }
 `;
 export const NavFilter = styled.nav`
     display: flex;
     width: 90%;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
+    
+    @media only screen and (max-width: 768px) {
+        flex-wrap: wrap;
+        margin-left: 0px;
+        align-items: center;
+        justify-content: center;
+    }
 `;
 export const ButtonFilter = styled.button`
     background-color: #feee35;
     font-weight: 700;
     border-radius: 25px;
-    margin-top: 20px;
-    margin-left: 20px;
-    height: 50px;
-    min-width: 150px;
-    max-width: 150px;
-    padding: 7px;
+    margin: 30px;
+    height: 40px;
+    width: 150px;
+    padding: 9px;
+    :hover{
+        background-color:#D6D793;
+    }
 `;
 
 export const Display = styled.div`
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
+    @media only screen and (max-width: 768px) {
+        padding-right: 20px;
+        margin-left: 0px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0px;
+        width: 100%;
+    }
 `;
+
 export const Date = styled.div`
     margin-left: 5px;
     width: 100%;
@@ -131,6 +158,13 @@ export const Body = styled.body`
     width: 100vw;
     min-height: 100vh;
     height: 100%;
+`;
+export const Chat = styled.div`
+    align-self: center;
+    display: flex;
+    width: 20%;
+    align-self: flex-end;
+    cursor: pointer;
 `;
 export const Icone = styled.img`
     width: 90%;
@@ -151,13 +185,24 @@ export const Nav = styled.nav`
     margin: 20px;
     font-size: 20px;
     h6 {
-        font-size: 50px;
+        font-size: 45px;
         display: flex;
         align-items: center;
         margin-left: 10px;
         margin-right: 20px;
     }
     flex-wrap: wrap;
+
+    @media only screen and (max-width: 768px) {
+        padding-right: 0px;
+        margin: 0px;
+        margin-bottom: 20px;
+        justify-content: center;
+
+        h6 {
+            font-size: 30px;
+        }
+    }
 `;
 export const ContainerPrincipal = styled.div`
     width: 100%;

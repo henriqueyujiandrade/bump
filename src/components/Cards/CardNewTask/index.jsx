@@ -2,7 +2,7 @@ import { ConteCardNew, DivAcao, DivInfo } from "../styled";
 import User from "./user.svg";
 import XRoxo from "./X.svg";
 
-export const CardNewTask = () => {
+export const CardNewTask = ({ modalexcluirST }) => {
     return (
         <ConteCardNew>
             <DivInfo>
@@ -11,7 +11,7 @@ export const CardNewTask = () => {
             </DivInfo>
             <DivAcao>
                 <img src={User} />
-                <div>
+                <div onClick={modalexcluirST}>
                     <img src={XRoxo} />
                 </div>
             </DivAcao>

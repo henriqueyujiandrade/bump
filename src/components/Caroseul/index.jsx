@@ -1,8 +1,8 @@
 import Slider from "react-slick/lib/slider";
 import { Container } from "./style";
-import img1 from './../../assets/2022-03-28_20-15.png'
-import img2 from './../../assets/2022-03-28_20-16.png'
-import img3 from './../../assets/2022-03-29_17-43.png'
+import img1 from "./../../assets/2022-03-28_20-15.png";
+import img2 from "./../../assets/2022-03-28_20-16.png";
+import img3 from "./../../assets/2022-03-29_17-43.png";
 
 export default function SimpleSlider() {
     var settings = {
@@ -17,35 +17,34 @@ export default function SimpleSlider() {
         cssEase: "linear",
         responsive: [
             {
-              breakpoint: 1024,
-              settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                infinite: true,
-                dots: true
-              }
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: true,
+                },
             },
             {
-              breakpoint: 768,
-              settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                initialSlide: 2
-              }
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    initialSlide: 2,
+                },
             },
             {
-              breakpoint: 375,
-              settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-              }
-            }
-          ]
+                breakpoint: 375,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                },
+            },
+        ],
     };
     return (
-      <Container>
-          <Slider {...settings} className="teste">
-          
+        <Container>
+            <Slider {...settings} className="teste">
                 <div>
                     <img src={img1} alt="img1" />
                 </div>
@@ -55,7 +54,7 @@ export default function SimpleSlider() {
                 <div>
                     <img src={img3} alt="img3" />
                 </div>
-          </Slider>
-      </Container>
+            </Slider>
+        </Container>
     );
-  }
+}

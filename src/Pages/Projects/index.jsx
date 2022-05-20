@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import { TasksContext } from "../../Providers/Tasks";
+import { GroupProvider } from "../../Providers/Group";
+import { MemberContext } from "../../Providers/Member";
 import {
     Container,
     Header,
@@ -11,6 +13,7 @@ import {
     ButtonFilter,
     Display,
     Date,
+    Chat,
     TagTeam,
     Nav,
     ContainerPrincipal,
@@ -27,8 +30,9 @@ import {
     AiOutlineLaptop,
     AiOutlineTeam,
     AiOutlineClockCircle,
-    //AiOutlineWechat,
+    AiOutlineWechat,
     AiOutlineEdit,
+    AiFillDelete,
 } from "react-icons/ai";
 import {
     Box,
@@ -48,30 +52,67 @@ import SideBar from "../../components/SideBar/SideBar";
 import getCurrentDate from "./getCurrentDate";
 import { CardNewTask } from "../../components/Cards/CardNewTask";
 import filterDate from "./filterDate";
+import { GroupContext } from "../../Providers/Group";
+
+import { ModalExcluir } from "../../Modals/ModalExcluir";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 const Projects = () => {
-    const [openM, setOpenM] = useState(false);
+    const param = useParams();
+    const idGrupe = param.id;
+
+    const [groupInfo, setGroupInfo] = useState();
+    const [openExcluirG, setOpenExcluirG] = useState(false);
+    const [openExcluirT, setOpenExcluirT] = useState(false);
+    const [openExcluirST, setOpenExcluirST] = useState(false);
+    const [openMG, setOpenMG] = useState(false);
+    const [openMT, setOpenMT] = useState(false);
     const [openMAdd, setOpenMAdd] = useState(false);
+    const [openMTAdd, setOpenMTAdd] = useState(false);
     const [openAddTask, setOpenAddTask] = useState(false);
     const [openEditTask, setOpenEditTask] = useState(false);
     const [openAddSubTask, setOpenAddSubTask] = useState(false);
+    const none = "none";
+    const flex = "flex";
+    const [openSideBar, setOpenSideBar] = useState(none);
+
+    const modalexcluirG = () => {
+        setOpenExcluirG(true);
+    };
+
+    const modalexcluirT = () => {
+        setOpenExcluirT(true);
+    };
+
+    const modalexcluirST = () => {
+        setOpenExcluirST(true);
+        setOpenEditTask(false);
+    };
+
+    const addMembros = () => {
+        setOpenMG(false);
+        setOpenMAdd(true);
+    };
+    const addMembrosT = () => {
+        setOpenMT(false);
+        setOpenMTAdd(true);
+    };
 
     const editTesk = (target) => {
         setOpenEditTask(true);
     };
 
-    const none = "none";
-    const flex = "flex";
-    const [openSideBar, setOpenSideBar] = useState(none);
-
-    const addMembros = () => {
-        setOpenMAdd(true);
-    };
-    const checkMembers = () => {
-        setOpenM(true);
+    const checkMembersG = () => {
+        setOpenMG(true);
         setOpenMAdd(false);
     };
+
+    const checkMembersT = () => {
+        setOpenMT(true);
+        setOpenMTAdd(false);
+    };
+
     const openAddTaskFunc = () => {
-        /* setOpenM(true); */
         setOpenAddTask(true);
     };
 
@@ -83,16 +124,24 @@ const Projects = () => {
         }
     };
     const { tasks, removeTask } = useContext(TasksContext);
+    const {
+        infoGroup,
+        infoG,
+        addMember,
+        removeMember,
+        setGpId,
+        setTokenMember,
+    } = useContext(GroupContext);
+    const { group, addGroup, removeGroup, setTokenGroup } =
+        useContext(GroupContext);
     const [showTasks, setShowTasks] = useState(tasks);
-
-    function clickClose(target) {
-        removeTask(target);
+    useEffect(() => {
         setShowTasks(tasks);
-    }
+        infoGroup(idGrupe);
+    }, [tasks]);
 
     function filtrar(event) {
         if (event === "Todas") {
-            console.log(tasks);
             return setShowTasks(tasks);
         }
         if (event === "Concluídas") {
@@ -132,9 +181,23 @@ const Projects = () => {
             setShowTasks(array);
         }
     }
+
     return (
         <Body>
             <>
+                {openExcluirG && (
+                    <ModalExcluir excluirG setOpenExcluirG={setOpenExcluirG} />
+                )}
+                {openExcluirT && (
+                    <ModalExcluir excluirT setOpenExcluirT={setOpenExcluirT} />
+                )}
+                {openExcluirST && (
+                    <ModalExcluir
+                        excluirST
+                        setOpenEditTask={setOpenEditTask}
+                        setOpenExcluirST={setOpenExcluirST}
+                    />
+                )}
                 {openAddSubTask && (
                     <ModalAddSubTask
                         subTask
@@ -144,21 +207,48 @@ const Projects = () => {
                 )}
                 {openEditTask && (
                     <ModalEditTask
+                        modalexcluirST={modalexcluirST}
                         setOpenAddSubTask={setOpenAddSubTask}
                         setOpenEditTask={setOpenEditTask}
                     />
                 )}
                 {openAddTask && (
-                    <ModalAddTask setOpenAddTask={setOpenAddTask} />
+                    <ModalAddTask
+                        idGrupe={idGrupe}
+                        addTasks
+                        setOpenAddTask={setOpenAddTask}
+                    />
                 )}
+
                 {openMAdd && (
                     <ModalMembroAdd
-                        setOpenM={setOpenM}
+                        addMembroG
+                        setOpenMG={setOpenMG}
                         setOpenMAdd={setOpenMAdd}
                     />
                 )}
-                {openM && (
-                    <ModalMembro addMembros={addMembros} setOpenM={setOpenM} />
+                {openMTAdd && (
+                    <ModalMembroAdd
+                        addMembroT
+                        setOpenMT={setOpenMT}
+                        setOpenMTAdd={setOpenMTAdd}
+                    />
+                )}
+                {openMT && (
+                    <ModalMembro
+                        idGrupe={idGrupe}
+                        infoGroup={infoGroup}
+                        membrosT
+                        addMembrosT={addMembrosT}
+                        setOpenMT={setOpenMT}
+                    />
+                )}
+                {openMG && (
+                    <ModalMembro
+                        membrosG
+                        addMembros={addMembros}
+                        setOpenM={setOpenMG}
+                    />
                 )}
             </>
             <Container>
@@ -175,21 +265,23 @@ const Projects = () => {
                     </Button>
                     <Header>
                         <Nav className="nav-header">
-                            <AiOutlineLaptop size={100} />
+                            <AiOutlineLaptop size={60} />
                             <h6> Rotina</h6>
-                            <RemoveTask>Excluir Coleção</RemoveTask>
+                            <RemoveTask onClick={modalexcluirG}>
+                                <AiFillDelete />
+                            </RemoveTask>
                         </Nav>
                         <Nav className="nav-header">
                             <AddTask onClick={openAddTaskFunc}>
-                                Adicionar +
+                                + Task
                             </AddTask>
 
-                            <Group onClick={checkMembers}>
-                                <AiOutlineTeam />2
+                            <Group onClick={checkMembersG}>
+                                <AiOutlineTeam />
+                                {infoG.membros && <>{infoG.membros.length}</>}
                             </Group>
                         </Nav>
                     </Header>
-
                     <NavFilter>
                         <ButtonFilter
                             onClick={(event) => filtrar(event.target.innerText)}
@@ -220,7 +312,7 @@ const Projects = () => {
                                     margin={"35px"}
                                     display={"flex"}
                                     flexDir={"column"}
-                                    width={"300px"}
+                                    width={"280px"}
                                     borderRadius={"15px"}
                                     id={results.id}
                                 >
@@ -233,15 +325,15 @@ const Projects = () => {
                                         <Label>{results.creationDate}</Label>
                                         <Label
                                             href=""
-                                            onClick={() =>
-                                                clickClose(results.id)
-                                            }
+                                            onClick={modalexcluirT}
+                                            /* () =>
+                                                clickClose(results.id) */
                                         >
                                             X
                                         </Label>
                                     </Heading>
                                     <Box
-                                        fontSize={"30"}
+                                        fontSize={"20"}
                                         fontWeight={"500"}
                                         padding={"0px 10px"}
                                     >
@@ -256,17 +348,19 @@ const Projects = () => {
                                                 {results.expirationDate}
                                             </LabelExp>
                                             <AiOutlineEdit
-                                                size="40"
+                                                cursor={"pointer"}
+                                                size="25"
                                                 onClick={() =>
                                                     editTesk(results.id)
                                                 }
                                             />
                                             <TagTeam
                                                 className="tag-team"
-                                                onClick={addMembros}
+                                                onClick={checkMembersT}
                                             >
                                                 <AiOutlineTeam />
-                                                {results.members.length}
+                                                {results.members &&
+                                                    results.members.length}
                                             </TagTeam>
                                         </Date>
                                     </ButtonGroup>
@@ -275,6 +369,9 @@ const Projects = () => {
                         })}
                     </Display>
                 </ContainerPrincipal>
+                <Chat>
+                    <AiOutlineWechat color="white" size={80} />
+                </Chat>
             </Container>
         </Body>
     );
