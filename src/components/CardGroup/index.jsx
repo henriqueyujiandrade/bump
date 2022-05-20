@@ -16,6 +16,10 @@ export const CardGroup = ({ colection }) => {
             <li
                 onClick={() => {
                     setTasks([]);
+                    window.localStorage.setItem(
+                        "@bump:groupid",
+                        JSON.stringify(colection.id)
+                    );
                     setGroupId(colection.id);
                     setGpId(colection.id);
                     setIdChat(colection.id);
