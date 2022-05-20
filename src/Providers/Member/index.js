@@ -15,7 +15,9 @@ export const MemberProvider = ({ children }) => {
     const [myInfoInMembers, setMyInfoInMembers] = useState(
         JSON.parse(localStorage.getItem("@bump:myInfo")) || ""
     );
-    const [gpId, setGpId] = useState(JSON.parse(localStorage.getItem("@bump:groupid")) || "");
+    const [gpId, setGpId] = useState(
+        JSON.parse(localStorage.getItem("@bump:groupid")) || ""
+    );
 
     useEffect(() => {
         if (tokenMember && gpId) {
@@ -80,11 +82,9 @@ export const MemberProvider = ({ children }) => {
         ) {
             toast.error("Você deve ser administrador para remover membros");
         } else {
-<<<<<<< HEAD
-            const filteredMembers = member.filter((user) => user.id != id);
-=======
-            const filteredMembers = member.filter((user) => user.id !== Number(id));
->>>>>>> f3b0c25184d63afe279160da33664390eb986374
+            const filteredMembers = member.filter(
+                (user) => user.id !== Number(id)
+            );
             toast.success("Usuário excluido");
             api.patch(
                 `group/${groupId}`,
@@ -105,7 +105,7 @@ export const MemberProvider = ({ children }) => {
                 member,
                 myInfoInMembers,
                 addMember,
-                removeMember, 
+                removeMember,
                 setGpId,
                 setTokenMember,
                 setMyInfoInMembers,
