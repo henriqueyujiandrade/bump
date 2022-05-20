@@ -80,8 +80,10 @@ const Projects = () => {
         setOpenExcluirG(true);
     };
 
-    const modalexcluirT = () => {
-        setOpenExcluirT(true);
+    const modalexcluirT = (id) => {
+
+        console.log('Id da task',id);
+        setOpenExcluirT(id);
     };
 
     const modalexcluirST = () => {
@@ -189,7 +191,7 @@ const Projects = () => {
                     <ModalExcluir excluirG setOpenExcluirG={setOpenExcluirG} />
                 )}
                 {openExcluirT && (
-                    <ModalExcluir excluirT setOpenExcluirT={setOpenExcluirT} />
+                    <ModalExcluir excluirT openExcluirT={openExcluirT} setOpenExcluirT={setOpenExcluirT} />
                 )}
                 {openExcluirST && (
                     <ModalExcluir
@@ -325,7 +327,7 @@ const Projects = () => {
                                         <Label>{results.creationDate}</Label>
                                         <Label
                                             href=""
-                                            onClick={modalexcluirT}
+                                            onClick={() => modalexcluirT(results.id)}
                                             /* () =>
                                                 clickClose(results.id) */
                                         >

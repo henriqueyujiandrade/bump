@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { BtnMembrosAdd } from "../../components/Botões/Membros";
 import { CardMembros } from "../../components/Cards/CardMembros";
 import { Close } from "../../components/Close";
+import { GroupContext } from "../../Providers/Group";
+import { TasksContext } from "../../Providers/Tasks";
 import {
     ConteCard,
     ModExcluir,
@@ -18,6 +22,7 @@ export const ModalExcluir = ({
     setOpenExcluirT,
     setOpenExcluirST,
     setOpenEditTask,
+    openExcluirT
 }) => {
     const close = () => {
         setOpenExcluirG(false);
@@ -30,6 +35,16 @@ export const ModalExcluir = ({
         setOpenEditTask(true);
     };
 
+    const history = useHistory();
+
+    const param = useParams();
+    const idGroup = param.id
+    const { removeGroup } = useContext(GroupContext)
+    const { taskId, removeTask } = useContext(TasksContext)
+
+    console.log('Id group', idGroup)
+    console.log('Id task', taskId)
+
     return (
         <>
             {excluirG && (
@@ -38,9 +53,16 @@ export const ModalExcluir = ({
                         <Close close={close} />
                         <h1>Deseja excluir esse Grupo?</h1>
                         <div>
-                            <BtnMembrosAdd excluir /* click={addMembros} */>
+                            <BtnMembrosAdd excluir click={() => {
+
+                                removeGroup(idGroup)
+                                close();
+                                history.push('/dashboard/');
+
+                            }}  /* click={addMembros} */>
                                 Excluir
                             </BtnMembrosAdd>
+
                             <BtnMembrosAdd cancelar click={close}>
                                 Cancelar
                             </BtnMembrosAdd>
@@ -54,7 +76,12 @@ export const ModalExcluir = ({
                         <Close close={closeT} />
                         <h1>Deseja excluir essa Task?</h1>
                         <div>
-                            <BtnMembrosAdd excluir /* click={addMembros} */>
+                            <BtnMembrosAdd excluir click={() => {
+
+                                removeTask(openExcluirT)
+                                closeT();
+
+                            }}/* click={addMembros} */>
                                 Excluir
                             </BtnMembrosAdd>
                             <BtnMembrosAdd cancelar click={closeT}>
