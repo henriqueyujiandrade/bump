@@ -265,15 +265,15 @@ const Projects = () => {
                     </Button>
                     <Header>
                         <Nav className="nav-header">
-                            <AiOutlineLaptop size={100} />
-                            <h6> Coleção</h6>
+                            <AiOutlineLaptop size={60} />
+                            <h6> Rotina</h6>
                             <RemoveTask onClick={modalexcluirG}>
                                 <AiFillDelete />
                             </RemoveTask>
                         </Nav>
                         <Nav className="nav-header">
                             <AddTask onClick={openAddTaskFunc}>
-                                Adicionar +
+                                + Task
                             </AddTask>
 
                             <Group onClick={checkMembersG}>
@@ -312,7 +312,7 @@ const Projects = () => {
                                     margin={"35px"}
                                     display={"flex"}
                                     flexDir={"column"}
-                                    width={"300px"}
+                                    width={"280px"}
                                     borderRadius={"15px"}
                                     id={results.id}
                                 >
@@ -333,7 +333,7 @@ const Projects = () => {
                                         </Label>
                                     </Heading>
                                     <Box
-                                        fontSize={"30"}
+                                        fontSize={"20"}
                                         fontWeight={"500"}
                                         padding={"0px 10px"}
                                     >
@@ -349,7 +349,7 @@ const Projects = () => {
                                             </LabelExp>
                                             <AiOutlineEdit
                                                 cursor={"pointer"}
-                                                size="40"
+                                                size="25"
                                                 onClick={() =>
                                                     editTesk(results.id)
                                                 }
