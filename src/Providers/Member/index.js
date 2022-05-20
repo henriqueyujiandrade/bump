@@ -80,11 +80,7 @@ export const MemberProvider = ({ children }) => {
         ) {
             toast.error("Você deve ser administrador para remover membros");
         } else {
-<<<<<<< HEAD
-            const filteredMembers = member.filter((user) => user.id != id);
-=======
             const filteredMembers = member.filter((user) => user.id !== Number(id));
->>>>>>> f3b0c25184d63afe279160da33664390eb986374
             toast.success("Usuário excluido");
             api.patch(
                 `group/${groupId}`,
