@@ -80,29 +80,6 @@ export const MemberProvider = ({ children }) => {
     }
   };
 
-<<<<<<< HEAD
-    const removeMember = (groupId, id) => {
-        if (
-            !member
-                .filter((mb) => mb.status === "admin")
-                .find((adm) => adm.id === myInfoInMembers.id)
-        ) {
-            toast.error("Você deve ser administrador para remover membros");
-        } else {
-            const filteredMembers = member.filter((user) => user.id !== Number(id));
-            toast.success("Usuário excluido");
-            api.patch(
-                `group/${groupId}`,
-                { membros: filteredMembers },
-                {
-                    headers: {
-                        Authorization: `Bearer ${tokenMember}`,
-                    },
-                }
-            ).then((response) => setMember(filteredMembers));
-        }
-    };
-=======
   const removeMember = (groupId, id) => {
     if (
       !member
@@ -126,7 +103,6 @@ export const MemberProvider = ({ children }) => {
         .then((response) => setMember(filteredMembers));
     }
   };
->>>>>>> 7b180ed23e10e740617d3b4319bed8e006d24db4
 
   return (
     <MemberContext.Provider
