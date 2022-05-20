@@ -11,7 +11,10 @@ import {
     MenuList,
     MenuItem,
 } from "@chakra-ui/react";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router-dom";
+import { useContext } from "react";
+
+import { MemberContext } from "../../Providers/Member";
 
 import logo from "./Bump.svg";
 
@@ -21,6 +24,8 @@ export default function WithSubnavigation({
     homeLogado,
     homeDeslogado,
 }) {
+    const { myInfoInMembers } = useContext(MemberContext);
+    console.log(myInfoInMembers.url)
     const history = useHistory();
     const color = useColorModeValue("#6D17B0");
     const hover = useColorModeValue("#A993D7");
@@ -178,9 +183,8 @@ export default function WithSubnavigation({
                                 >
                                     <Avatar
                                         size={"sm"}
-                                        src={
-                                            "https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
-                                        }
+                                        src={myInfoInMembers.url ? myInfoInMembers.url : "http://www.rachegebran.com.br/wp-content/uploads/perfil.jpg"}
+                                        alt="Foto de Perfil"
                                     />
                                 </MenuButton>
                                 <MenuList>

@@ -16,6 +16,7 @@ import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 import { useHistory, Link } from "react-router-dom";
+import { toast } from "react-toastify"
 
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
@@ -23,12 +24,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import Header from "../../components/Header";
 
-import { toast } from "react-toastify"
-
 import api from "../../Services/api";
 
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
+
+    
 
     const history = useHistory();
 
@@ -41,7 +42,7 @@ const Register = () => {
         password: yup
             .string()
             .required("Campo Obrigatório")
-            .min(6, "Minimo 6 caracteres!"),
+            .min(4, "Minimo 4 caracteres!"),
         passwordConfirm: yup
             .string()
             .required("Campo Obrigatório")
