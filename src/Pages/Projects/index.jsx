@@ -85,8 +85,8 @@ const Projects = () => {
     setOpenExcluirG(true);
   };
 
-  const modalexcluirT = () => {
-    setOpenExcluirT(true);
+  const modalexcluirT = (id) => {
+    setOpenExcluirT(id);
   };
 
   const modalexcluirST = () => {
@@ -186,7 +186,7 @@ const Projects = () => {
           <ModalExcluir excluirG setOpenExcluirG={setOpenExcluirG} />
         )}
         {openExcluirT && (
-          <ModalExcluir excluirT setOpenExcluirT={setOpenExcluirT} />
+          <ModalExcluir excluirT openExcluirT={openExcluirT} setOpenExcluirT={setOpenExcluirT} />
         )}
         {openExcluirST && (
           <ModalExcluir
@@ -304,6 +304,7 @@ const Projects = () => {
                   width={"280px"}
                   borderRadius={"15px"}
                   id={results.id}
+                  key = {results.id}
                 >
                   <Heading
                     size="xs"
@@ -314,7 +315,7 @@ const Projects = () => {
                     <Label>{results.creationDate}</Label>
                     <Label
                       href=""
-                      onClick={modalexcluirT}
+                      onClick={() => modalexcluirT(results.id)}
                       /* () =>
                                                 clickClose(results.id) */
                     >
