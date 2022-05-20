@@ -46,6 +46,8 @@ const Register = () => {
             .string()
             .required("Campo Obrigatório")
             .oneOf([yup.ref("password")], "Senhas não são iguais"),
+        url: yup
+            .string()
     });
 
     const {
@@ -205,6 +207,15 @@ const Register = () => {
                                             {errors.passwordConfirm.message}
                                         </Text>
                                     )}
+                                </FormControl>
+                                <FormControl py={2}>
+                                    <FormLabel>Foto Perfil</FormLabel>
+                                    <Input
+                                        type="url"
+                                        id="url"
+                                        placeholder="Cole sua url"
+                                        {...register("url")}
+                                    />
                                 </FormControl>
                                 <Stack spacing={10} pt={2}>
                                     <Button

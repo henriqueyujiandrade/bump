@@ -24,7 +24,7 @@ export const MemberProvider = ({ children }) => {
                     Authorization: `Bearer ${tokenMember}`,
                 },
             }).then((response) => {
-                const thisGp = response.data.filter((gp) => gp.id == gpId);
+                const thisGp = response.data.filter((gp) => gp.id === gpId);
 
                 setMember(thisGp[0].membros);
             });
@@ -42,23 +42,24 @@ export const MemberProvider = ({ children }) => {
 
     const addMember = (groupId, data) => {
         if (
-            !users.find((user) => user.email == data.email) ||
-            member.find((mb) => mb.email == data.email)
+            !users.find((user) => user.email === data.email) ||
+            member.find((mb) => mb.email === data.email)
         ) {
             toast.warn("usuário não encontrado ou já adicionado");
         } else if (
             !member
-                .filter((mb) => mb.status == "admin")
-                .find((adm) => adm.id == myInfoInMembers.id)
+                .filter((mb) => mb.status === "admin")
+                .find((adm) => adm.id === myInfoInMembers.id)
         ) {
             console.log(member);
             toast.error("Você deve ser administrador para adicionar membros");
         } else {
-            const dev = users.find((user) => user.email == data.email);
+            const dev = users.find((user) => user.email === data.email);
             const { name, id } = dev;
             const status = "dev";
             const newMember = { ...data, status, name, id };
             const membros = [...member, newMember];
+            toast.success("Usuário adicionado");
             api.patch(
                 `group/${groupId}`,
                 { membros: membros },
@@ -74,12 +75,13 @@ export const MemberProvider = ({ children }) => {
     const removeMember = (groupId, id) => {
         if (
             !member
-                .filter((mb) => mb.status == "admin")
-                .find((adm) => adm.id == myInfoInMembers.id)
+                .filter((mb) => mb.status === "admin")
+                .find((adm) => adm.id === myInfoInMembers.id)
         ) {
             toast.error("Você deve ser administrador para remover membros");
         } else {
-            const filteredMembers = member.filter((user) => user.id != id);
+            const filteredMembers = member.filter((user) => user.id !== id);
+            toast.success("Usuário excluido");
             api.patch(
                 `group/${groupId}`,
                 { membros: filteredMembers },
