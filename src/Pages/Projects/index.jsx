@@ -64,6 +64,7 @@ const Projects = () => {
   const param = useParams();
   const idGrupe = param.id;
 
+  const [groupInfo, setGroupInfo] = useState();
   const [subTaskInfo, setSubTaskInfo] = useState();
   const [openExcluirG, setOpenExcluirG] = useState(false);
   const [openExcluirT, setOpenExcluirT] = useState(false);
@@ -77,7 +78,7 @@ const Projects = () => {
   const [openAddSubTask, setOpenAddSubTask] = useState(false);
   const none = "none";
   const flex = "flex";
-  const [openSideBar, setOpenSideBar] = useState(none);
+  const [openSideBar, setOpenSideBar] = useState("none");
   const { tasks, removeTask, subTasks, taskId, setTaskId } =
     useContext(TasksContext);
   const [openChat, setOpenChat] = useState("none");
