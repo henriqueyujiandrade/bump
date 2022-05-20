@@ -3,22 +3,22 @@ import { TasksContext } from "../../Providers/Tasks";
 import { GroupProvider } from "../../Providers/Group";
 import { MemberContext } from "../../Providers/Member";
 import {
-    Container,
-    Header,
-    AddTask,
-    Body,
-    RemoveTask,
-    Group,
-    NavFilter,
-    ButtonFilter,
-    Display,
-    Date,
-    Chat,
-    TagTeam,
-    Nav,
-    ContainerPrincipal,
-    Label,
-    LabelExp,
+  Container,
+  Header,
+  AddTask,
+  Body,
+  RemoveTask,
+  Group,
+  NavFilter,
+  ButtonFilter,
+  Display,
+  Date,
+  Chat,
+  TagTeam,
+  Nav,
+  ContainerPrincipal,
+  Label,
+  LabelExp,
 } from "./style";
 // --- modal ---
 import { useState } from "react";
@@ -27,20 +27,20 @@ import { ModalMembroAdd } from "../../Modals/ModalMembrosAdd";
 //-- modal --
 
 import {
-    AiOutlineLaptop,
-    AiOutlineTeam,
-    AiOutlineClockCircle,
-    AiOutlineWechat,
-    AiOutlineEdit,
-    AiFillDelete,
+  AiOutlineLaptop,
+  AiOutlineTeam,
+  AiOutlineClockCircle,
+  AiOutlineWechat,
+  AiOutlineEdit,
+  AiFillDelete,
 } from "react-icons/ai";
 import {
-    Box,
-    Flex,
-    Spacer,
-    Button,
-    ButtonGroup,
-    Heading,
+  Box,
+  Flex,
+  Spacer,
+  Button,
+  ButtonGroup,
+  Heading,
 } from "@chakra-ui/react";
 import { ModalAddTask } from "../../Modals/ModalAddTask";
 
@@ -54,12 +54,15 @@ import { CardNewTask } from "../../components/Cards/CardNewTask";
 import filterDate from "./filterDate";
 import { GroupContext } from "../../Providers/Group";
 
+//-- chat--
+import Chatt from "../../components/Chat/index";
+
 import { ModalExcluir } from "../../Modals/ModalExcluir";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 const Projects = () => {
-    const param = useParams();
-    const idGrupe = param.id;
+  const param = useParams();
+  const idGrupe = param.id;
 
     const [groupInfo, setGroupInfo] = useState();
     const [openExcluirG, setOpenExcluirG] = useState(false);
@@ -74,153 +77,146 @@ const Projects = () => {
     const [openAddSubTask, setOpenAddSubTask] = useState(false);
     const none = "none";
     const flex = "flex";
-    const [openSideBar, setOpenSideBar] = useState(none);
+    const [openSideBar, setOpenSideBar] = useState("none");
+    const [openChat, setOpenChat] = useState("none");
 
-    const modalexcluirG = () => {
-        setOpenExcluirG(true);
-    };
 
-    const modalexcluirT = (id) => {
+  const modalexcluirG = () => {
+    setOpenExcluirG(true);
+  };
 
-        console.log('Id da task',id);
-        setOpenExcluirT(id);
-    };
+  const modalexcluirT = (id) => {
+    setOpenExcluirT(id);
+  };
 
-    const modalexcluirST = () => {
-        setOpenExcluirST(true);
-        setOpenEditTask(false);
-    };
+  const modalexcluirST = () => {
+    setOpenExcluirST(true);
+    setOpenEditTask(false);
+  };
 
-    const addMembros = () => {
-        setOpenMG(false);
-        setOpenMAdd(true);
-    };
-    const addMembrosT = () => {
-        setOpenMT(false);
-        setOpenMTAdd(true);
-    };
+  const addMembros = () => {
+    setOpenMG(false);
+    setOpenMAdd(true);
+  };
+  const addMembrosT = () => {
+    setOpenMT(false);
+    setOpenMTAdd(true);
+  };
 
-    const editTesk = (target) => {
-        setOpenEditTask(true);
-    };
+  const editTesk = (target) => {
+    setOpenEditTask(true);
+  };
 
-    const checkMembersG = () => {
-        setOpenMG(true);
-        setOpenMAdd(false);
-    };
+  const checkMembersG = () => {
+    setOpenMG(true);
+    setOpenMAdd(false);
+  };
 
-    const checkMembersT = () => {
-        setOpenMT(true);
-        setOpenMTAdd(false);
-    };
+  const checkMembersT = () => {
+    setOpenMT(true);
+    setOpenMTAdd(false);
+  };
 
-    const openAddTaskFunc = () => {
-        setOpenAddTask(true);
-    };
+  const openAddTaskFunc = () => {
+    setOpenAddTask(true);
+  };
 
-    const handleOpenSideBar = () => {
-        if (openSideBar === none) {
-            setOpenSideBar(flex);
-        } else {
-            setOpenSideBar(none);
-        }
-    };
-    const { tasks, removeTask } = useContext(TasksContext);
-    const {
-        infoGroup,
-        infoG,
-        addMember,
-        removeMember,
-        setGpId,
-        setTokenMember,
-    } = useContext(GroupContext);
-    const { group, addGroup, removeGroup, setTokenGroup } =
-        useContext(GroupContext);
-    const [showTasks, setShowTasks] = useState(tasks);
-    useEffect(() => {
-        setShowTasks(tasks);
-        infoGroup(idGrupe);
-    }, [tasks]);
+  const handleOpenSideBar = () => {
+    if (openSideBar === none) {
+      setOpenSideBar(flex);
+    } else {
+      setOpenSideBar(none);
+    }
+  };
+  const { tasks, removeTask } = useContext(TasksContext);
+  const { infoGroup, infoG, addMember, removeMember, setGpId, setTokenMember } =
+    useContext(GroupContext);
+  const { group, addGroup, removeGroup, setTokenGroup } =
+    useContext(GroupContext);
+  const [showTasks, setShowTasks] = useState(tasks);
+  useEffect(() => {
+    setShowTasks(tasks);
+    infoGroup(idGrupe);
+  }, [tasks]);
 
-    function filtrar(event) {
-        if (event === "Todas") {
-            return setShowTasks(tasks);
-        }
-        if (event === "Concluídas") {
-            setShowTasks(tasks.filter((tasks) => tasks.status === "concluida"));
-        }
-
-        if (event === "Atrasadas") {
-            setShowTasks([]);
-            const filtradas = [];
-            for (let i = 0; i < tasks.length; i++) {
-                const yrTask =
-                    tasks[i].expirationDate[6] +
-                    tasks[i].expirationDate[7] +
-                    tasks[i].expirationDate[8] +
-                    tasks[i].expirationDate[9];
-                const mTask =
-                    tasks[i].expirationDate[3] + tasks[i].expirationDate[4];
-                const dTask =
-                    tasks[i].expirationDate[0] + tasks[i].expirationDate[1];
-
-                if (
-                    parseInt(yrTask) < getCurrentDate().year ||
-                    (parseInt(yrTask) <= getCurrentDate().year &&
-                        parseInt(mTask) < getCurrentDate().month) ||
-                    (parseInt(yrTask) <= getCurrentDate().year &&
-                        parseInt(mTask) <= getCurrentDate().month &&
-                        parseInt(dTask) < getCurrentDate().date)
-                ) {
-                    filtradas.push(tasks[i]);
-                }
-            }
-            setShowTasks(filtradas);
-        }
-        if (event === "Data") {
-            const array = [...tasks];
-            filterDate(array);
-            setShowTasks(array);
-        }
+  function filtrar(event) {
+    if (event === "Todas") {
+      return setShowTasks(tasks);
+    }
+    if (event === "Concluídas") {
+      setShowTasks(tasks.filter((tasks) => tasks.status === "concluida"));
     }
 
-    return (
-        <Body>
-            <>
-                {openExcluirG && (
-                    <ModalExcluir excluirG setOpenExcluirG={setOpenExcluirG} />
-                )}
-                {openExcluirT && (
-                    <ModalExcluir excluirT openExcluirT={openExcluirT} setOpenExcluirT={setOpenExcluirT} />
-                )}
-                {openExcluirST && (
-                    <ModalExcluir
-                        excluirST
-                        setOpenEditTask={setOpenEditTask}
-                        setOpenExcluirST={setOpenExcluirST}
-                    />
-                )}
-                {openAddSubTask && (
-                    <ModalAddSubTask
-                        subTask
-                        setOpenEditTask={setOpenEditTask}
-                        setOpenAddSubTask={setOpenAddSubTask}
-                    />
-                )}
-                {openEditTask && (
-                    <ModalEditTask
-                        modalexcluirST={modalexcluirST}
-                        setOpenAddSubTask={setOpenAddSubTask}
-                        setOpenEditTask={setOpenEditTask}
-                    />
-                )}
-                {openAddTask && (
-                    <ModalAddTask
-                        idGrupe={idGrupe}
-                        addTasks
-                        setOpenAddTask={setOpenAddTask}
-                    />
-                )}
+    if (event === "Atrasadas") {
+      setShowTasks([]);
+      const filtradas = [];
+      for (let i = 0; i < tasks.length; i++) {
+        const yrTask =
+          tasks[i].expirationDate[6] +
+          tasks[i].expirationDate[7] +
+          tasks[i].expirationDate[8] +
+          tasks[i].expirationDate[9];
+        const mTask = tasks[i].expirationDate[3] + tasks[i].expirationDate[4];
+        const dTask = tasks[i].expirationDate[0] + tasks[i].expirationDate[1];
+
+        if (
+          parseInt(yrTask) < getCurrentDate().year ||
+          (parseInt(yrTask) <= getCurrentDate().year &&
+            parseInt(mTask) < getCurrentDate().month) ||
+          (parseInt(yrTask) <= getCurrentDate().year &&
+            parseInt(mTask) <= getCurrentDate().month &&
+            parseInt(dTask) < getCurrentDate().date)
+        ) {
+          filtradas.push(tasks[i]);
+        }
+      }
+      setShowTasks(filtradas);
+    }
+    if (event === "Data") {
+      const array = [...tasks];
+      filterDate(array);
+      setShowTasks(array);
+    }
+  }
+
+  return (
+    <Body>
+      <>
+        {openExcluirG && (
+          <ModalExcluir excluirG setOpenExcluirG={setOpenExcluirG} />
+        )}
+        {openExcluirT && (
+          <ModalExcluir excluirT openExcluirT={openExcluirT} setOpenExcluirT={setOpenExcluirT} />
+        )}
+        {openExcluirST && (
+          <ModalExcluir
+            excluirST
+            setOpenEditTask={setOpenEditTask}
+            setOpenExcluirST={setOpenExcluirST}
+          />
+        )}
+        {openAddSubTask && (
+          <ModalAddSubTask
+            subTask
+            setOpenEditTask={setOpenEditTask}
+            setOpenAddSubTask={setOpenAddSubTask}
+          />
+        )}
+        {openEditTask && (
+          <ModalEditTask
+            modalexcluirST={modalexcluirST}
+            setOpenAddSubTask={setOpenAddSubTask}
+            setOpenEditTask={setOpenEditTask}
+          />
+        )}
+        {openAddTask && (
+          <ModalAddTask
+            idGrupe={idGrupe}
+            addTasks
+            setOpenAddTask={setOpenAddTask}
+          />
+        )}
+
 
                 {openMAdd && (
                     <ModalMembroAdd
@@ -274,73 +270,62 @@ const Projects = () => {
                             </RemoveTask>
                         </Nav>
                         <Nav className="nav-header">
-                            <AddTask onClick={openAddTaskFunc}>
-                                + Task
-                            </AddTask>
+                            <AddTask onClick={openAddTaskFunc}>+ Task</AddTask>
 
-                            <Group onClick={checkMembersG}>
-                                <AiOutlineTeam />
-                                {infoG.membros && <>{infoG.membros.length}</>}
-                            </Group>
-                        </Nav>
-                    </Header>
-                    <NavFilter>
-                        <ButtonFilter
-                            onClick={(event) => filtrar(event.target.innerText)}
-                        >
-                            Data
-                        </ButtonFilter>
-                        <ButtonFilter
-                            onClick={(event) => filtrar(event.target.innerText)}
-                        >
-                            Concluídas
-                        </ButtonFilter>
-                        <ButtonFilter
-                            onClick={(event) => filtrar(event.target.innerText)}
-                        >
-                            Atrasadas
-                        </ButtonFilter>
-                        <ButtonFilter
-                            onClick={(event) => filtrar(event.target.innerText)}
-                        >
-                            Todas
-                        </ButtonFilter>
-                    </NavFilter>
-                    <Display>
-                        {showTasks.map((results) => {
-                            return (
-                                <Flex
-                                    background={"white"}
-                                    margin={"35px"}
-                                    display={"flex"}
-                                    flexDir={"column"}
-                                    width={"280px"}
-                                    borderRadius={"15px"}
-                                    id={results.id}
-                                >
-                                    <Heading
-                                        size="xs"
-                                        padding={"10px"}
-                                        display={"flex"}
-                                        justifyContent={"space-between"}
-                                    >
-                                        <Label>{results.creationDate}</Label>
-                                        <Label
-                                            href=""
-                                            onClick={() => modalexcluirT(results.id)}
-                                            /* () =>
+
+              <Group onClick={checkMembersG}>
+                <AiOutlineTeam />
+                {infoG.membros && <>{infoG.membros.length}</>}
+              </Group>
+            </Nav>
+          </Header>
+          <NavFilter>
+            <ButtonFilter onClick={(event) => filtrar(event.target.innerText)}>
+              Data
+            </ButtonFilter>
+            <ButtonFilter onClick={(event) => filtrar(event.target.innerText)}>
+              Concluídas
+            </ButtonFilter>
+            <ButtonFilter onClick={(event) => filtrar(event.target.innerText)}>
+              Atrasadas
+            </ButtonFilter>
+            <ButtonFilter onClick={(event) => filtrar(event.target.innerText)}>
+              Todas
+            </ButtonFilter>
+          </NavFilter>
+          <Display>
+            {showTasks.map((results) => {
+              return (
+                <Flex
+                  background={"white"}
+                  margin={"35px"}
+                  display={"flex"}
+                  flexDir={"column"}
+                  width={"280px"}
+                  borderRadius={"15px"}
+                  id={results.id}
+                  key = {results.id}
+                >
+                  <Heading
+                    size="xs"
+                    padding={"10px"}
+                    display={"flex"}
+                    justifyContent={"space-between"}
+                  >
+                    <Label>{results.creationDate}</Label>
+                    <Label
+                      href=""
+                      onClick={() => modalexcluirT(results.id)}
+                      /* () =>
                                                 clickClose(results.id) */
-                                        >
-                                            X
-                                        </Label>
-                                    </Heading>
-                                    <Box
-                                        fontSize={"20"}
-                                        fontWeight={"500"}
-                                        padding={"0px 10px"}
-                                    >
-                                        {results.description}
-                                    </Box>
+                    >
+                      X
+                    </Label>
+                  </Heading>
+                  <Box fontSize={"20"} fontWeight={"500"} padding={"0px 10px"}>
+                    {results.description}
+                  </Box>
+
 
                                     <Spacer />
                                     <ButtonGroup gap="2">
@@ -372,10 +357,18 @@ const Projects = () => {
                     </Display>
                 </ContainerPrincipal>
                 <Chat>
-                    <AiOutlineWechat color="white" size={80} />
+                    <Chatt openChat={openChat} setOpenChat={setOpenChat} />
+                    <AiOutlineWechat
+                        onClick={() => {
+                            setOpenChat("flex");
+                        }}
+                        color="white"
+                        size={80}
+                    />
                 </Chat>
             </Container>
         </Body>
     );
+
 };
 export default Projects;

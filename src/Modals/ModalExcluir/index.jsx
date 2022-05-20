@@ -43,7 +43,7 @@ export const ModalExcluir = ({
     const { taskId, removeTask } = useContext(TasksContext)
 
     console.log('Id group', idGroup)
-    console.log('Id task', taskId)
+    console.log('Id task', openExcluirT)
 
     return (
         <>

@@ -2,10 +2,16 @@ import { useEffect } from "react";
 import { createContext, useState } from "react";
 import api from "../../Services/api";
 
-export const TasksContext = createContext();
 
-export const TasksProvider = ({ children }) => {
-    const [tasks, setTasks] = useState([]);
+
+export const TasksContext = createContext()
+
+export const TasksProvider = ({children}) => {
+    const [tasks, setTasks] = useState([])
+    
+
+ 
+
 
     const [tokenTask, setTokenTask] = useState(
         JSON.parse(localStorage.getItem("@bump:token")) || ""
@@ -106,5 +112,5 @@ export const TasksProvider = ({ children }) => {
         >
             {children}
         </TasksContext.Provider>
-    );
-};
+    )
+}
