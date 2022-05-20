@@ -37,6 +37,7 @@ export const TasksProvider = ({ children }) => {
                     Authorization: `Bearer ${tokenTask}`,
                 },
             }).then((response) => {
+                console.log(response.data.subtask);
                 setSubTasks(response.data.subtask);
             });
         }
@@ -82,7 +83,7 @@ export const TasksProvider = ({ children }) => {
             },
         })
             .then((response) =>
-                setTasks(subTasks.filter((subtk) => subtk.id !== id))
+                setSubTasks(subTasks.filter((subtk) => subtk.id != id))
             )
             .catch((err) => console.log(err));
     };
@@ -91,6 +92,7 @@ export const TasksProvider = ({ children }) => {
         <TasksContext.Provider
             value={{
                 tasks,
+                taskId,
                 subTasks,
                 addTask,
                 removeTask,

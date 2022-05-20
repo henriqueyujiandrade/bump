@@ -61,7 +61,7 @@ const Projects = () => {
     const param = useParams();
     const idGrupe = param.id;
 
-    const [groupInfo, setGroupInfo] = useState();
+    const [subTaskInfo, setSubTaskInfo] = useState();
     const [openExcluirG, setOpenExcluirG] = useState(false);
     const [openExcluirT, setOpenExcluirT] = useState(false);
     const [openExcluirST, setOpenExcluirST] = useState(false);
@@ -75,6 +75,8 @@ const Projects = () => {
     const none = "none";
     const flex = "flex";
     const [openSideBar, setOpenSideBar] = useState(none);
+    const { tasks, removeTask, subTasks, taskId, setTaskId } =
+        useContext(TasksContext);
 
     const modalexcluirG = () => {
         setOpenExcluirG(true);
@@ -84,8 +86,8 @@ const Projects = () => {
         setOpenExcluirT(true);
     };
 
-    const modalexcluirST = () => {
-        setOpenExcluirST(true);
+    const modalexcluirST = (e) => {
+        setOpenExcluirST(e.target.id);
         setOpenEditTask(false);
     };
 
@@ -99,6 +101,9 @@ const Projects = () => {
     };
 
     const editTesk = (target) => {
+        console.log(target);
+        setSubTaskInfo(showTasks.filter((ts) => ts.id == target));
+        setTaskId(target);
         setOpenEditTask(true);
     };
 
@@ -123,7 +128,6 @@ const Projects = () => {
             setOpenSideBar(none);
         }
     };
-    const { tasks, removeTask } = useContext(TasksContext);
     const {
         infoGroup,
         infoG,
@@ -193,6 +197,7 @@ const Projects = () => {
                 )}
                 {openExcluirST && (
                     <ModalExcluir
+                        openExcluirST={openExcluirST}
                         excluirST
                         setOpenEditTask={setOpenEditTask}
                         setOpenExcluirST={setOpenExcluirST}
@@ -207,6 +212,7 @@ const Projects = () => {
                 )}
                 {openEditTask && (
                     <ModalEditTask
+                        subTaskInfo={subTaskInfo}
                         modalexcluirST={modalexcluirST}
                         setOpenAddSubTask={setOpenAddSubTask}
                         setOpenEditTask={setOpenEditTask}
@@ -266,7 +272,7 @@ const Projects = () => {
                     <Header>
                         <Nav className="nav-header">
                             <AiOutlineLaptop size={100} />
-                            <h6> Coleção</h6>
+                            <h6>{infoG.name}</h6>
                             <RemoveTask onClick={modalexcluirG}>
                                 <AiFillDelete />
                             </RemoveTask>
@@ -355,8 +361,8 @@ const Projects = () => {
                                                 }
                                             />
                                             <TagTeam
-                                                className="tag-team"
-                                                onClick={checkMembersT}
+                                                className="tag-team" /* 
+                                                onClick={checkMembersT} */
                                             >
                                                 <AiOutlineTeam />
                                                 {results.members &&

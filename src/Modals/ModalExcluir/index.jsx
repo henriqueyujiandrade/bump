@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { BtnMembrosAdd } from "../../components/Botões/Membros";
 import { CardMembros } from "../../components/Cards/CardMembros";
 import { Close } from "../../components/Close";
+import { TasksContext } from "../../Providers/Tasks";
 import {
     ConteCard,
     ModExcluir,
@@ -14,11 +15,14 @@ export const ModalExcluir = ({
     excluirG,
     excluirT,
     excluirST,
+    openExcluirST,
     setOpenExcluirG,
     setOpenExcluirT,
     setOpenExcluirST,
     setOpenEditTask,
 }) => {
+    const { tasks, removeSubTask, removeTask, subTasks, setTaskId, taskId } =
+        useContext(TasksContext);
     const close = () => {
         setOpenExcluirG(false);
     };
@@ -26,6 +30,12 @@ export const ModalExcluir = ({
         setOpenExcluirT(false);
     };
     const closeST = () => {
+        setOpenExcluirST(false);
+        setOpenEditTask(true);
+    };
+
+    const excluirSubTask = () => {
+        removeSubTask(openExcluirST);
         setOpenExcluirST(false);
         setOpenEditTask(true);
     };
@@ -38,9 +48,7 @@ export const ModalExcluir = ({
                         <Close close={close} />
                         <h1>Deseja excluir esse Grupo?</h1>
                         <div>
-                            <BtnMembrosAdd excluir /* click={addMembros} */>
-                                Excluir
-                            </BtnMembrosAdd>
+                            <BtnMembrosAdd excluir>Excluir</BtnMembrosAdd>
                             <BtnMembrosAdd cancelar click={close}>
                                 Cancelar
                             </BtnMembrosAdd>
@@ -70,7 +78,7 @@ export const ModalExcluir = ({
                         <Close close={closeST} />
                         <h1>Deseja excluir essa SubTask?</h1>
                         <div>
-                            <BtnMembrosAdd excluir /* click={addMembros} */>
+                            <BtnMembrosAdd excluir click={excluirSubTask}>
                                 Excluir
                             </BtnMembrosAdd>
                             <BtnMembrosAdd cancelar click={closeST}>
