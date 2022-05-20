@@ -14,10 +14,9 @@ const Dashboard = () => {
     return (
         <Container>
             <Header homeLogado />
-
-            {isOpen && <ModalAddGroup setIsOpen={setIsOpen} />}
-
             <main>
+                {isOpen && <ModalAddGroup setIsOpen={setIsOpen} />}
+
                 <h2 className="title-welcome">Bem vindo {user.name}!</h2>
                 {group.length === 0 ? (
                     <section className="no-task">

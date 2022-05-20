@@ -1,6 +1,11 @@
 import Header from "./../../components/Header/";
 import { Container } from "./style";
-import img3 from "./../../assets/2022-03-29_17-43.png";
+import igor from "./../../assets/igor.jpeg";
+import maykon from "./../../assets/maykon.jpeg";
+import henrique from "./../../assets/henrique.jpg";
+import valmir from "./../../assets/valmir.jpg";
+import yasmin from "./../../assets/yasmin.png";
+import joao from "./../../assets/joao.jpg";
 import { CardDev } from "../../components/CardDev";
 import SimpleSlider from "../../components/Caroseul";
 
@@ -26,34 +31,34 @@ const StartPage = () => {
 
                     <div className="devs">
                         <CardDev
-                            name="Valmir"
-                            link="https://github.com/"
-                            img={img3}
+                            name="Henrique"
+                            link="https://github.com/henriqueyujiandrade"
+                            img={henrique}
+                        />
+                        <CardDev
+                            name="Igor"
+                            link="https://github.com/igor-xavier"
+                            img={igor}
+                        />
+                        <CardDev
+                            name="João Victor"
+                            link="https://github.com/joaovictorprocopio"
+                            img={joao}
+                        />
+                        <CardDev
+                            name="Maykon"
+                            link="https://github.com/maykonx22"
+                            img={maykon}
                         />
                         <CardDev
                             name="Valmir"
-                            link="https://github.com/"
-                            img={img3}
+                            link="https://github.com/Valmir-Virtuoso"
+                            img={valmir}
                         />
                         <CardDev
-                            name="Valmir"
-                            link="https://github.com/"
-                            img={img3}
-                        />
-                        <CardDev
-                            name="Valmir"
-                            link="https://github.com/"
-                            img={img3}
-                        />
-                        <CardDev
-                            name="Valmir"
-                            link="https://github.com/"
-                            img={img3}
-                        />
-                        <CardDev
-                            name="Valmir"
-                            link="https://github.com/"
-                            img={img3}
+                            name="Yasmin"
+                            link="https://github.com/YasminAlves16"
+                            img={yasmin}
                         />
                     </div>
                 </section>
