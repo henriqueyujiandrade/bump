@@ -126,7 +126,6 @@ export default function WithSubnavigation({
                         minH={"60px"}
                         py={{ base: 2 }}
                         px={{ base: 20 }}
-                        borderBottom={1}
                         spacing={6}
                         borderStyle={"solid"}
                         borderColor={colorT}
@@ -162,6 +161,7 @@ export default function WithSubnavigation({
                                 _hover={{
                                     bg: hover
                                 }}
+                                onClick={() => localStorage.clear()}
                             >
                                 Sair
                             </Button>
