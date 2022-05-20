@@ -1,8 +1,9 @@
 import Slider from "react-slick/lib/slider";
 import { Container } from "./style";
-import img1 from "./../../assets/2022-03-28_20-15.png";
-import img2 from "./../../assets/2022-03-28_20-16.png";
-import img3 from "./../../assets/2022-03-29_17-43.png";
+import img1 from './../../assets/img1.png'
+import img2 from './../../assets/img2.png'
+import img3 from './../../assets/img3.png'
+import img4 from './../../assets/img4.png'
 
 export default function SimpleSlider() {
     var settings = {
@@ -53,6 +54,9 @@ export default function SimpleSlider() {
                 </div>
                 <div>
                     <img src={img3} alt="img3" />
+                </div>
+                <div>
+                    <img src={img4} alt="img3" />
                 </div>
             </Slider>
         </Container>
