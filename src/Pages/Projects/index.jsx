@@ -54,6 +54,9 @@ import { CardNewTask } from "../../components/Cards/CardNewTask";
 import filterDate from "./filterDate";
 import { GroupContext } from "../../Providers/Group";
 
+//-- chat--
+import Chatt from "../../components/Chat/index";
+
 import { ModalExcluir } from "../../Modals/ModalExcluir";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -61,20 +64,22 @@ const Projects = () => {
   const param = useParams();
   const idGrupe = param.id;
 
-  const [groupInfo, setGroupInfo] = useState();
-  const [openExcluirG, setOpenExcluirG] = useState(false);
-  const [openExcluirT, setOpenExcluirT] = useState(false);
-  const [openExcluirST, setOpenExcluirST] = useState(false);
-  const [openMG, setOpenMG] = useState(false);
-  const [openMT, setOpenMT] = useState(false);
-  const [openMAdd, setOpenMAdd] = useState(false);
-  const [openMTAdd, setOpenMTAdd] = useState(false);
-  const [openAddTask, setOpenAddTask] = useState(false);
-  const [openEditTask, setOpenEditTask] = useState(false);
-  const [openAddSubTask, setOpenAddSubTask] = useState(false);
-  const none = "none";
-  const flex = "flex";
-  const [openSideBar, setOpenSideBar] = useState(none);
+    const [groupInfo, setGroupInfo] = useState();
+    const [openExcluirG, setOpenExcluirG] = useState(false);
+    const [openExcluirT, setOpenExcluirT] = useState(false);
+    const [openExcluirST, setOpenExcluirST] = useState(false);
+    const [openMG, setOpenMG] = useState(false);
+    const [openMT, setOpenMT] = useState(false);
+    const [openMAdd, setOpenMAdd] = useState(false);
+    const [openMTAdd, setOpenMTAdd] = useState(false);
+    const [openAddTask, setOpenAddTask] = useState(false);
+    const [openEditTask, setOpenEditTask] = useState(false);
+    const [openAddSubTask, setOpenAddSubTask] = useState(false);
+    const none = "none";
+    const flex = "flex";
+    const [openSideBar, setOpenSideBar] = useState("none");
+    const [openChat, setOpenChat] = useState("none");
+
 
   const modalexcluirG = () => {
     setOpenExcluirG(true);
@@ -212,52 +217,61 @@ const Projects = () => {
           />
         )}
 
-        {openMAdd && (
-          <ModalMembroAdd
-            addMembroG
-            setOpenMG={setOpenMG}
-            setOpenMAdd={setOpenMAdd}
-          />
-        )}
-        {openMTAdd && (
-          <ModalMembroAdd
-            addMembroT
-            setOpenMT={setOpenMT}
-            setOpenMTAdd={setOpenMTAdd}
-          />
-        )}
-        {openMT && (
-          <ModalMembro
-            idGrupe={idGrupe}
-            infoGroup={infoGroup}
-            membrosT
-            addMembrosT={addMembrosT}
-            setOpenMT={setOpenMT}
-          />
-        )}
-        {openMG && (
-          <ModalMembro membrosG addMembros={addMembros} setOpenM={setOpenMG} />
-        )}
-      </>
-      <Container>
-        <SideBar setShowSideBar={setOpenSideBar} showSideBar={openSideBar} />
-        <ContainerPrincipal className="container-principal">
-          <Button
-            onClick={handleOpenSideBar}
-            display={["flex", "flex", "none"]}
-          >
-            Menu
-          </Button>
-          <Header>
-            <Nav className="nav-header">
-              <AiOutlineLaptop size={60} />
-              <h6> Rotina</h6>
-              <RemoveTask onClick={modalexcluirG}>
-                <AiFillDelete />
-              </RemoveTask>
-            </Nav>
-            <Nav className="nav-header">
-              <AddTask onClick={openAddTaskFunc}>+ Task</AddTask>
+
+                {openMAdd && (
+                    <ModalMembroAdd
+                        addMembroG
+                        setOpenMG={setOpenMG}
+                        setOpenMAdd={setOpenMAdd}
+                    />
+                )}
+                {openMTAdd && (
+                    <ModalMembroAdd
+                        addMembroT
+                        setOpenMT={setOpenMT}
+                        setOpenMTAdd={setOpenMTAdd}
+                    />
+                )}
+                {openMT && (
+                    <ModalMembro
+                        idGrupe={idGrupe}
+                        infoGroup={infoGroup}
+                        membrosT
+                        addMembrosT={addMembrosT}
+                        setOpenMT={setOpenMT}
+                    />
+                )}
+                {openMG && (
+                    <ModalMembro
+                        membrosG
+                        addMembros={addMembros}
+                        setOpenM={setOpenMG}
+                    />
+                )}
+            </>
+            <Container>
+                <SideBar
+                    setShowSideBar={setOpenSideBar}
+                    showSideBar={openSideBar}
+                />
+                <ContainerPrincipal className="container-principal">
+                    <Button
+                        onClick={handleOpenSideBar}
+                        display={["flex", "flex", "none"]}
+                    >
+                        Menu
+                    </Button>
+                    <Header>
+                        <Nav className="nav-header">
+                            <AiOutlineLaptop size={60} />
+                            <h6> Rotina</h6>
+                            <RemoveTask onClick={modalexcluirG}>
+                                <AiFillDelete />
+                            </RemoveTask>
+                        </Nav>
+                        <Nav className="nav-header">
+                            <AddTask onClick={openAddTaskFunc}>+ Task</AddTask>
+
 
               <Group onClick={checkMembersG}>
                 <AiOutlineTeam />
@@ -311,34 +325,49 @@ const Projects = () => {
                     {results.description}
                   </Box>
 
-                  <Spacer />
-                  <ButtonGroup gap="2">
-                    <Date>
-                      <LabelExp className="expiration-date">
-                        <AiOutlineClockCircle />
-                        {results.expirationDate}
-                      </LabelExp>
-                      <AiOutlineEdit
-                        cursor={"pointer"}
-                        size="25"
-                        onClick={() => editTesk(results.id)}
-                      />
-                      <TagTeam className="tag-team" onClick={checkMembersT}>
-                        <AiOutlineTeam />
-                        {results.members && results.members.length}
-                      </TagTeam>
-                    </Date>
-                  </ButtonGroup>
-                </Flex>
-              );
-            })}
-          </Display>
-        </ContainerPrincipal>
-        <Chat>
-          <AiOutlineWechat color="white" size={80} />
-        </Chat>
-      </Container>
-    </Body>
-  );
+
+                                    <Spacer />
+                                    <ButtonGroup gap="2">
+                                        <Date>
+                                            <LabelExp className="expiration-date">
+                                                <AiOutlineClockCircle />
+                                                {results.expirationDate}
+                                            </LabelExp>
+                                            <AiOutlineEdit
+                                                cursor={"pointer"}
+                                                size="25"
+                                                onClick={() =>
+                                                    editTesk(results.id)
+                                                }
+                                            />
+                                            <TagTeam
+                                                className="tag-team"
+                                                onClick={checkMembersT}
+                                            >
+                                                <AiOutlineTeam />
+                                                {results.members &&
+                                                    results.members.length}
+                                            </TagTeam>
+                                        </Date>
+                                    </ButtonGroup>
+                                </Flex>
+                            );
+                        })}
+                    </Display>
+                </ContainerPrincipal>
+                <Chat>
+                    <Chatt openChat={openChat} setOpenChat={setOpenChat} />
+                    <AiOutlineWechat
+                        onClick={() => {
+                            setOpenChat("flex");
+                        }}
+                        color="white"
+                        size={80}
+                    />
+                </Chat>
+            </Container>
+        </Body>
+    );
+
 };
 export default Projects;
