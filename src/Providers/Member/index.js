@@ -1,91 +1,112 @@
 import { useEffect } from "react";
 import { createContext, useState } from "react";
+import { toast } from "react-toastify";
 
 import api from "../../Services/api";
 
+export const MemberContext = createContext();
 
-export const MemberContext = createContext()
+export const MemberProvider = ({ children }) => {
+    const [member, setMember] = useState([]);
+    const [tokenMember, setTokenMember] = useState(
+        JSON.parse(localStorage.getItem("@bump:token")) || ""
+    );
+    const [users, setUsers] = useState([]);
+    const [myInfoInMembers, setMyInfoInMembers] = useState(
+        JSON.parse(localStorage.getItem("@bump:myInfo")) || ""
+    );
+    const [gpId, setGpId] = useState("");
 
-export const MemberProvider = ({children}) => {
-    
-    const[member, setMember] = useState([])
-    const [token, setToken] = useState( JSON.parse(localStorage.getItem("@bump:token")) || "")
-    const [users, setUsers] = useState([])
-    
-   
-    useEffect(()=>{
-        if(token){       
-        api.get("group",{
-            headers: {
-                Authorization: `Bearer ${token}`,
-            }
-        })
-        .then((response) =>{
-            const thisGp = response.data.filter((gp) => gp.groupId == "8da51ca4-204f-4264-a9bb-989851c5aadb")
-            
-            setMember(thisGp[0].membros) 
-           
-        })
+    useEffect(() => {
+        if (tokenMember && gpId) {
+            api.get("group", {
+                headers: {
+                    Authorization: `Bearer ${tokenMember}`,
+                },
+            }).then((response) => {
+                const thisGp = response.data.filter((gp) => gp.id === gpId);
 
-        api.get("users",{
-            headers: {
-                Authorization: `Bearer ${token}`,
-            }
-        })
-        .then((response) =>{            
-            
-            setUsers(response.data) 
-           
-        })
-    }
+                setMember(thisGp[0].membros);
+            });
 
-    },[token])
-
-    const addMember = (idDefault,data) =>{
-        if(!users.find((user) => user.email == data.email) || member.find((mb) => mb.email == data.email)){
-            console.log('usuário não encontrado ou já adicionado')
+            api.get("users", {
+                headers: {
+                    Authorization: `Bearer ${tokenMember}`,
+                },
+            }).then((response) => {
+                console.log(response.data);
+                setUsers(response.data);
+            });
         }
-        else if(!member.filter((mb)=> mb.status == "admin").find((adm)=> adm.id == 2)){
-            console.log('Você deve ser administrador para adicionar membros')
-        }
-        else{
-        const dev = users.find((user) => user.email == data.email)
-        const {name,id} = dev
-        const status = "dev"
-        const newMember = {...data, status, name, id}
-        const membros = [...member, newMember]
-        api.patch(`group/${idDefault}`,{membros:membros}, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            }
-        })
-        .then((response) => setMember(membros))
-        }
-    }
-    
-    const removeMember = (idDefault,id) =>{
-        if(!member.filter((mb)=> mb.status == "admin").find((adm)=> adm.id == 2)){
-            console.log('Você deve ser administrador para remover membros')
-        }
-        else{
+    }, [tokenMember, gpId]);
 
-        
-        const filteredMembers = member.filter((user) => user.id != id)
-        api.patch(`group/${idDefault}`,{membros:filteredMembers}, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            }
-        })
-        .then((response) => setMember(filteredMembers))
+    const addMember = (groupId, data) => {
+        if (
+            !users.find((user) => user.email === data.email) ||
+            member.find((mb) => mb.email === data.email)
+        ) {
+            toast.warn("usuário não encontrado ou já adicionado");
+        } else if (
+            !member
+                .filter((mb) => mb.status === "admin")
+                .find((adm) => adm.id === myInfoInMembers.id)
+        ) {
+            console.log(member);
+            toast.error("Você deve ser administrador para adicionar membros");
+        } else {
+            const dev = users.find((user) => user.email === data.email);
+            const { name, id } = dev;
+            const status = "dev";
+            const newMember = { ...data, status, name, id };
+            const membros = [...member, newMember];
+            toast.success("usuário adicionado");
+            api.patch(
+                `group/${groupId}`,
+                { membros: membros },
+                {
+                    headers: {
+                        Authorization: `Bearer ${tokenMember}`,
+                    },
+                }
+            ).then((response) => setMember(membros));
         }
-    }
-    
+    };
 
+    const removeMember = (groupId, id) => {
+        if (
+            !member
+                .filter((mb) => mb.status === "admin")
+                .find((adm) => adm.id === myInfoInMembers.id)
+        ) {
+            toast.error("Você deve ser administrador para remover membros");
+        } else {
+            toast.success("usuário excluido")
+            const filteredMembers = member.filter((user) => user.id !== id);
+            api.patch(
+                `group/${groupId}`,
+                { membros: filteredMembers },
+                {
+                    headers: {
+                        Authorization: `Bearer ${tokenMember}`,
+                    },
+                }
+            ).then((response) => setMember(filteredMembers));
+        }
+    };
 
     return (
-        <MemberContext.Provider value={{ member,addMember, removeMember }}>
+        <MemberContext.Provider
+            value={{
+                users,
+                member,
+                addMember,
+                removeMember,
+                setGpId,
+                setTokenMember,
+                setMyInfoInMembers,
+            }}
+        >
             {children}
         </MemberContext.Provider>
     );
 };
-
