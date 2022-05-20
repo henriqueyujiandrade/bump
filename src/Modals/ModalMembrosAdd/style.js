@@ -33,10 +33,18 @@ export const ModMembroAddList = styled.div`
     }
 `;
 
-export const ConteForm = styled.div`
+export const ConteForm = styled.form`
     @media (min-width: 750px) {
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+`;
+
+export const DivNao = styled.form`
+    @media (min-width: 750px) {
+        font-size: 1.5em;
+        font-weight: 600;
+        color: white;
     }
 `;

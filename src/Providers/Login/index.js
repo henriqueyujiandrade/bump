@@ -11,11 +11,20 @@ export const LoginProvider = ({ children }) => {
 
     const history = useHistory();
 
-    const confirmLogin = async (setToken,setInfo,data) => {
+    const confirmLogin = async (
+        setToken,
+        setInfo,
+        setTokTask,
+        setMyInfoTask,
+        setTokenMember,
+        setMyInfoInMembers,
+        setTokenChat,
+        setMyInfoChat,
+        data
+    ) => {
         await api
             .post("login", data)
             .then((response) => {
-                console.log(response.data.accessToken);
                 window.localStorage.clear();
                 window.localStorage.setItem(
                     "@bump:token",
@@ -23,10 +32,16 @@ export const LoginProvider = ({ children }) => {
                 );
                 window.localStorage.setItem(
                     "@bump:myInfo",
-                    JSON.stringify(response.data.user) 
+                    JSON.stringify(response.data.user)
                 );
-                setToken(response.data.accessToken)
-                setInfo(response.data.user) 
+                setToken(response.data.accessToken);
+                setInfo(response.data.user);
+                setTokTask(response.data.accessToken);
+                setMyInfoTask(response.data.user);
+                setTokenMember(response.data.accessToken);
+                setMyInfoInMembers(response.data.user);
+                setTokenChat(response.data.accessToken);
+                setMyInfoChat(response.data.user);
 
                 toast.success("Login realizado com sucesso!");
 

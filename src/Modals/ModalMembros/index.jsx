@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { BtnMembrosAdd } from "../../components/Botões/Membros";
 import { CardMembros } from "../../components/Cards/CardMembros";
 import { Close } from "../../components/Close";
+import { GroupContext } from "../../Providers/Group";
 import { ConteCard, ModMembroConte, ModMembroList } from "./style";
 
 export const ModalMembro = ({
@@ -12,13 +14,20 @@ export const ModalMembro = ({
     membrosG,
     membrosT,
 }) => {
+    const param = useParams();
+    const idGrupe = param.id;
+    const { infoGroup, infoG } = useContext(GroupContext);
+
+    useEffect(() => {
+        infoGroup(idGrupe);
+    }, [infoGroup]);
+
     const close = () => {
         setOpenM(false);
     };
     const closeT = () => {
         setOpenMT(false);
     };
-
     return (
         <>
             {membrosG && (
@@ -27,9 +36,32 @@ export const ModalMembro = ({
                         <Close close={close} />
                         <h1>Membros</h1>
                         <ConteCard>
+                            {infoG.membros && (
+                                <>
+                                    {infoG.membros.map((elemento) => {
+                                        if (elemento.status == "admin") {
+                                            return (
+                                                <CardMembros
+                                                    key={elemento.id}
+                                                    elemento={elemento}
+                                                    statusAdm="true"
+                                                />
+                                            );
+                                        } else {
+                                            return (
+                                                <CardMembros
+                                                    key={elemento.id}
+                                                    elemento={elemento}
+                                                />
+                                            );
+                                        }
+                                    })}
+                                </>
+                            )}
+                            {/* 
                             <CardMembros statusAdm="true" />
                             <CardMembros />
-                            <CardMembros />
+                            <CardMembros /> */}
                         </ConteCard>
                         <BtnMembrosAdd modal click={addMembros}>
                             Adicionar +

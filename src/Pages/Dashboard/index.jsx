@@ -10,9 +10,6 @@ const Dashboard = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const user = JSON.parse(localStorage.getItem("@bump:myInfo"));
-    console.log(user);
-
-    console.log("Grupo: ", group);
 
     return (
         <Container>

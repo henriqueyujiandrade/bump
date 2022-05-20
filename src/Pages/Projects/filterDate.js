@@ -2,7 +2,6 @@ export default function filterDate(array) {
     array.sort(function (a, b) {
         let dateA = a.expirationDate.split("-").reverse(),
             dateB = b.expirationDate.split("-").reverse();
-        console.log(array);
         return dateB[0] - dateA[0];
     });
     array.sort(function (a, b) {
