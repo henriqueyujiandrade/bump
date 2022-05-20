@@ -5,7 +5,7 @@ export const Container = styled.div`
   min-height: 100%;
   display: flex;
   background-color: #02072f;
-  width: 100%;
+  width: 60%;
   @media only screen and (max-width: 767px) {
     margin-left: 0px;
   }
@@ -162,9 +162,9 @@ export const Body = styled.body`
 export const Chat = styled.div`
   align-self: center;
   display: flex;
-  width: 20%;
   align-self: flex-end;
   cursor: pointer;
+  min-width: fit-content;
 `;
 export const Icone = styled.img`
   width: 90%;
