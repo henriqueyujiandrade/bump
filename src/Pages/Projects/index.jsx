@@ -77,7 +77,8 @@ const Projects = () => {
     const [openAddSubTask, setOpenAddSubTask] = useState(false);
     const none = "none";
     const flex = "flex";
-    const [openSideBar, setOpenSideBar] = useState(none);
+    const [openSideBar, setOpenSideBar] = useState("none");
+    const [openChat, setOpenChat] = useState("none");
 
     const modalexcluirG = () => {
         setOpenExcluirG(true);
@@ -275,9 +276,7 @@ const Projects = () => {
                             </RemoveTask>
                         </Nav>
                         <Nav className="nav-header">
-                            <AddTask onClick={openAddTaskFunc}>
-                                + Task
-                            </AddTask>
+                            <AddTask onClick={openAddTaskFunc}>+ Task</AddTask>
 
                             <Group onClick={checkMembersG}>
                                 <AiOutlineTeam />
@@ -373,8 +372,14 @@ const Projects = () => {
                     </Display>
                 </ContainerPrincipal>
                 <Chat>
-                    <Chatt />
-                    <AiOutlineWechat color="white" size={80} />
+                    <Chatt openChat={openChat} setOpenChat={setOpenChat} />
+                    <AiOutlineWechat
+                        onClick={() => {
+                            setOpenChat("flex");
+                        }}
+                        color="white"
+                        size={80}
+                    />
                 </Chat>
             </Container>
         </Body>

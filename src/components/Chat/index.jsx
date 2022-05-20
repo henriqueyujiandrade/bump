@@ -140,7 +140,7 @@ const Chatt = ({ openChat, setOpenChat }) => {
         <>
             <Flex
                 display={openChat}
-                position={["absolute", "absolute", "static"]}
+                position={["absolute", "absolute", "relative"]}
                 top={"0px"}
                 left={"0px"}
                 flexDir={"column"}
