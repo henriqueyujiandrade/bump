@@ -4,6 +4,8 @@ import igor from "./../../assets/igor.jpeg";
 import maykon from "./../../assets/maykon.jpeg";
 import henrique from "./../../assets/henrique.jpg";
 import valmir from "./../../assets/valmir.jpg";
+import yasmin from "./../../assets/yasmin.png";
+import joao from "./../../assets/joao.jpg";
 import { CardDev } from "../../components/CardDev";
 import SimpleSlider from "../../components/Caroseul";
 
@@ -40,8 +42,8 @@ const StartPage = () => {
                         />
                         <CardDev
                             name="João Victor"
-                            link="https://github.com/"
-                            img={igor}
+                            link="https://github.com/joaovictorprocopio"
+                            img={joao}
                         />
                         <CardDev
                             name="Maykon"
@@ -55,8 +57,8 @@ const StartPage = () => {
                         />
                         <CardDev
                             name="Yasmin"
-                            link="https://github.com/"
-                            img={igor}
+                            link="https://github.com/YasminAlves16"
+                            img={yasmin}
                         />
                     </div>
                 </section>
