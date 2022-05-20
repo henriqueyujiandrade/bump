@@ -22,6 +22,7 @@ export const Container = styled.div`
 
             font-size: 1.25rem;
             color: #FFFFFF;
+            font-weight: bold;
             margin-bottom: 10px;
 
         }

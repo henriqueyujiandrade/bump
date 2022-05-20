@@ -6,6 +6,7 @@ export const Container = styled.div`
   display: flex;
   background-color: #02072f;
   width: 60%;
+  width: 100%;
   @media only screen and (max-width: 767px) {
     margin-left: 0px;
   }
