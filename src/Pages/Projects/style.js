@@ -75,8 +75,8 @@ export const AddTask = styled.button`
     font-weight: 600;
     width: 100px;
     margin-right: 20px;
-    :hover{
-        background-color:#D6D793;
+    :hover {
+        background-color: #d6d793;
     }
 `;
 export const RemoveTask = styled.button`
@@ -85,8 +85,8 @@ export const RemoveTask = styled.button`
     padding: 10px;
     font-weight: 500;
 
-    :hover{
-        background-color:#AF3DFF;
+    :hover {
+        background-color: #af3dff;
     }
 `;
 export const Group = styled.button`
@@ -111,7 +111,7 @@ export const NavFilter = styled.nav`
     width: 90%;
     align-items: center;
     justify-content: space-between;
-    
+
     @media only screen and (max-width: 768px) {
         flex-wrap: wrap;
         margin-left: 0px;
@@ -127,14 +127,15 @@ export const ButtonFilter = styled.button`
     height: 40px;
     width: 150px;
     padding: 9px;
-    :hover{
-        background-color:#D6D793;
+    :hover {
+        background-color: #d6d793;
     }
 `;
 
 export const Display = styled.div`
     display: flex;
     flex-wrap: wrap;
+
     @media only screen and (max-width: 768px) {
         padding-right: 20px;
         margin-left: 0px;
@@ -160,11 +161,12 @@ export const Body = styled.body`
     height: 100%;
 `;
 export const Chat = styled.div`
+    margin: 0px;
+    padding: 0px;
     align-self: center;
     display: flex;
-    width: 20%;
+    width: 20vw;
     align-self: flex-end;
-    cursor: pointer;
 `;
 export const Icone = styled.img`
     width: 90%;
@@ -205,7 +207,7 @@ export const Nav = styled.nav`
     }
 `;
 export const ContainerPrincipal = styled.div`
-    width: 100%;
+    width: 63vw;
     min-height: 100vh;
     height: 100%;
 `;
