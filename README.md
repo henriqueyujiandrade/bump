@@ -3,7 +3,8 @@
 
 O BUMP é um projeto desenvolvido para auxiliar nas organizações de atividades a serem feitas, podendo-as reunir em apenas um lugar. Contém uma interface limpa e de fácil uso, além de possuir um chat no qual o usuario pode interagir com outros membros que estão nos mesmos grupos de atividade que o usuario.
 
-# COLAR IMAGEM DO PROJETO AQUI
+
+![printProjeto](https://user-images.githubusercontent.com/95253622/169465881-5c43d8d3-24ca-482e-9ec7-0c0a0060fe52.png)
 
 <h4 align="center"> 
     :construction:  Projeto em construção  :construction:
@@ -15,13 +16,12 @@ O BUMP é um projeto desenvolvido para auxiliar nas organizações de atividades
 - `Funcionalidade 2`: Entrar na home onde aparece todos os grupos de atividade em que o usuario logado está
 - `Funcionalidade 3`: Pode criar novos grupos ou entrar nos grupos ja existentes
 - `Funcionalidade 4`: Ao entrar no grupo  é mostrado para os membros presentes, as tasks e o chat
-- `Funcionalidade 5`: Em cada task pode ser adicionado subtasks e marcadas como concluidas pelos membros que a fizeram
+- `Funcionalidade 5`: Em cada task pode ser adicionado subtasks e marcadas como concluidas pelos membros que a fizeram!
 
-# Talvez colocar um gif realizando cada funcionalidade referente ao projeto
 
 ## 📁 Acesso ao projeto
 
-**Colocar link vercel aqui**
+### https://bump-henriqueyujiandrade.vercel.app/
 
 
 ## 💻 Tecnologias Utilizadas
@@ -38,4 +38,5 @@ O BUMP é um projeto desenvolvido para auxiliar nas organizações de atividades
 
 ## Desenvolvedores 
 
-
+| [<img src="" width=115><br><sub>Yasmin</sub>](https://github.com/camilafernanda) | [<img src="https://avatars.githubusercontent.coyasmin.pngm/u/37356058?v=4" width=115><br><sub>Camila Fernanda Alves</sub>](https://github.com/camilafernanda) | [<img src="https://avatars.githubusercontent.com/u/37356058?v=4" width=115><br><sub>Camila Fernanda Alves</sub>](https://github.com/camilafernanda) | [<img src="https://avatars.githubusercontent.com/u/37356058?v=4" width=115><br><sub>Camila Fernanda Alves</sub>](https://github.com/camilafernanda) | [<img src="https://avatars.githubusercontent.com/u/30351153?v=4" width=115><br><sub>Guilherme Lima</sub>](https://github.com/guilhermeonrails) |  [<img src="https://avatars.githubusercontent.com/u/8989346?v=4" width=115><br><sub>Alex Felipe</sub>](https://github.com/alexfelipe) |
+| :---: | :---: | :---: | :---: | :---: | :---: |
