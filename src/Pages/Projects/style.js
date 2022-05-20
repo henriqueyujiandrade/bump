@@ -54,33 +54,40 @@ export const Header = styled.header`
     display: flex;
     flex-direction: row;
     color: #ffff;
-    margin-top: 60px;
+    margin-top: 20px;
     width: 90%;
     font-size: 50px;
     justify-content: space-between;
     flex-wrap: wrap;
+
     @media only screen and (max-width: 768px) {
         margin-left: 0px;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
+        flex-direction: column;
     }
 `;
 export const AddTask = styled.button`
     background-color: #feee35;
     border-radius: 25.8319px;
-    padding: 7px;
+    padding: 9px;
     color: #444444;
-    height: 56.67px;
     font-weight: 600;
-    min-width: 150px;
-    max-width: 150px;
+    width: 100px;
+    margin-right: 20px;
+    :hover {
+        background-color: #d6d793;
+    }
 `;
 export const RemoveTask = styled.button`
     background-color: #6d17b0;
     border-radius: 25.8319px;
-    padding: 7px;
+    padding: 10px;
     font-weight: 500;
+
+    :hover {
+        background-color: #af3dff;
+    }
 `;
 export const Group = styled.button`
     background-color: #57aad9;
@@ -90,7 +97,7 @@ export const Group = styled.button`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    height: 56.67px;
+    height: 45px;
     margin-left: 30px;
     font-weight: 700;
     @media only screen and (max-width: 768px) {
@@ -104,10 +111,10 @@ export const NavFilter = styled.nav`
     width: 90%;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
+
     @media only screen and (max-width: 768px) {
+        flex-wrap: wrap;
         margin-left: 0px;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
     }
@@ -116,18 +123,19 @@ export const ButtonFilter = styled.button`
     background-color: #feee35;
     font-weight: 700;
     border-radius: 25px;
-    margin-top: 20px;
-    margin-left: 20px;
-    height: 50px;
-    min-width: 150px;
-    max-width: 150px;
-    padding: 7px;
+    margin: 30px;
+    height: 40px;
+    width: 150px;
+    padding: 9px;
+    :hover {
+        background-color: #d6d793;
+    }
 `;
 
 export const Display = styled.div`
     display: flex;
     flex-wrap: wrap;
-    width: 75%;
+
     @media only screen and (max-width: 768px) {
         padding-right: 20px;
         margin-left: 0px;
@@ -153,11 +161,12 @@ export const Body = styled.body`
     height: 100%;
 `;
 export const Chat = styled.div`
+    margin: 0px;
+    padding: 0px;
     align-self: center;
     display: flex;
-    width: 20%;
+    width: 20vw;
     align-self: flex-end;
-    cursor: pointer;
 `;
 export const Icone = styled.img`
     width: 90%;
@@ -178,23 +187,27 @@ export const Nav = styled.nav`
     margin: 20px;
     font-size: 20px;
     h6 {
-        font-size: 50px;
+        font-size: 45px;
         display: flex;
         align-items: center;
         margin-left: 10px;
         margin-right: 20px;
     }
     flex-wrap: wrap;
+
     @media only screen and (max-width: 768px) {
         padding-right: 0px;
         margin: 0px;
         margin-bottom: 20px;
         justify-content: center;
-        flex-direction: column;
+
+        h6 {
+            font-size: 30px;
+        }
     }
 `;
 export const ContainerPrincipal = styled.div`
-    width: 100%;
+    width: 63vw;
     min-height: 100vh;
     height: 100%;
 `;

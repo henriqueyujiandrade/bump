@@ -54,6 +54,9 @@ import { CardNewTask } from "../../components/Cards/CardNewTask";
 import filterDate from "./filterDate";
 import { GroupContext } from "../../Providers/Group";
 
+//-- chat--
+import Chatt from "../../components/Chat/index";
+
 import { ModalExcluir } from "../../Modals/ModalExcluir";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -77,11 +80,11 @@ const Projects = () => {
     const [openSideBar, setOpenSideBar] = useState(none);
     const { tasks, removeTask, subTasks, taskId, setTaskId } =
         useContext(TasksContext);
+    const [openChat, setOpenChat] = useState("none");
 
     const modalexcluirG = () => {
         setOpenExcluirG(true);
     };
-
     const modalexcluirT = () => {
         setOpenExcluirT(true);
     };
@@ -91,6 +94,12 @@ const Projects = () => {
         setOpenEditTask(false);
     };
 
+    const editTesk = (target) => {
+        console.log(target);
+        setSubTaskInfo(showTasks.filter((ts) => ts.id == target));
+        setTaskId(target);
+        setOpenEditTask(true);
+    };
     const addMembros = () => {
         setOpenMG(false);
         setOpenMAdd(true);
@@ -98,13 +107,6 @@ const Projects = () => {
     const addMembrosT = () => {
         setOpenMT(false);
         setOpenMTAdd(true);
-    };
-
-    const editTesk = (target) => {
-        console.log(target);
-        setSubTaskInfo(showTasks.filter((ts) => ts.id == target));
-        setTaskId(target);
-        setOpenEditTask(true);
     };
 
     const checkMembersG = () => {
@@ -115,10 +117,6 @@ const Projects = () => {
     const checkMembersT = () => {
         setOpenMT(true);
         setOpenMTAdd(false);
-    };
-
-    const openAddTaskFunc = () => {
-        setOpenAddTask(true);
     };
 
     const handleOpenSideBar = () => {
@@ -143,6 +141,9 @@ const Projects = () => {
         setShowTasks(tasks);
         infoGroup(idGrupe);
     }, [tasks]);
+    const openAddTaskFunc = () => {
+        setOpenAddTask(true);
+    };
 
     function filtrar(event) {
         if (event === "Todas") {
@@ -151,7 +152,6 @@ const Projects = () => {
         if (event === "Concluídas") {
             setShowTasks(tasks.filter((tasks) => tasks.status === "concluida"));
         }
-
         if (event === "Atrasadas") {
             setShowTasks([]);
             const filtradas = [];
@@ -278,9 +278,7 @@ const Projects = () => {
                             </RemoveTask>
                         </Nav>
                         <Nav className="nav-header">
-                            <AddTask onClick={openAddTaskFunc}>
-                                Adicionar +
-                            </AddTask>
+                            <AddTask onClick={openAddTaskFunc}>+ Task</AddTask>
 
                             <Group onClick={checkMembersG}>
                                 <AiOutlineTeam />
@@ -318,7 +316,7 @@ const Projects = () => {
                                     margin={"35px"}
                                     display={"flex"}
                                     flexDir={"column"}
-                                    width={"300px"}
+                                    width={"280px"}
                                     borderRadius={"15px"}
                                     id={results.id}
                                 >
@@ -339,7 +337,7 @@ const Projects = () => {
                                         </Label>
                                     </Heading>
                                     <Box
-                                        fontSize={"30"}
+                                        fontSize={"20"}
                                         fontWeight={"500"}
                                         padding={"0px 10px"}
                                     >
@@ -355,7 +353,7 @@ const Projects = () => {
                                             </LabelExp>
                                             <AiOutlineEdit
                                                 cursor={"pointer"}
-                                                size="40"
+                                                size="25"
                                                 onClick={() =>
                                                     editTesk(results.id)
                                                 }
@@ -376,7 +374,14 @@ const Projects = () => {
                     </Display>
                 </ContainerPrincipal>
                 <Chat>
-                    <AiOutlineWechat color="white" size={80} />
+                    <Chatt openChat={openChat} setOpenChat={setOpenChat} />
+                    <AiOutlineWechat
+                        onClick={() => {
+                            setOpenChat("flex");
+                        }}
+                        color="white"
+                        size={80}
+                    />
                 </Chat>
             </Container>
         </Body>

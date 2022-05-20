@@ -12,8 +12,12 @@ import { GroupContext } from "../../Providers/Group/index.js";
 import { useHistory } from "react-router-dom";
 import { TasksContext } from "../../Providers/Tasks";
 
+import { MemberContext } from "../../Providers/Member";
+
+
 const SideBar = ({ showSideBar, setShowSideBar }) => {
     const { setGroupId } = useContext(TasksContext);
+    const { myInfoInMembers } = useContext(MemberContext);
     const { group } = useContext(GroupContext);
     const [drop, setDrop] = useState("isClose");
     const history = useHistory();
@@ -88,8 +92,8 @@ const SideBar = ({ showSideBar, setShowSideBar }) => {
                     </Flex>
                     <Flex marginBottom="16px">
                         <Image
-                            src={UserIcon}
-                            alt={"User Image"}
+                            src={myInfoInMembers.url ? myInfoInMembers.url : "http://www.rachegebran.com.br/wp-content/uploads/perfil.jpg"}
+                            alt={"Foto de Perfil"}
                             borderRadius="50%"
                             w={["60px", "90px", "110px"]}
                             h={["60px", "90px", "110px"]}
@@ -131,6 +135,7 @@ const SideBar = ({ showSideBar, setShowSideBar }) => {
                             display={drop === "isClose" ? "none" : "flex"}
                             flexDir="column"
                             maxHeight={"40vh"}
+                            maxWidth={["113px", "139px", "155px"]}
                             overflowY="auto"
                             css={{
                                 "&::-webkit-scrollbar": {
