@@ -13,6 +13,7 @@ import {
     ButtonFilter,
     Display,
     Date,
+    Chat,
     TagTeam,
     Nav,
     ContainerPrincipal,
@@ -29,8 +30,9 @@ import {
     AiOutlineLaptop,
     AiOutlineTeam,
     AiOutlineClockCircle,
-    //AiOutlineWechat,
+    AiOutlineWechat,
     AiOutlineEdit,
+    AiFillDelete,
 } from "react-icons/ai";
 import {
     Box,
@@ -51,12 +53,15 @@ import getCurrentDate from "./getCurrentDate";
 import { CardNewTask } from "../../components/Cards/CardNewTask";
 import filterDate from "./filterDate";
 import { GroupContext } from "../../Providers/Group";
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
-import { useHistory } from "react-router-dom";
 
 import { ModalExcluir } from "../../Modals/ModalExcluir";
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 const Projects = () => {
+    const param = useParams();
+    const idGrupe = param.id;
+
+    const [groupInfo, setGroupInfo] = useState();
     const [openExcluirG, setOpenExcluirG] = useState(false);
     const [openExcluirT, setOpenExcluirT] = useState(false);
     const [openExcluirST, setOpenExcluirST] = useState(false);
@@ -67,7 +72,6 @@ const Projects = () => {
     const [openAddTask, setOpenAddTask] = useState(false);
     const [openEditTask, setOpenEditTask] = useState(false);
     const [openAddSubTask, setOpenAddSubTask] = useState(false);
-    const history = useHistory();
     const none = "none";
     const flex = "flex";
     const [openSideBar, setOpenSideBar] = useState(none);
@@ -109,7 +113,6 @@ const Projects = () => {
     };
 
     const openAddTaskFunc = () => {
-        /* setOpenM(true); */
         setOpenAddTask(true);
     };
 
@@ -121,25 +124,24 @@ const Projects = () => {
         }
     };
     const { tasks, removeTask } = useContext(TasksContext);
-    const { member, addMember, removeMember, setGpId, setTokenMember } =
-        useContext(GroupContext);
+    const {
+        infoGroup,
+        infoG,
+        addMember,
+        removeMember,
+        setGpId,
+        setTokenMember,
+    } = useContext(GroupContext);
     const { group, addGroup, removeGroup, setTokenGroup } =
         useContext(GroupContext);
     const [showTasks, setShowTasks] = useState(tasks);
-    
     useEffect(() => {
-        setShowTasks(tasks)
-
-    }, [tasks])
-
-    function clickClose(target) {
-        removeTask(target);
         setShowTasks(tasks);
-    }
+        infoGroup(idGrupe);
+    }, [tasks]);
 
     function filtrar(event) {
         if (event === "Todas") {
-            console.log(tasks);
             return setShowTasks(tasks);
         }
         if (event === "Concluídas") {
@@ -179,10 +181,6 @@ const Projects = () => {
             setShowTasks(array);
         }
     }
-    function deleteColecao() {
-        //->Passar o id removeGroup();
-        history.push("/dashboard");
-    }
 
     return (
         <Body>
@@ -215,7 +213,11 @@ const Projects = () => {
                     />
                 )}
                 {openAddTask && (
-                    <ModalAddTask addTasks setOpenAddTask={setOpenAddTask} />
+                    <ModalAddTask
+                        idGrupe={idGrupe}
+                        addTasks
+                        setOpenAddTask={setOpenAddTask}
+                    />
                 )}
 
                 {openMAdd && (
@@ -234,6 +236,8 @@ const Projects = () => {
                 )}
                 {openMT && (
                     <ModalMembro
+                        idGrupe={idGrupe}
+                        infoGroup={infoGroup}
                         membrosT
                         addMembrosT={addMembrosT}
                         setOpenMT={setOpenMT}
@@ -262,9 +266,9 @@ const Projects = () => {
                     <Header>
                         <Nav className="nav-header">
                             <AiOutlineLaptop size={100} />
-                            <h6> Rotina</h6>
+                            <h6> Coleção</h6>
                             <RemoveTask onClick={modalexcluirG}>
-                                Excluir Coleção
+                                <AiFillDelete />
                             </RemoveTask>
                         </Nav>
                         <Nav className="nav-header">
@@ -273,11 +277,11 @@ const Projects = () => {
                             </AddTask>
 
                             <Group onClick={checkMembersG}>
-                                <AiOutlineTeam />2
+                                <AiOutlineTeam />
+                                {infoG.membros && <>{infoG.membros.length}</>}
                             </Group>
                         </Nav>
                     </Header>
-
                     <NavFilter>
                         <ButtonFilter
                             onClick={(event) => filtrar(event.target.innerText)}
@@ -302,8 +306,6 @@ const Projects = () => {
                     </NavFilter>
                     <Display>
                         {showTasks.map((results) => {
-
-                    
                             return (
                                 <Flex
                                     background={"white"}
@@ -357,7 +359,8 @@ const Projects = () => {
                                                 onClick={checkMembersT}
                                             >
                                                 <AiOutlineTeam />
-                                                {results.members && results.members.length}
+                                                {results.members &&
+                                                    results.members.length}
                                             </TagTeam>
                                         </Date>
                                     </ButtonGroup>
@@ -366,6 +369,9 @@ const Projects = () => {
                         })}
                     </Display>
                 </ContainerPrincipal>
+                <Chat>
+                    <AiOutlineWechat color="white" size={80} />
+                </Chat>
             </Container>
         </Body>
     );

@@ -18,15 +18,15 @@ export const ModalAddGroup = ({setIsOpen}) => {
 
         <Container>
 
-            <button className="btn-close" onClick={() => setIsOpen(false)}><i class='bx bx-x'></i></button>
 
-            <form onSubmit={handleSubmit(onSubmit)}>
-
-                <input type="text" placeholder="Nome" {...register('name')}/>
-                <input type="text" placeholder="Descrição" {...register('description')}/>
-                <button className="btn-create">Criar grupo</button>
-        
-            </form>
+            <div>
+                <button className="btn-close" onClick={() => setIsOpen(false)}><i class='bx bx-x'></i></button>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <input type="text" placeholder="Nome" {...register('name')}/>
+                    <input type="text" placeholder="Descrição" {...register('description')}/>
+                    <button className="btn-create">Criar grupo</button>
+                </form>
+            </div>
         
         </Container>
 

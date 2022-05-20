@@ -6,8 +6,9 @@ import { ModMembroAddConte, ModMembroAddList } from "../ModalMembrosAdd/style";
 import { useContext, useState } from "react";
 import { TasksContext } from "../../Providers/Tasks";
 import { ConteForm } from "./styled";
+import getCurrentDate from "../../Pages/Projects/getCurrentDate";
 
-export const ModalAddTask = ({ setOpenAddTask, addTasks }) => {
+export const ModalAddTask = ({ setOpenAddTask, addTasks, idGrupe }) => {
     const { register, handleSubmit } = useForm();
 
     const close = () => {
@@ -27,7 +28,8 @@ export const ModalAddTask = ({ setOpenAddTask, addTasks }) => {
 
     const onSubmitFunction = (data) => {
         data.creationDate = date;
-        console.log(data);
+        addTask(idGrupe, data);
+        setOpenAddTask(false);
     };
     return (
         <>

@@ -1,98 +1,84 @@
 import styled from "styled-components";
 
-export const Container = styled.main`
+export const Container = styled.div`
 
     background-color: rgba(0, 0, 0, 0.25);
-    width: 100%;
-    height: 100%;
+
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
 
     display: flex;
     align-items: center;
+    justify-content: center;
 
     position: absolute;
 
     z-index: 2;
 
-    .btn-close {
+    div {
 
-        position: absolute;
-        left: 340px;
-        top: 490px;
+        position: relative;
 
-        i {
+        .btn-close {
 
-            color: white;
-            font-size: 2rem;
+            position: absolute;
+            right: 2%;
+            top: 5%;
 
-        }
+            i {
 
-        @media (min-width: 768px) {
-
-            left: 535px;
-            top: 305px;
-
-        }
-
-        @media (min-width: 1024px) {
-
-            left: 660px;
-            top: 210px;
-            font-size: 3rem;
-
-        }
-
-        @media (min-width: 1920px) {
-
-            left: 1100px;
-            top: 285px;
-            font-size: 4rem;
-
-        }
-
-    }
-
-    form {
-
-        border-radius: 15px;
-
-        background-color: #B84DEB;
-        width: 375px;
-        margin: 0 auto;
-
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-
-        padding: 20px;
-
-        input {
-
-            width: 50%;
-            margin: 10px 0 10px 0;
-            padding: 10px
-
-        }
-
-        button {
-
-            padding: 10px;
-            background-color: #FEEE35;
-            border-radius: 10px;
-
-            font-weight: bold;
-
-            opacity: 0.8;
-            transition: 0.2s;
-
-            :hover {
-
-                opacity: 1;
+                color: white;
+                font-size: 2rem;
 
             }
 
         }
 
+        form {
+
+            border-radius: 15px;
+
+            background-color: #B84DEB;
+            width: 375px;
+            margin: 0 auto;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            input {
+
+                width: 50%;
+                margin: 10px 0 10px 0;
+                padding: 10px
+
+            }
+
+            button {
+
+                padding: 10px;
+                background-color: #FEEE35;
+                border-radius: 10px;
+
+                font-weight: bold;
+
+                opacity: 0.8;
+                transition: 0.2s;
+
+                :hover {
+
+                    opacity: 1;
+
+                }
+
+            }
+
+        }
     }
     
 `

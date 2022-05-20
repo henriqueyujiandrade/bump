@@ -7,9 +7,14 @@ export const GroupContext = createContext();
 
 export const GroupProvider = ({ children }) => {
     const [group, setGroup] = useState([]);
-    const [tokenGroup, setTokenGroup] = useState(JSON.parse(localStorage.getItem("@bump:token")) || "");
-    const [myInfo, setMyInfo] = useState(JSON.parse(localStorage.getItem("@bump:myInfo")) || "");
-    
+    const [infoG, setInfoG] = useState([]);
+    const [tokenGroup, setTokenGroup] = useState(
+        JSON.parse(localStorage.getItem("@bump:token")) || ""
+    );
+    const [myInfo, setMyInfo] = useState(
+        JSON.parse(localStorage.getItem("@bump:myInfo")) || ""
+    );
+
     useEffect(() => {
         if (tokenGroup) {
             api.get("group", {
@@ -22,15 +27,27 @@ export const GroupProvider = ({ children }) => {
                         gp.membros.find((membro) => membro.id == myInfo.id)
                     )
                 );
-            });            
+            });
         }
-    }, [tokenGroup,myInfo]);
+    }, [tokenGroup, myInfo]);
+
+    const infoGroup = (id) => {
+        api.get(`group/${id}`, {
+            headers: {
+                Authorization: `Bearer ${tokenGroup}`,
+            },
+        })
+            .then((response) => {
+                setInfoG(response.data);
+            })
+            .catch((err) => console.log(err));
+    };
 
     const addGroup = (data) => {
         const status = "admin";
         const admin = { ...myInfo, status };
         const membros = [admin];
-        const newData = { ...data, membros};
+        const newData = { ...data, membros };
         api.post(`group`, newData, {
             headers: {
                 Authorization: `Bearer ${tokenGroup}`,
@@ -51,7 +68,17 @@ export const GroupProvider = ({ children }) => {
     };
 
     return (
-        <GroupContext.Provider value={{ group, addGroup, removeGroup, setTokenGroup, setMyInfo }}>
+        <GroupContext.Provider
+            value={{
+                infoGroup,
+                infoG,
+                group,
+                addGroup,
+                removeGroup,
+                setTokenGroup,
+                setMyInfo,
+            }}
+        >
             {children}
         </GroupContext.Provider>
     );
