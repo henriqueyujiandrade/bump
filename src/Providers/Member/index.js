@@ -15,7 +15,7 @@ export const MemberProvider = ({ children }) => {
     const [myInfoInMembers, setMyInfoInMembers] = useState(
         JSON.parse(localStorage.getItem("@bump:myInfo")) || ""
     );
-    const [gpId, setGpId] = useState("");
+    const [gpId, setGpId] = useState(JSON.parse(localStorage.getItem("@bump:groupid")) || "");
 
     useEffect(() => {
         if (tokenMember && gpId) {

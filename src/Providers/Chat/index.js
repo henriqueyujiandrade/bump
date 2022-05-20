@@ -11,7 +11,7 @@ export const ChatProvider = ({children}) => {
     const [myInfoChat, setMyInfoChat] = useState(
         JSON.parse(localStorage.getItem("@bump:myInfo")) || ""
     );
-    const [idChat, setIdChat] = useState('')
+    const [idChat, setIdChat] = useState(JSON.parse(localStorage.getItem("@bump:groupid")) || "")
     
     useEffect(()=>{
         if(tokenChat && idChat)
