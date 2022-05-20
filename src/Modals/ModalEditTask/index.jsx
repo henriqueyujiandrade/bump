@@ -14,16 +14,20 @@ import {
     useDisclosure,
 } from "@chakra-ui/react";
 import styled from "styled-components";
-import React from "react";
-import { ModTaskEditConte } from "./styled";
+import React, { useContext } from "react";
+import { DivNao, ModTaskEditConte } from "./styled";
 import { CardNewTask } from "../../components/Cards/CardNewTask";
 import { Close } from "../../components/Close";
+import { TasksContext } from "../../Providers/Tasks";
 
 export const ModalEditTask = ({
     setOpenEditTask,
     setOpenAddSubTask,
     modalexcluirST,
+    subTaskInfo,
 }) => {
+    const { tasks, removeTask, subTasks, setTaskId, taskId } =
+        useContext(TasksContext);
     const close = () => {
         setOpenEditTask(false);
     };
@@ -60,6 +64,7 @@ export const ModalEditTask = ({
         line-height: 22px;
         color: #ffffff;
     `;
+
     return (
         <ModTaskEditConte>
             <Modal
@@ -75,10 +80,28 @@ export const ModalEditTask = ({
                         </Button>
                         <Close close={close} addTesk="true" />
                     </ModalFooter>
-                    <CardNewTask modalexcluirST={modalexcluirST} />
-                    <CardNewTask />
-                    <CardNewTask />
-                    <ModalBody pb={6}>Tarefa do dia 10/05/2022</ModalBody>
+
+                    {subTasks.length != 0 ? (
+                        <>
+                            {subTasks.map((elemento) => {
+                                return (
+                                    <CardNewTask
+                                        key={elemento.id}
+                                        elemento={elemento}
+                                        modalexcluirST={modalexcluirST}
+                                    />
+                                );
+                            })}
+                        </>
+                    ) : (
+                        <>
+                            <DivNao>Não Tem</DivNao>
+                        </>
+                    )}
+
+                    <ModalBody pb={6}>
+                        Tarefa do dia {subTaskInfo[0].expirationDate}
+                    </ModalBody>
                 </ModalContent>
             </Modal>
         </ModTaskEditConte>

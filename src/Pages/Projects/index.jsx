@@ -64,36 +64,39 @@ const Projects = () => {
   const param = useParams();
   const idGrupe = param.id;
 
-    const [groupInfo, setGroupInfo] = useState();
-    const [openExcluirG, setOpenExcluirG] = useState(false);
-    const [openExcluirT, setOpenExcluirT] = useState(false);
-    const [openExcluirST, setOpenExcluirST] = useState(false);
-    const [openMG, setOpenMG] = useState(false);
-    const [openMT, setOpenMT] = useState(false);
-    const [openMAdd, setOpenMAdd] = useState(false);
-    const [openMTAdd, setOpenMTAdd] = useState(false);
-    const [openAddTask, setOpenAddTask] = useState(false);
-    const [openEditTask, setOpenEditTask] = useState(false);
-    const [openAddSubTask, setOpenAddSubTask] = useState(false);
-    const none = "none";
-    const flex = "flex";
-    const [openSideBar, setOpenSideBar] = useState("none");
-    const [openChat, setOpenChat] = useState("none");
-
+  const [subTaskInfo, setSubTaskInfo] = useState();
+  const [openExcluirG, setOpenExcluirG] = useState(false);
+  const [openExcluirT, setOpenExcluirT] = useState(false);
+  const [openExcluirST, setOpenExcluirST] = useState(false);
+  const [openMG, setOpenMG] = useState(false);
+  const [openMT, setOpenMT] = useState(false);
+  const [openMAdd, setOpenMAdd] = useState(false);
+  const [openMTAdd, setOpenMTAdd] = useState(false);
+  const [openAddTask, setOpenAddTask] = useState(false);
+  const [openEditTask, setOpenEditTask] = useState(false);
+  const [openAddSubTask, setOpenAddSubTask] = useState(false);
+  const none = "none";
+  const flex = "flex";
+  const [openSideBar, setOpenSideBar] = useState(none);
+  const { tasks, removeTask, subTasks, taskId, setTaskId } =
+    useContext(TasksContext);
+  const [openChat, setOpenChat] = useState("none");
 
   const modalexcluirG = () => {
     setOpenExcluirG(true);
   };
 
-  const modalexcluirT = (id) => {
-    setOpenExcluirT(id);
-  };
-
-  const modalexcluirST = () => {
-    setOpenExcluirST(true);
+  const modalexcluirST = (e) => {
+    setOpenExcluirST(e.target.id);
     setOpenEditTask(false);
   };
 
+  const editTesk = (target) => {
+    console.log(target);
+    setSubTaskInfo(showTasks.filter((ts) => ts.id == target));
+    setTaskId(target);
+    setOpenEditTask(true);
+  };
   const addMembros = () => {
     setOpenMG(false);
     setOpenMAdd(true);
@@ -102,9 +105,8 @@ const Projects = () => {
     setOpenMT(false);
     setOpenMTAdd(true);
   };
-
-  const editTesk = (target) => {
-    setOpenEditTask(true);
+  const modalexcluirT = (id) => {
+    setOpenExcluirT(id);
   };
 
   const checkMembersG = () => {
@@ -117,10 +119,6 @@ const Projects = () => {
     setOpenMTAdd(false);
   };
 
-  const openAddTaskFunc = () => {
-    setOpenAddTask(true);
-  };
-
   const handleOpenSideBar = () => {
     if (openSideBar === none) {
       setOpenSideBar(flex);
@@ -128,7 +126,6 @@ const Projects = () => {
       setOpenSideBar(none);
     }
   };
-  const { tasks, removeTask } = useContext(TasksContext);
   const { infoGroup, infoG, addMember, removeMember, setGpId, setTokenMember } =
     useContext(GroupContext);
   const { group, addGroup, removeGroup, setTokenGroup } =
@@ -138,6 +135,9 @@ const Projects = () => {
     setShowTasks(tasks);
     infoGroup(idGrupe);
   }, [tasks]);
+  const openAddTaskFunc = () => {
+    setOpenAddTask(true);
+  };
 
   function filtrar(event) {
     if (event === "Todas") {
@@ -146,7 +146,6 @@ const Projects = () => {
     if (event === "Concluídas") {
       setShowTasks(tasks.filter((tasks) => tasks.status === "concluida"));
     }
-
     if (event === "Atrasadas") {
       setShowTasks([]);
       const filtradas = [];
@@ -186,10 +185,15 @@ const Projects = () => {
           <ModalExcluir excluirG setOpenExcluirG={setOpenExcluirG} />
         )}
         {openExcluirT && (
-          <ModalExcluir excluirT openExcluirT={openExcluirT} setOpenExcluirT={setOpenExcluirT} />
+          <ModalExcluir
+            excluirT
+            openExcluirT={openExcluirT}
+            setOpenExcluirT={setOpenExcluirT}
+          />
         )}
         {openExcluirST && (
           <ModalExcluir
+            openExcluirST={openExcluirST}
             excluirST
             setOpenEditTask={setOpenEditTask}
             setOpenExcluirST={setOpenExcluirST}
@@ -204,6 +208,7 @@ const Projects = () => {
         )}
         {openEditTask && (
           <ModalEditTask
+            subTaskInfo={subTaskInfo}
             modalexcluirST={modalexcluirST}
             setOpenAddSubTask={setOpenAddSubTask}
             setOpenEditTask={setOpenEditTask}
@@ -217,61 +222,52 @@ const Projects = () => {
           />
         )}
 
-
-                {openMAdd && (
-                    <ModalMembroAdd
-                        addMembroG
-                        setOpenMG={setOpenMG}
-                        setOpenMAdd={setOpenMAdd}
-                    />
-                )}
-                {openMTAdd && (
-                    <ModalMembroAdd
-                        addMembroT
-                        setOpenMT={setOpenMT}
-                        setOpenMTAdd={setOpenMTAdd}
-                    />
-                )}
-                {openMT && (
-                    <ModalMembro
-                        idGrupe={idGrupe}
-                        infoGroup={infoGroup}
-                        membrosT
-                        addMembrosT={addMembrosT}
-                        setOpenMT={setOpenMT}
-                    />
-                )}
-                {openMG && (
-                    <ModalMembro
-                        membrosG
-                        addMembros={addMembros}
-                        setOpenM={setOpenMG}
-                    />
-                )}
-            </>
-            <Container>
-                <SideBar
-                    setShowSideBar={setOpenSideBar}
-                    showSideBar={openSideBar}
-                />
-                <ContainerPrincipal className="container-principal">
-                    <Button
-                        onClick={handleOpenSideBar}
-                        display={["flex", "flex", "none"]}
-                    >
-                        Menu
-                    </Button>
-                    <Header>
-                        <Nav className="nav-header">
-                            <AiOutlineLaptop size={60} />
-                            <h6> Rotina</h6>
-                            <RemoveTask onClick={modalexcluirG}>
-                                <AiFillDelete />
-                            </RemoveTask>
-                        </Nav>
-                        <Nav className="nav-header">
-                            <AddTask onClick={openAddTaskFunc}>+ Task</AddTask>
-
+        {openMAdd && (
+          <ModalMembroAdd
+            addMembroG
+            setOpenMG={setOpenMG}
+            setOpenMAdd={setOpenMAdd}
+          />
+        )}
+        {openMTAdd && (
+          <ModalMembroAdd
+            addMembroT
+            setOpenMT={setOpenMT}
+            setOpenMTAdd={setOpenMTAdd}
+          />
+        )}
+        {openMT && (
+          <ModalMembro
+            idGrupe={idGrupe}
+            infoGroup={infoGroup}
+            membrosT
+            addMembrosT={addMembrosT}
+            setOpenMT={setOpenMT}
+          />
+        )}
+        {openMG && (
+          <ModalMembro membrosG addMembros={addMembros} setOpenM={setOpenMG} />
+        )}
+      </>
+      <Container>
+        <SideBar setShowSideBar={setOpenSideBar} showSideBar={openSideBar} />
+        <ContainerPrincipal className="container-principal">
+          <Button
+            onClick={handleOpenSideBar}
+            display={["flex", "flex", "none"]}
+          >
+            Menu
+          </Button>
+          <Header>
+            <Nav className="nav-header">
+              <AiOutlineLaptop size={100} />
+              <h6>{infoG.name}</h6>
+              <RemoveTask onClick={modalexcluirG}>
+                <AiFillDelete />
+              </RemoveTask>
+            </Nav>
+            <Nav className="nav-header">
+              <AddTask onClick={openAddTaskFunc}>+ Task</AddTask>
 
               <Group onClick={checkMembersG}>
                 <AiOutlineTeam />
@@ -304,7 +300,7 @@ const Projects = () => {
                   width={"280px"}
                   borderRadius={"15px"}
                   id={results.id}
-                  key = {results.id}
+                  key={results.id}
                 >
                   <Heading
                     size="xs"
@@ -326,49 +322,44 @@ const Projects = () => {
                     {results.description}
                   </Box>
 
-
-                                    <Spacer />
-                                    <ButtonGroup gap="2">
-                                        <Date>
-                                            <LabelExp className="expiration-date">
-                                                <AiOutlineClockCircle />
-                                                {results.expirationDate}
-                                            </LabelExp>
-                                            <AiOutlineEdit
-                                                cursor={"pointer"}
-                                                size="25"
-                                                onClick={() =>
-                                                    editTesk(results.id)
-                                                }
-                                            />
-                                            <TagTeam
-                                                className="tag-team"
-                                                onClick={checkMembersT}
-                                            >
-                                                <AiOutlineTeam />
-                                                {results.members &&
-                                                    results.members.length}
-                                            </TagTeam>
-                                        </Date>
-                                    </ButtonGroup>
-                                </Flex>
-                            );
-                        })}
-                    </Display>
-                </ContainerPrincipal>
-                <Chat>
-                    <Chatt openChat={openChat} setOpenChat={setOpenChat} />
-                    <AiOutlineWechat
-                        onClick={() => {
-                            setOpenChat("flex");
-                        }}
-                        color="white"
-                        size={80}
-                    />
-                </Chat>
-            </Container>
-        </Body>
-    );
-
+                  <Spacer />
+                  <ButtonGroup gap="2">
+                    <Date>
+                      <LabelExp className="expiration-date">
+                        <AiOutlineClockCircle />
+                        {results.expirationDate}
+                      </LabelExp>
+                      <AiOutlineEdit
+                        cursor={"pointer"}
+                        size="25"
+                        onClick={() => editTesk(results.id)}
+                      />
+                      <TagTeam
+                        className="tag-team" /* 
+                                                onClick={checkMembersT} */
+                      >
+                        <AiOutlineTeam />
+                        {results.members && results.members.length}
+                      </TagTeam>
+                    </Date>
+                  </ButtonGroup>
+                </Flex>
+              );
+            })}
+          </Display>
+        </ContainerPrincipal>
+        <Chat>
+          <Chatt openChat={openChat} setOpenChat={setOpenChat} />
+          <AiOutlineWechat
+            onClick={() => {
+              setOpenChat("flex");
+            }}
+            color="white"
+            size={80}
+          />
+        </Chat>
+      </Container>
+    </Body>
+  );
 };
 export default Projects;
